@@ -1,11 +1,11 @@
 const routemamba = require("../src/routemamba");
 
-test('checking "http://www.google.com" is url or correct', () => { 
+test('checking "http://www.google.com" is url or correct should true', () => { 
     expect(routemamba.validURL("http://www.google.com")).toBe(true);
 });
 
-test('checking "www.google.com" is url or correct', () => { 
-    expect(routemamba.validURL("www.google.com")).toBe(true);
+test('checking "www.google.com" is url or correct should true', () => { 
+    expect(routemamba.validURL("www.google.com")).toBe(false);
 });
 
 test('checking "wwwsdsdfdsf" is url or correct', () => { 
