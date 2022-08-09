@@ -221,10 +221,178 @@ class Routemamba extends routemamba_init {
         this.server_host;
         this.meta_content_url;
         this.preloader;
-        this.error_head = `<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>ERROR</title><link rel="stylesheet" href="./src-v2/css/main.css"></link>`;
+        this.error_head = `<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>ERROR</title>`;
 
-        this.__404_url = '<div class="error_body"><div class="error_card"><div class="error_header"><h1>404 HTTP URL</h1></div><div class="error_desc"><p><p class="red-box">Elevator rendering error !!</p>Did you forget to declare <span class="red-box">http_url</span> on: </p><code class="bg-code"><span class="r">elevator</span><span class="c">.</span><span class="b">route</span><span class="w">({</span><br><br>&nbsp&nbsp <span class="w">http_url:</span> <b class="red-box-l">undefined</b> &nbsp <b class="red"><<-- error !(undefined)</b><br><br><span class="w">});</span></code><p>Set <span class="red-box">http_url</span> to solve this problem</p><hr><p>Developed by: Rezwan Ahmod Sami</p></div></div></div>';
-        this.__404_server_host = '<div class="error_body"><div class="error_card"><div class="error_header"><h1>404 SERVER HOST</h1></div><div class="error_desc"><p><p class="red-box">Elevator rendering error !!</p>Did you forget to declare <span class="red-box">server_host</span> on: </p><code class="bg-code"><span class="r">elevator</span><span class="c">.</span><span class="b">server_host</span><span class="w">&nbsp=</span>&nbsp<b class="red-box-l">undefined</b> &nbsp <b class="red"><<-- error!!!</b><br><br></span></code><p>Set <span class="red-box">server_host</span> to solve this problem</p><hr><p>Developed by: Rezwan Ahmod Sami</p></div></div></div>';
+        this.__404_url = `
+        <style>
+        body{
+            margin: 0;
+            padding: 0;
+            background-color: rgb(245, 245, 245);
+         }
+         .error_body{
+            width: 100% !important;
+            height: 100% !important;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+         }
+         
+         .error_card{
+            display: block;
+            width: 400px;
+            background-color: rgb(255, 255, 255);
+            border-radius: 5px;
+            padding: 15px;
+            box-shadow: 1px 0px 12px rgb(177, 177, 177);
+         }
+         
+         .error_header{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-bottom: 1px solid grey;
+         }
+         
+         h1{
+            color: rgb(248, 82, 82);
+         }
+         
+         p{
+            color: grey;
+         }
+         
+         .red-box{
+            background-color: rgba(255, 182, 182, 0.699);
+            color: rgb(255, 88, 88);
+            padding: 3px;
+            border-radius: 3px;
+            font-weight: 700;
+         }
+         
+         .red-box-l{
+            background-color: rgb(255, 174, 174);
+            color: rgb(247, 72, 72);
+            padding: 3px;
+            border-radius: 3px;
+            font-weight: 700;
+         }
+         
+         .r{
+            color: #65DBCA;
+         }
+         .p{
+            color: #C792EA
+         }
+         
+         .b{
+            color: #82AAE5
+         }
+         
+         .w{
+            color: #c9D1DF;
+         }
+         
+         .red{
+            color: red;
+         }
+         
+         .bg-code{
+            background-color: #011627;
+            color: rgb(1, 153, 22);
+            display: block;
+            padding: 5px;
+            border-radius: 5px;
+            font-weight: 700;
+            width: 100%;
+         }
+        </style>
+        <div class="error_body"><div class="error_card"><div class="error_header"><h1>404 HTTP URL</h1></div><div class="error_desc"><p><p class="red-box">Routemamba rendering error !!</p>Did you forget to declare <span class="red-box">http_url</span> on: </p><code class="bg-code"><span class="r">routemamba</span><span class="c">.</span><span class="b">route</span><span class="w">({</span><br><br>&nbsp&nbsp <span class="w">http_url:</span> <b class="red-box-l">undefined</b> &nbsp <b class="red"><<-- error !(undefined)</b><br><br><span class="w">});</span></code><p>Set <span class="red-box">http_url</span> to solve this problem</p><hr><p>Developed by: Rezwan Ahmod Sami</p></div></div></div>`;
+        this.__404_server_host = `<style>
+        body{
+            margin: 0;
+            padding: 0;
+            background-color: rgb(245, 245, 245);
+         }
+         .error_body{
+            width: 100% !important;
+            height: 100% !important;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+         }
+         
+         .error_card{
+            display: block;
+            width: 400px;
+            background-color: rgb(255, 255, 255);
+            border-radius: 5px;
+            padding: 15px;
+            box-shadow: 1px 0px 12px rgb(177, 177, 177);
+         }
+         
+         .error_header{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-bottom: 1px solid grey;
+         }
+         
+         h1{
+            color: rgb(248, 82, 82);
+         }
+         
+         p{
+            color: grey;
+         }
+         
+         .red-box{
+            background-color: rgba(255, 182, 182, 0.699);
+            color: rgb(255, 88, 88);
+            padding: 3px;
+            border-radius: 3px;
+            font-weight: 700;
+         }
+         
+         .red-box-l{
+            background-color: rgb(255, 174, 174);
+            color: rgb(247, 72, 72);
+            padding: 3px;
+            border-radius: 3px;
+            font-weight: 700;
+         }
+         
+         .r{
+            color: #65DBCA;
+         }
+         .p{
+            color: #C792EA
+         }
+         
+         .b{
+            color: #82AAE5
+         }
+         
+         .w{
+            color: #c9D1DF;
+         }
+         
+         .red{
+            color: red;
+         }
+         
+         .bg-code{
+            background-color: #011627;
+            color: rgb(1, 153, 22);
+            display: block;
+            padding: 5px;
+            border-radius: 5px;
+            font-weight: 700;
+            width: 100%;
+         }
+        </style><div class="error_body"><div class="error_card"><div class="error_header"><h1>404 SERVER HOST</h1></div><div class="error_desc"><p><p class="red-box">Routemamba rendering error !!</p>Did you forget to declare <span class="red-box">server_host</span> on: </p><code class="bg-code"><span class="r">routemamba</span><span class="c">.</span><span class="b">server_host</span><span class="w">&nbsp=</span>&nbsp<b class="red-box-l">undefined</b> &nbsp <b class="red"><<-- error!!!</b><br><br></span></code><p>Set <span class="red-box">server_host</span> to solve this problem</p><hr><p>Developed by: Rezwan Ahmod Sami</p></div></div></div>`;
         this.error_404;
         this.error_400;
         this.error_500;
