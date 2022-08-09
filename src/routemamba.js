@@ -560,4 +560,5 @@ class Routemamba extends routemamba_init {
 }
 
 const routemamba = new Routemamba();
-export default  routemamba;
+
+module.exports = routemamba;
