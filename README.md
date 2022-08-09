@@ -157,7 +157,7 @@ After set meta content path, you need to add ```<meta></meta>``` tag on ```<head
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <title><?php echo $title; ?></title>
    </meta>
-   <script src="https://cdn.alkhella.com/routemamba/routemamba.min.js"></script>
+   <script src="https://cdn.rezwanahmodsami.com/routemamba/v1.0.x/routemamba.min.js"></script>
    
 </head>
 <body>
