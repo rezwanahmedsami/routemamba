@@ -5,7 +5,7 @@ test('checking "http://www.google.com" is url or correct should true', () => {
 });
 
 test('checking "www.google.com" is url or correct should true', () => { 
-    expect(routemamba.validURL("www.google.com")).toBe(false);
+    expect(routemamba.validURL("www.google.com")).toBe(true);
 });
 
 test('checking "wwwsdsdfdsf" is url or correct', () => { 
