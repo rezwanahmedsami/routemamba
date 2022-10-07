@@ -147,7 +147,7 @@ class routemamba_init {
         let component_div = document.querySelector(component);
 
         if (server_host != "") {
-            var isValidServerHost = (server_host.indexOf("http://127.0.0.1") !== -1) || (server_host.indexOf("http://localhost") !== -1) ? true : this.validURL(server_host);
+            var isValidServerHost = (server_host.indexOf("http://127.0.0.1") !== -1) || (server_host.indexOf("http://localhost") !== -1) || (server_host.indexOf("file://") !== -1) ? true : this.validURL(server_host);
             if (!isValidServerHost) {
                 alert("The server host is invalid");
             }else{
