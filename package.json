@@ -1,6 +1,6 @@
 {
   "name": "routemamba",
-  "version": "2.0.1",
+  "version": "2.1.0",
   "description": "Routemamba is a js library to develop single page web applications easily, specially for php webapp. ",
   "main": "index.js",
   "scripts": {

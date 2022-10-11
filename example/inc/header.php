@@ -26,6 +26,7 @@
    </meta>
    <!-- <script src="routemamba.min.js"></script> -->
    <script src="../../routemamba.min.js"></script>
+   <!-- <script src="../../src/routemamba.js"></script> -->
    
 </head>
 <body>
@@ -35,5 +36,6 @@
       <button id="home">Home</button>
       <button id="about">about</button>
       <button id="privacy">privacy</button>
+      <button id="tabs-example">Tabs example</button>
       <hr>
    </div>

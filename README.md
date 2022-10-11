@@ -686,6 +686,167 @@ routemamba.__render();
 
 ```
 
+## Creating tabs
+Some people also wants to create a tabs system easily. So, now by routemamba you can easily
+add tabs by routemamba method: ```routemamba.initTabs([])```. See this Example:
+#### javascript initialization: 
+```javascript
+routemamba.initTabs([
+        {
+            tabSwitcher: ".tab-switcher", // tab switcher buttons class here.
+            initialTab: "tab1", // inital tab id here
+            activeSwitcherClass: "tab-active", // active tab class here, which class you want to add.
+            activeTabClass: "activeTab", // active tab class here, which class you want to add.
+            tabs: [ //define tabs info here
+                {
+                    tabRoute: "tab1", // tab id where content will load
+                    content_url: "content/tabs/tab1.php", // tab component
+                    preloader: 'loading...', // preloading content
+                    error_handler: 'error', // error content
+                },
+                {
+                    tabRoute: "tab2",
+                    content_url: "content/tabs/tab2.php",
+                    preloader: 'loading...',
+                    error_handler: 'error',
+                },
+                {
+                    tabRoute: "tab3",
+                    content_url: "content/tabs/tab3.php",
+                    preloader: 'loading...',
+                    error_handler: 'error',
+                },
+            ]
+        },
+    ]);
+
+    // note: you can initalize multiple tabs here
+    // example:
+
+    routemamba.initTabs([
+        {
+            tabSwitcher: ".tab-switcher",
+            initialTab: "tab1",
+            activeSwitcherClass: "tab-active",
+            activeTabClass: "activeTab",
+            tabs: [
+                {
+                    tabRoute: "tab1",
+                    content_url: "content/tabs/tab1.php",
+                    preloader: 'loading...',
+                    error_handler: 'error',
+                },
+                {
+                    tabRoute: "tab2",
+                    content_url: "content/tabs/tab2.php",
+                    preloader: 'loading...',
+                    error_handler: 'error',
+                },
+                {
+                    tabRoute: "tab3",
+                    content_url: "content/tabs/tab3.php",
+                    preloader: 'loading...',
+                    error_handler: 'error',
+                },
+            ]
+        },
+        {
+            tabSwitcher: ".tab-switcher2",
+            initialTab: "tab22",
+            activeSwitcherClass: "tab-active2",
+            activeTabClass: "activeTab2",
+            tabs: [
+                {
+                    tabRoute: "tab12",
+                    content_url: "content/tabs/tab1.php",
+                    preloader: 'loading...',
+                    error_handler: 'error',
+                },
+                {
+                    tabRoute: "tab22",
+                    content_url: "content/tabs/tab2.php",
+                    preloader: 'loading...',
+                    error_handler: 'error',
+                },
+                {
+                    tabRoute: "tab32",
+                    content_url: "content/tabs/tab3.php",
+                    preloader: 'loading...',
+                    error_handler: 'error',
+                },
+            ]
+        },
+    ]);
+```
+Note: you must need to initialize this method where tabs will load. if you want to see more details check this code: [Tabs example code](https://github.com/rezwanahmodsami/routemamba/tree/main/example/content/tabs-example.php)
+
+#### html code example: 
+```html
+<style>
+    .TabRoot{
+        width: 500px;
+        height: 500px;
+        background-color: green;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        flex-direction: column;
+    }
+    .tabs-btns{
+        width: 100%;
+        height: 60px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .tabs-btns button{
+        margin-right: 5px;
+    }
+    .tab-contents {
+        width: 480px;
+        padding: 5px;
+        background-color: red;
+    }
+    .tab-active {
+        background-color: yellow;
+        display: flex;
+    }
+    .activeTab{
+        display: block !important;
+    }
+
+    .tab-active2 {
+        background-color: yellow;
+        display: flex;
+    }
+    .activeTab2{
+        display: block !important;
+    }
+    .tab-container{
+        display: none;
+    }
+</style>
+
+<div class="TabRoot">
+    <div class="tabs-btns">
+         // this is tab switchers
+        <button class="tab-switcher" tabRoute="tab1">Tab1</button> //  you must need to define tabRoute="" attribute here.
+        <button class="tab-switcher" tabRoute="tab2">Tab2</button>
+        <button class="tab-switcher" tabRoute="tab3">Tab3</button>
+    </div>
+    <div class="tab-contents">
+        <div id="tab1" class="tab-container"> // there you need to define tab id, where content will load.
+        </div>
+        <div id="tab2" class="tab-container">
+        </div>
+        <div id="tab3" class="tab-container">
+        </div>
+    </div>
+</div>
+```
+
+_______
+
 ## Contributing
 
 In general, we follow the "fork-and-pull" Git workflow.

@@ -704,6 +704,86 @@ class Routemamba extends routemamba_init {
         }
     }
 
+    initTabs(registerdTabs){
+        registerdTabs.forEach(regTab => {
+            if (regTab.tabSwitcher == undefined || regTab.tabSwitcher == "") {
+                throw new Error("`tabSwitcher` field can't be undefined or empty in Tabs register.");
+            }
+            if (regTab.initialTab == undefined || regTab.initialTab == "") {
+                throw new Error("`initialTab` field can't be undefined or empty in Tabs register.");
+            }
+            if (regTab.tabs == undefined || regTab.tabs == "") {
+                throw new Error("`tabs` field can't be undefined in Tabs register.");
+            }
+
+            let tabSwitcher = document.querySelectorAll(regTab.tabSwitcher);
+            tabSwitcher.forEach(switcher => {
+                if (switcher.getAttribute("tabRoute") == regTab.initialTab) {
+                    if (document.querySelector(`.${regTab.activeSwitcherClass}`) != null && document.querySelector(`.${regTab.activeSwitcherClass}`) != undefined) {
+                        document.querySelector(`.${regTab.activeSwitcherClass}`).classList.remove(regTab.activeSwitcherClass);
+                    }
+                    switcher.classList.add(regTab.activeSwitcherClass);
+                }
+                switcher.addEventListener("click", ()=>{
+                    let tabRoute = switcher.getAttribute("tabRoute");
+                    if (tabRoute != undefined) {
+                        if (document.querySelector(`.${regTab.activeSwitcherClass}`) != null && document.querySelector(`.${regTab.activeSwitcherClass}`) != undefined) {
+ 
+                            document.querySelector(`.${regTab.activeSwitcherClass}`).classList.remove(regTab.activeSwitcherClass);
+                        }
+                        switcher.classList.add(regTab.activeSwitcherClass);
+                        let tabComponent = document.getElementById(tabRoute);
+                        if (tabComponent != null && tabComponent != undefined) {
+                            if (regTab.activeTabClass != undefined && regTab.activeTabClass != null && regTab.activeTabClass != "") {
+                                document.querySelector(`.${regTab.activeTabClass}`).classList.remove(regTab.activeTabClass);
+                                tabComponent.classList.add(regTab.activeTabClass);
+                            }else{
+                                document.querySelector('.rm-tab-active').style.setProperty("display","", "");
+                                document.querySelector('.rm-tab-active').classList.remove('rm-tab-active');
+                                tabComponent.style.setProperty("display","block", "important");
+                                tabComponent.classList.add('rm-tab-active');
+                            }
+                        }else{
+                            throw new Error("`"+tabRoute+"` tabRoute container can't be undefined.");
+                        }
+                    }else{
+                        throw new Error("`tabRoute` Attribute can't be undefined in tab switcher.");
+                    }
+                })
+            });
+
+            regTab.tabs.forEach(Tab => {
+                if (Tab.tabRoute == regTab.initialTab) {
+                    let tabComponent = document.getElementById(Tab.tabRoute);
+                    if (tabComponent != null && tabComponent != undefined) {
+                        if (regTab.activeTabClass != undefined && regTab.activeTabClass != null && regTab.activeTabClass != "") {
+                            tabComponent.classList.add(regTab.activeTabClass);
+                        }else{
+                            tabComponent.style.setProperty("display","block", "important");
+                            tabComponent.classList.add('rm-tab-active');
+
+                        }
+                    }else{
+                        throw new Error("`"+Tab.tabRoute+"` tabRoute container can't be undefined.");
+                    }
+                }
+                let routeInfo = {
+                    method: "GET",
+                    meta_loader: false,
+                    content_url: Tab.content_url,
+                    component: `#${Tab.tabRoute}`,
+                    preloader: Tab.preloader,
+                    error_handler: Tab.error_handler,
+                    http_url_change: false,
+                    http_url: ""
+                 }
+                 if (Tab.data != undefined) {
+                    routeInfo.data = Tab.data;
+                 }
+                this.route(routeInfo);
+            });
+        });
+    }
     __render_header() {
         let current_http_url = window.location.href;
         let split_url = current_http_url.split('/');
@@ -716,7 +796,6 @@ class Routemamba extends routemamba_init {
         }
 
         let parse_data = this.__parse_object_to_param(data);
-        let headers = this.construct_headers;
 
         this.construct_headers.forEach(route=>{
             if (route.http_url == get_route_param[0]) {
@@ -726,7 +805,6 @@ class Routemamba extends routemamba_init {
                     route.content_url = `${route_split[0]}?` + parse_data;
                 }
                 route.meta_loader = false;
-                // console.log("Header: ", route);
                 this.route(route);
             }
         }

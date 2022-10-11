@@ -2,6 +2,7 @@
 var home_btn = document.getElementById("home");
 var about_btn = document.getElementById("about");
 var privacy_btn = document.getElementById("privacy");
+var tabs_example_btn = document.getElementById("tabs-example");
 var back = document.getElementById("back");
 var next = document.getElementById("next");
 
@@ -56,6 +57,16 @@ routemamba.http_routes([
          error_handler: 'error',
          http_url_change: false,
          http_url: "privacy.php"
+      },
+      {
+         method: "GET",
+         meta_loader: true,
+         content_url: "content/tabs-example.php",
+         component: "#root",
+         preloader: 'loading...',
+         error_handler: 'error',
+         http_url_change: false,
+         http_url: "tabs-example.php"
       }
 ]);
 
@@ -87,6 +98,15 @@ routemamba.page_headers_content([
          error_handler: 'error',
          http_url_change: false,
          http_url: "privacy.php"
+      },
+      {
+         method: "GET",
+         content_url: "content/header.php",
+         component: "#header_load",
+         preloader: 'loading...',
+         error_handler: 'error',
+         http_url_change: false,
+         http_url: "tabs-example.php"
       }
 ]);
 
@@ -170,6 +190,18 @@ privacy_btn.addEventListener('click', ()=>{
       });
 });
 
+tabs_example_btn.addEventListener('click', ()=>{
+   routemamba.route({
+         method: "GET",
+         meta_loader: true,
+         content_url: "content/tabs-example.php",
+         component: "#root",
+         preloader: 'loading...',
+         error_handler: 'error',
+         http_url_change: true,
+         http_url: "tabs-example.php"
+      });
+});
 
 // rendering
 routemamba.__render();
