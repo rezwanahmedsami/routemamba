@@ -147,7 +147,7 @@ class routemamba_init {
         let component_div = document.querySelector(component);
 
         if (server_host != "") {
-            var isValidServerHost = (server_host.indexOf("http://127.0.0.1") !== -1) || (server_host.indexOf("http://localhost") !== -1) || (server_host.indexOf("file://") !== -1) ? true : this.validURL(server_host);
+            var isValidServerHost = (server_host.indexOf("http://127.0.0.1") !== -1) || (server_host.indexOf("http://localhost") !== -1) || (server_host.indexOf("file://") !== -1) ? true : this.validURL(server_host) || (server_host.indexOf("tauri://localhost") !== -1) ? true : this.validURL(server_host);
             if (!isValidServerHost) {
                 alert("The server host is invalid");
             }else{
@@ -825,6 +825,14 @@ class Routemamba extends routemamba_init {
         let parse_data = this.__parse_object_to_param(data);
         this.construct_routes.forEach(route=>{
             if (route.http_url == get_route_param[0]) {
+                if (route.method == 'GET') {
+                    let content_path = route.content_url;
+                    let route_split = content_path.split('?');
+                    route.content_url = `${route_split[0]}?` + parse_data;
+                }
+                route.meta_loader = false;
+                this.route(route);
+            }else if (split_url.length < 4 && route.http_url == "") {
                 if (route.method == 'GET') {
                     let content_path = route.content_url;
                     let route_split = content_path.split('?');
