@@ -25,7 +25,7 @@
    <title><?php echo $title; ?></title>
    </meta>
    <!-- <script src="routemamba.min.js"></script> -->
-   <script src="../../routemamba.min.js"></script>
+   <script src="../../dist/routemamba.min.js"></script>
    <!-- <script src="../../src/routemamba.js"></script> -->
    
 </head>

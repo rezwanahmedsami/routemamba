@@ -143,6 +143,10 @@ class routemamba_init {
         return !!pattern.test(str);
       }
 
+    isEmptyObject(obj) {
+        return Object.keys(obj).length === 0;
+    }
+
     __init_routemamba(method, content_url, component, preloader='', error_handler='', data='',type, http_url_change=false, server_host='', http_url='') {
         let component_div = document.querySelector(component);
 
@@ -514,6 +518,10 @@ class Routemamba extends routemamba_init {
         if (get_route_param[1] != undefined) {
             data = this.parse_query_string(get_route_param[1]);
             content_url = content_url + '?' + this.__parse_object_to_param(data);
+        }else if(data != undefined && data != null && !this.isEmptyObject(data) && data != ""){
+            let query = this.__parse_object_to_param(data);
+            content_url = content_url + '?' + query;
+            http_url = http_url + "?"+ query;
         }
         if (meta_loader == true) {
             this.meta_loader(http_url);
@@ -602,6 +610,53 @@ class Routemamba extends routemamba_init {
         window.addEventListener('popstate', (event)=>{
             this.__history_routes_handler(true);
         });
+    }
+
+    navigate(route_to = null, data = null, options = {}){
+        if (route_to != null) {
+            this.construct_routes.forEach(r => {
+                if (route_to.indexOf(r.http_url) !== -1) {
+                    let h_url = r.http_url;
+                    
+                    r.http_url = route_to;
+                    if (data != null) {
+                        r.data = data;
+                    }
+
+                    if (options.meta_loader != undefined && typeof options.meta_loader == "boolean") {
+                        r.meta_loader = options.meta_loader;
+                    }
+                    if (options.http_url_change != undefined && typeof options.http_url_change == "boolean") {
+                        r.http_url_change = options.http_url_change;
+                    }else{
+                        r.http_url_change = true;
+                    }
+
+                    if (options.method != undefined && options.method != "") {
+                        r.method = options.method;
+                    }
+
+                    if (options.header_load != undefined && typeof options.header_load == "boolean") {
+                        this.construct_headers.forEach(h => {
+                            if (h.http_url == h_url) {
+                                this.route(h);
+                            }
+                        });
+                    }
+
+                    if (options.footer_load != undefined && typeof options.footer_load == "boolean") {
+                        this.construct_footers.forEach(f => {
+                            if (f.http_url == h_url) {
+                                this.route(f);
+                            }
+                        });
+                    }
+                    this.route(r);
+                }
+            })
+        }else{
+            throw Error("naviagte method called but route path not defined.");
+        }
     }
 
     header_load(arr) {

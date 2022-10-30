@@ -101,7 +101,7 @@ routemamba.page_headers_content([
       },
       {
          method: "GET",
-         content_url: "content/header.php",
+         content_url: "content/header2.php",
          component: "#header_load",
          preloader: 'loading...',
          error_handler: 'error',
@@ -138,6 +138,15 @@ routemamba.page_footers_content([
          error_handler: 'error',
          http_url_change: false,
          http_url: "privacy.php"
+      },
+      {
+         method: "GET",
+         content_url: "content/footer2.php",
+         component: "#footer_load",
+         preloader: 'loading...',
+         error_handler: 'error',
+         http_url_change: false,
+         http_url: "tabs-example.php"
       }
 ]);
 
@@ -164,17 +173,34 @@ home_btn.addEventListener('click', ()=>{
 });
 
 about_btn.addEventListener('click', ()=>{
-   routemamba.route({
-         method: "GET",
-         meta_loader: true,
-         content_url: "content/about.php",
-         component: "#root",
-         preloader: '<h1>loading...</h2>',
-         // data: {id: 2456, name: "sami"},
-         error_handler: 'error',
-         http_url_change: true,
-         http_url: "about.php?id=34324&name=rezwan"
-      });
+
+   // routemamba.navigate("about.php?id=34324&name=reszwan");
+   routemamba.navigate("about.php", {
+      id: 43345,
+      name: "rezwan"
+   }, {
+      header_load: true,
+      footer_load: true
+   });
+
+   // routemamba.navigate("about.php", {
+   //    id: 43345,
+   //    name: "rezwan"
+   // }, {
+   //    http_url_change: false
+   // });
+
+   // routemamba.route({
+   //       method: "GET",
+   //       meta_loader: true,
+   //       content_url: "content/about.php",
+   //       component: "#root",
+   //       preloader: '<h1>loading...</h2>',
+   //       // data: {id: 2456, name: "sami"},
+   //       error_handler: 'error',
+   //       http_url_change: true,
+   //       http_url: "about.php?id=34324&name=rezwan"
+   //    });
 });
 
 privacy_btn.addEventListener('click', ()=>{
@@ -191,16 +217,23 @@ privacy_btn.addEventListener('click', ()=>{
 });
 
 tabs_example_btn.addEventListener('click', ()=>{
-   routemamba.route({
-         method: "GET",
-         meta_loader: true,
-         content_url: "content/tabs-example.php",
-         component: "#root",
-         preloader: 'loading...',
-         error_handler: 'error',
-         http_url_change: true,
-         http_url: "tabs-example.php"
-      });
+   routemamba.navigate("tabs-example.php", {}, {
+      meta_loader: true,
+      method: "GET",
+      http_url_change: true,
+      header_load: true,
+      footer_load: true
+   });
+   // routemamba.route({
+   //       method: "GET",
+   //       meta_loader: true,
+   //       content_url: "content/tabs-example.php",
+   //       component: "#root",
+   //       preloader: 'loading...',
+   //       error_handler: 'error',
+   //       http_url_change: true,
+   //       http_url: "tabs-example.php"
+   //    });
 });
 
 // rendering
