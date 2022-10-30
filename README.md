@@ -74,7 +74,7 @@ Example linking:
 
 ``` html
 <head>
-   <script src="https://cdn.rezwanahmodsami.com/routemamba/v2.1.x/routemamba.min.js"></script>
+   <script src="https://cdn.rezwanahmodsami.com/routemamba/v2.2.x/routemamba.min.js"></script>
 </head>
 ```
 
