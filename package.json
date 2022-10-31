@@ -6,7 +6,7 @@
   "scripts": {
     "test": "concurrently 'npm run serve' jest -k 'node ./e2e/timeout.js'",
     "build": "webpack",
-    "serve": "npx webpack serve",
+    "serve": "webpack-dev-server --hot",
     "dev": "webpack --watch"
   },
   "repository": {
