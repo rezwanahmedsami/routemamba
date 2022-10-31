@@ -11,4 +11,11 @@ module.exports = {
         libraryTarget: 'umd',
         umdNamedDefine: true,
     },
+    devServer: {
+        static: {
+          directory: path.join(__dirname, './'),
+        },
+        compress: true,
+        port: 3000,
+      },
 }
