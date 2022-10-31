@@ -4,7 +4,7 @@
   "description": "Routemamba is a js library to develop single page web applications easily, specially for php webapp. ",
   "main": "index.js",
   "scripts": {
-    "test": "concurrently 'npm run serve' jest -k",
+    "test": "jest",
     "build": "webpack",
     "serve": "npx webpack serve",
     "dev": "webpack --watch"
