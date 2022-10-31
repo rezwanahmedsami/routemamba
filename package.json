@@ -4,7 +4,7 @@
   "description": "Routemamba is a js library to develop single page web applications easily, specially for php webapp. ",
   "main": "index.js",
   "scripts": {
-    "test": "jest",
+    "test": "concurrently 'npm run serve' jest -k",
     "build": "webpack",
     "serve": "npx webpack serve",
     "dev": "webpack --watch"
@@ -24,6 +24,7 @@
   },
   "homepage": "https://github.com/rezwanahmodsami/routemamba#readme",
   "devDependencies": {
+    "concurrently": "^7.5.0",
     "jest": "^28.1.3",
     "puppeteer": "^19.2.0",
     "webpack": "^5.74.0",
