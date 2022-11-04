@@ -1,9 +1,7 @@
 const concurrently = require('concurrently');
 
 const { result } = concurrently([
-  "npm run serve",
   "npx jest",
-  "node ./e2e/timeout.js",
 ], {
   prefix: 'name',
   killOthers: ['failure', 'success'],
@@ -18,6 +16,6 @@ result.then(
     function onFailure(exitInfo) {
       // This code is necessary to make sure the parent terminates 
       // when the application is closed because of a failure.
-      process.exit();
+      process.exit(1);
     }
   );

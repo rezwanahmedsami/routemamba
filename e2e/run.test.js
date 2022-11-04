@@ -1,4 +1,12 @@
 const  puppeteer  = require("puppeteer");
+const WebpackDevServer = require("webpack-dev-server");
+const webpack = require("webpack");
+const config = require("../webpack.config");
+
+const compiler = webpack(config);
+const devServerOptions = { ...config.devServer};
+// create instance
+const server = new WebpackDevServer(devServerOptions, compiler);
 
 jest.setTimeout(30000);
 
@@ -7,6 +15,10 @@ let url = "http://localhost:3000/index.html";
 describe('Open browser and go to localhost website built using routemamba',  () => {
     var browser;
     var page;
+    it('should start webpack dev server', async () => {
+        // start
+        await server.listen()
+    });
     it('it should open a browser and visit localhost index.html', async () => {
         browser = await puppeteer.launch();
         page = await browser.newPage();
@@ -22,13 +34,13 @@ describe('Open browser and go to localhost website built using routemamba',  () 
             return tag.innerHTML;
         });
 
-        expect(indexContent).toBe("home");
+        await expect(indexContent).toBe("home");
     });
 
     // check navigation header is loaded or not
     test('Check header loaded or not', async () => { 
         let nav = await page.$$("#header_load > nav");
-        expect(nav.length).toBe(1);
+        await expect(nav.length).toBe(1);
     });
     
     // check after onlick on about, routing ok or not
@@ -39,7 +51,7 @@ describe('Open browser and go to localhost website built using routemamba',  () 
             return tag.innerHTML;
         });
 
-        expect(indexContent).toBe("about");
+        await expect(indexContent).toBe("about");
      });
 
      // check after onlick on tabs navigation, routing ok or not
@@ -50,13 +62,13 @@ describe('Open browser and go to localhost website built using routemamba',  () 
             return tag.innerHTML;
         });
 
-        expect(indexContent).toBe("tabs");
+        await expect(indexContent).toBe("tabs");
      });
 
     //  check tabs is working fine or not
     test('check first tab swticher loaded or not and check tab content and switching working or not', async () => { 
         let tabSwitcher = await page.$$(".tab-switcher");
-        expect(tabSwitcher.length).toBe(3);
+        await expect(tabSwitcher.length).toBe(3);
 
         // check tabs content loaded or not on first load
         let tab1Content = await page.$eval("#tab1 > h2", (e) =>{
@@ -69,13 +81,20 @@ describe('Open browser and go to localhost website built using routemamba',  () 
             return e.innerHTML;
         });
 
-        expect(tab1Content).toBe("This is tab 1");
-        expect(tab2Content).toBe("This is tab 2");
-        expect(tab3Content).toBe("This is tab 3");
+        await expect(tab1Content).toBe("This is tab 1");
+        await expect(tab2Content).toBe("This is tab 2");
+        await expect(tab3Content).toBe("This is tab 3");
 
     });
 
     it('it should close browser', async () => {
         await browser.close();  
+    });
+
+    it('should stop webpack dev server', async () => {
+        // close/stop
+        await server.close(() => {
+            console.log("server closed")
+        })
     });
 });
