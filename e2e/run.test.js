@@ -94,9 +94,7 @@ describe('Open browser and go to localhost website built using routemamba',  () 
     it('should stop webpack dev server', async () => {
         // close/stop
         setTimeout(async ()=>{
-            await server.close(() => {
-                console.log("server closed")
-            })
+            await server.close()
         }, 5000);
     });
 });
