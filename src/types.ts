@@ -7,10 +7,10 @@ type RouteMetaLoader        = boolean;
 type RouteContentUrl        = string;
 type RouteContainer         = string;
 type RoutePreloader         = string;
-type RouteData              = string;
+type RouteData              = object;
 type RouteErrorContent      = string;
 type RouteHttpUrlChange     = boolean;
-type RouteHttpUrl           = boolean;
+type RouteHttpUrl           = string;
 
 
 /**
@@ -18,15 +18,15 @@ type RouteHttpUrl           = boolean;
  * of all route method call.
  */
  export type Route  = {
-    method?:             RouteMethod,
-    meta_loader?:        RouteMetaLoader,
-    content_url?:        RouteContentUrl,
-    container?:          RouteContainer,
-    preloader?:          RoutePreloader,
-    data?:               RouteData,
-    error_content?:      RouteErrorContent,
-    http_url_change?:    RouteHttpUrlChange,
-    http_url?:           RouteHttpUrl,
+    method:             RouteMethod,
+    meta_loader:        RouteMetaLoader,
+    content_url:        RouteContentUrl,
+    container:          RouteContainer,
+    preloader:          RoutePreloader,
+    data:               RouteData,
+    error_content:      RouteErrorContent,
+    http_url_change:    RouteHttpUrlChange,
+    http_url:           RouteHttpUrl,
 }
 
 /**

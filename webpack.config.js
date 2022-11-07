@@ -3,7 +3,7 @@ const libraryName = 'routemamba'
 const outputFile = `${libraryName}.min.js` 
 module.exports = {
     mode: 'production',
-    entry: path.resolve(__dirname, 'src/routemamba.js'),
+    entry: path.resolve(__dirname, 'out/routemamba.js'),
     output: {
         path: path.resolve(__dirname, './dist/'),
         filename: outputFile, 
