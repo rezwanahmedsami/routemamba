@@ -12,10 +12,8 @@ const optionsTest: Route = {
     http_url: ""
 }
 
-class Routemamba {
-    name(){
-        console.log(optionsTest)
-    }
+const name = ()=>{
+    console.log(optionsTest)
 }
 
-export const routemamba = new Routemamba();
+export {name}
