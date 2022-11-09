@@ -1,19 +1,9 @@
-import { Route } from "./types";
+import { __render_DOM } from "./DomRenderer";
 
-const optionsTest: Route = {
-    method: "POST",
-    meta_loader: true,
-    content_url: "/sdsd/sds.js",
-    container: "#root",
-    preloader: "afadsf",
-    data: {},
-    error_content: "sdf",
-    http_url_change: false,
-    http_url: ""
+let scripContent = "<script>console.log('loaded from load script')";
+
+
+export {
+    __render_DOM,
+    scripContent,
 }
-
-const name = ()=>{
-    console.log(optionsTest)
-}
-
-export {name}

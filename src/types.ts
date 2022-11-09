@@ -18,6 +18,21 @@ export type RouteErrorHead         = string;
 
 
 /**
+ * Route engine types @param
+ */
+export type RouteEngine = {
+    method:             RouteMethod,
+    content_url:        RouteContentUrl,
+    container:          RouteContainer,
+    preloader:          RoutePreloader,
+    error_content:      RouteErrorContent,
+    data:               RouteData,
+    http_url_change:    RouteHttpUrlChange,
+    server_host:        RouteServerHost,
+    http_url:           RouteHttpUrl
+}
+
+/**
  * Route types defined for @param
  * of all route method call.
  */
