@@ -48,6 +48,21 @@ export type RouteEngine = {
     http_url:           RouteHttpUrl,
 }
 
+export type RegisterdRoutesPages = Array<Route>;
+
+export type RouteHeaderFooter<T> = {
+    container:          RouteContainer,
+    content_url:        RouteContentUrl,
+    preloader:          RoutePreloader,
+    error_content:      RouteErrorContent,
+    http_url:           T
+}
+
+export type RegisterdRoutesHeaders<T> = Array<RouteHeaderFooter<T>>;
+export type RegisterdRoutesFooters<T> = Array<RouteHeaderFooter<T>>;
+
+
+
 /**
  * Navigation Options types @param
  */
