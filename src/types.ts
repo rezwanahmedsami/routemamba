@@ -20,7 +20,7 @@ export type RouteErrorHead         = string;
 /**
  * Route engine types @param
  */
-export type RouteEngine = {
+export type RouteEngineInput = {
     method:             RouteMethod,
     content_url:        RouteContentUrl,
     container:          RouteContainer,
