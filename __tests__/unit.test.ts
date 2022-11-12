@@ -1,4 +1,4 @@
-import RmValidator from "../src/RmValidator";
+
 import {RoutesStorage} from "../src/Global";
 
 import * as RmRegister from "../src/RmRegister";
@@ -92,7 +92,7 @@ test('Push header footer data into routes footer and header storage', () => {
         content_url: "content/footer.php",
         preloader: 'loading...',
         error_content: 'error',
-        http_url: ["index.php"]
+        http_url: ["index.php",]
     });
     
     RoutesStorage.RoutesHeaders.push({
@@ -145,22 +145,3 @@ test('Push header footer data into routes footer and header storage', () => {
     });
  })
 
-test('checking "http://www.google.com" is url or correct should true', () => { 
-    expect(RmValidator.isValidUrl("http://www.google.com")).toBe(true);
-});
-
-test('checking "www.google.com" is url or correct should true', () => { 
-    expect(RmValidator.isValidUrl("www.google.com")).toBe(true);
-});
-
-test('checking "wwwsdsdfdsf" is url or correct', () => { 
-    expect(RmValidator.isValidUrl("wwwsdsdfdsf")).toBe(false);
-});
-
-test('converting "name=sami&id=3423432" to object data', () => { 
-    expect(RmValidator.parseQueryString("name=sami&id=3423432")).toEqual({ name: 'sami', id: '3423432' });
-});
-
-test('converting object: {name: "sami", id: 43534} to query param: "name=sami&id=3423432" to object data', () => { 
-    expect(RmValidator.parseObjectToQueryString({name: "sami", id: 43534})).toEqual("name=sami&id=43534");
-});

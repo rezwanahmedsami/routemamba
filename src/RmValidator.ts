@@ -4,12 +4,14 @@ import isValidUrl from "./validators/isValidUrl"
 import isEmptyObject from "./validators/isEmptyObject"
 import parseQueryString from "./validators/parseQueryString"
 import parseObjectToQueryString from "./validators/parseObjectToQueryString"
+import isValidServerHost from "./validators/isValidServerHost"
 
 const RmValidator = {
     isValidUrl,
     isEmptyObject,
     parseQueryString,
-    parseObjectToQueryString
+    parseObjectToQueryString,
+    isValidServerHost,
 }
 
 export default RmValidator

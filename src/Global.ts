@@ -16,10 +16,28 @@ export namespace  RoutesStorage {
  */
 export namespace PersistStorage {
 
+    interface persistNetworkConfig {
+        readonly localhost:                     string;
+        readonly localIp:                       string;
+        readonly localFilePath:                 string;
+        readonly tauriHost:                     string;
+        readonly http_www:                      string;
+        readonly https_www:                     string;
+    }
+
     interface persistantDomContent{
         readonly ErrorHeadContent:              RouteErrorHead;
         readonly __404_urlErrorContent:         string;
         readonly __404_ServerHostErrorContent:  string;
+    }
+
+    export var NetworkConfig:    persistNetworkConfig = {
+        localhost: 'http://localhost',
+        localIp: 'http://127.0.0.1',
+        localFilePath: 'file://',
+        tauriHost:   'tauri://localhost',
+        http_www: "http://www.",
+        https_www:  "https://www."
     }
 
     export var DomContent:              persistantDomContent = {
