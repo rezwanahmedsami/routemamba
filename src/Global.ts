@@ -27,6 +27,7 @@ export namespace PersistStorage {
 
     interface persistantDomContent{
         readonly ErrorHeadContent:              RouteErrorHead;
+        readonly DefineMetaUrlError:            string;
         readonly __404_urlErrorContent:         string;
         readonly __404_ServerHostErrorContent:  string;
     }
@@ -42,6 +43,7 @@ export namespace PersistStorage {
 
     export var DomContent:              persistantDomContent = {
         ErrorHeadContent: `<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>ERROR</title>`,
+        DefineMetaUrlError: 'Define Meta Content Url',
         __404_urlErrorContent: `
         <style>
         body{

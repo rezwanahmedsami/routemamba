@@ -1,7 +1,8 @@
-import { PersistStorage } from "./Global";
+import { PersistStorage, RoutesStorage } from "./Global";
 import RmValidator from "./RmValidator";
-import { RouteEngineInput } from "./types";
-import * as DomRenderer from "../src/DomRenderer";
+import { Route, RouteEngineInput } from "./types";
+import * as DomRenderer from "./DomRenderer";
+import * as RmLoaders from "./RmLoaders";
 
 export const RouteEngineInit = (Input: RouteEngineInput): void => {
 
@@ -131,5 +132,52 @@ export const RouteEngineInit = (Input: RouteEngineInput): void => {
 
         xhttp.send(finalData);
         
+    }
+}
+
+export const route = (Route: Route): void =>{
+    let split_http_url: Array<string> = [];
+
+    if (Route.http_url != undefined) {
+        split_http_url = Route.http_url.split("?");
+    }else{
+        DomRenderer.__render_DOM_head(PersistStorage.DomContent.ErrorHeadContent);
+        DomRenderer.__render_DOM_root(PersistStorage.DomContent.__404_urlErrorContent);
+    }
+
+    if (split_http_url[1] != undefined) {
+        Route.data = RmValidator.parseQueryString(split_http_url[1]);
+        Route.content_url = Route.content_url+"?"+RmValidator.parseObjectToQueryString(Route.data);
+    }else if(Route.data != undefined && Route.data != null && !RmValidator.isEmptyObject(Route.data)){
+        let query = RmValidator.parseObjectToQueryString(Route.data);
+        Route.content_url = Route.content_url+"?"+query;
+        Route.http_url = Route.http_url+"?"+query;
+    }
+
+    if (Route.meta_loader) {
+        RmLoaders.MetaLoader(Route.http_url);
+    }
+
+    const RouteEngineInput: RouteEngineInput = {
+        method: Route.method,
+        content_url: Route.content_url,
+        container: Route.container,
+        preloader: Route.preloader,
+        error_content: Route.preloader,
+        data: Route.data,
+        http_url_change: Route.http_url_change,
+        server_host: RoutesStorage.server_host,
+        http_url: Route.http_url
+    }
+
+    if (Route.http_url_change != undefined && !Route.http_url_change) {
+        RouteEngineInit(RouteEngineInput);
+    }else if(Route.http_url_change == true){
+        if (RoutesStorage.server_host != undefined && RoutesStorage.server_host != '') {
+            RouteEngineInit(RouteEngineInput);
+        }else{
+            DomRenderer.__render_DOM_head(PersistStorage.DomContent.ErrorHeadContent);
+            DomRenderer.__render_DOM_root(PersistStorage.DomContent.__404_ServerHostErrorContent);
+        }
     }
 }
