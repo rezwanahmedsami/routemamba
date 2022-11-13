@@ -15,6 +15,15 @@ export type RouteMetaUrl           = string;
 export type RouteDomContent        = string;
 export type RouteServerHost        = string;
 export type RouteErrorHead         = string;
+export type NavigateRoute          = string | null;
+export type NavigateData           = object | null;
+export type NavigateOptions        = {
+    meta_loader?:        RouteMetaLoader;
+    http_url_change?:    RouteHttpUrlChange;
+    method?:             RouteMethod;
+    header_load?:        boolean;
+    footer_load?:        boolean;
+};
 
 
 /**
