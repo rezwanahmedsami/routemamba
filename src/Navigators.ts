@@ -45,6 +45,7 @@ export const navigate = (route_to: NavigateRoute = null, data: NavigateData = nu
                                         http_url: h.http_url[i]
                                     }
                                     RoutesInitializer.route(Route);
+                                    break;
                                 }
                             }
                         });
@@ -66,6 +67,7 @@ export const navigate = (route_to: NavigateRoute = null, data: NavigateData = nu
                                         http_url: f.http_url[i]
                                     }
                                     RoutesInitializer.route(Route);
+                                    break;
                                 }
                             }
                         });
@@ -73,7 +75,6 @@ export const navigate = (route_to: NavigateRoute = null, data: NavigateData = nu
                 
                 RoutesInitializer.route(r);
             }else if((route_to.indexOf(r.http_url) === -1) && i == (RoutesStorage.RoutesPages.length - 1)){
-                console.log(route_to+" Not found");
                 throw new Error(`${route_to} is not a registered routes.`);
             }
         });
