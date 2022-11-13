@@ -26,6 +26,7 @@
    </meta>
    <!-- <script src="routemamba.min.js"></script> -->
    <script src="../../dist/routemamba.min.js"></script>
+   <!-- <script src="../../out/routemamba-depreceted.js"></script> -->
    <!-- <script src="../../src/routemamba.js"></script> -->
    
 </head>

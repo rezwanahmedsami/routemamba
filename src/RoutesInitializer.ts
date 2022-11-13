@@ -108,19 +108,22 @@ export const RouteEngineInit = (Input: RouteEngineInput): void => {
         if (Input.method == "POST") {
             finalData = RmValidator.parseObjectToQueryString(Input.data);
         }else if(Input.method == "GET"){
-            if(!RmValidator.isEmptyObject(Input.data)){
-                let exist_q_mark: boolean = Input.content_url.includes("?");
-                if (exist_q_mark) {
-                    let split_c_u: Array<string> = Input.content_url.split("?");
-                    if (split_c_u[split_c_u.length - 1] != '') {
-                        Input.content_url += "&";
-                    }
-                }else{
-                    Input.content_url += "?";
-                }
-            }
 
-            Input.content_url = RmValidator.parseObjectToQueryString(Input.data);
+            if (RoutesStorage.meta_content_url == Input.content_url) {
+                if(!RmValidator.isEmptyObject(Input.data)){
+                    let exist_q_mark: boolean = Input.content_url.includes("?");
+                    if (exist_q_mark) {
+                        let split_c_u: Array<string> = Input.content_url.split("?");
+                        if (split_c_u[split_c_u.length - 1] != '' && split_c_u[split_c_u.length - 1] != undefined) {
+                            Input.content_url += "&";
+                        }
+                    }else{
+                        Input.content_url += "?";
+                    }
+                }
+    
+                Input.content_url += RmValidator.parseObjectToQueryString(Input.data);
+            }
 
         }
 
