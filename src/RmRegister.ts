@@ -1,9 +1,13 @@
 
 import { RoutesStorage } from "./Global";
+import { historyRoutesLoader } from "./RmLoaders";
 import { RegisterdRoutesPages, RegisterdRoutesHeaders, RegisterdRoutesFooters, RouteServerHost, RouteMetaUrl} from "./types";
 
 export const register_http_routes = (Routes: RegisterdRoutesPages): void => {
     RoutesStorage.RoutesPages = Routes;
+    window.addEventListener("popstate", (event)=>{
+        historyRoutesLoader(true);
+    })
 }
 
 export const register_routes_headers = (Headers: RegisterdRoutesHeaders<Array<string>>): void => {

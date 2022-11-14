@@ -10,7 +10,7 @@ import { Route, RouteContentUrl, RouteData } from "./types";
 import * as RoutesInitializer from "./RoutesInitializer";
 import * as RmLoaders from "./RmLoaders";
 
-const renderHeader = (): void =>{
+export const renderHeader = (): void =>{
     let current_http_url: string = window.location.href;
     let split_url: Array<string> = current_http_url.split('/');
     let last_index: number = (split_url.length - 1);
@@ -56,7 +56,7 @@ const renderHeader = (): void =>{
 
 }
 
-const renderBody = (): void =>{
+export const renderBody = (): void =>{
     let current_http_url: string = window.location.href;
     let split_url: Array<string> = current_http_url.split('/');
     let last_index: number = (split_url.length - 1);
@@ -82,9 +82,8 @@ const renderBody = (): void =>{
                 let content_path = Broute.content_url;
                 let route_split = content_path.split("?");
                 route_content_url = `${route_split[0]}?`+query_data;
-                // Broute.content_url = `${route_split[0]}?`+query_data;
             }
-            let meta_loader = false;
+            let meta_loader = true;
             let Route: Route = {
                 method: Broute.method,
                 meta_loader: meta_loader,
@@ -103,9 +102,8 @@ const renderBody = (): void =>{
                 let content_path = Broute.content_url;
                 let route_split = content_path.split("?");
                 route_content_url = `${route_split[0]}?`+query_data;
-                // Broute.content_url = `${route_split[0]}?`+query_data;
             }
-            let meta_loader = false;
+            let meta_loader = true;
             let Route: Route = {
                 method: Broute.method,
                 meta_loader: meta_loader,
@@ -122,7 +120,7 @@ const renderBody = (): void =>{
     });
 }
 
-const renderFooter = (): void =>{
+export const renderFooter = (): void =>{
     let current_http_url: string = window.location.href;
     let split_url: Array<string> = current_http_url.split('/');
     let last_index: number = (split_url.length - 1);

@@ -78,6 +78,15 @@ var tabs_example_btn = document.getElementById("tabs-example");
 var back = document.getElementById("back");
 var next = document.getElementById("next");
 
+back.addEventListener('click', ()=>{
+    routemamba.pop_route();
+ });
+ 
+ next.addEventListener('click', ()=>{
+    routemamba.push_route();
+ });
+ 
+
 home_btn.addEventListener('click', ()=>{
     routemamba.navigate("/", {}, {
         header_load: true,
