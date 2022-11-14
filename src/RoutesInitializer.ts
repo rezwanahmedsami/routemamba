@@ -81,6 +81,9 @@ export const RouteEngineInit = (Input: RouteEngineInput): void => {
 
     if (Input.http_url_change != false) {
         if (Input.http_url != undefined) {
+            if(Input.http_url == ""){
+                Input.http_url = Input.server_host;
+            }
             window.history.pushState(Input.server_host, '', Input.http_url);
         }
     }
@@ -139,7 +142,6 @@ export const RouteEngineInit = (Input: RouteEngineInput): void => {
 }
 
 export const route = (Route: Route): void =>{
-    console.log("From route: ", Route);
     let split_http_url: Array<string> = [];
     let RouteHttpUrl: RouteHttpUrl = Route.http_url;
     let RouteContentUrl: RouteContentUrl = Route.content_url;
@@ -187,7 +189,5 @@ export const route = (Route: Route): void =>{
             DomRenderer.__render_DOM_root(PersistStorage.DomContent.__404_ServerHostErrorContent);
         }
     }
-
-    console.log("After route: ", Route);
 
 }

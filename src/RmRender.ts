@@ -27,7 +27,11 @@ const renderHeader = (): void =>{
 
     RoutesStorage.RoutesHeaders.forEach(Hroute => {
         for (let i = 0; i < Hroute.http_url.length; i++) {
-            if (Hroute.http_url[i] == get_route_param[0]) {
+            let http_url = Hroute.http_url[i];
+            if (http_url == "/") {
+                http_url = "";
+            }
+            if (http_url == get_route_param[0]) {
                 let content_path = Hroute.content_url;
                 let route_split = content_path.split("?");
                 let content_url: RouteContentUrl = `${route_split[0]}?`+query_data;
@@ -41,7 +45,7 @@ const renderHeader = (): void =>{
                     data: {},
                     error_content: Hroute.error_content,
                     http_url_change: false,
-                    http_url: Hroute.http_url[i]
+                    http_url: http_url
                 }
 
                 RoutesInitializer.route(Route);
@@ -68,22 +72,52 @@ const renderBody = (): void =>{
     query_data = RmValidator.parseObjectToQueryString(data);
 
     RoutesStorage.RoutesPages.forEach(Broute => {
-        if (Broute.http_url == get_route_param[0]) {
+        let http_url = Broute.http_url;
+        if (http_url == "/") {
+            http_url = "";
+        }
+        if (http_url == get_route_param[0]) {
+            let route_content_url: RouteContentUrl = '';
             if (Broute.method == 'GET') {
                 let content_path = Broute.content_url;
                 let route_split = content_path.split("?");
-                Broute.content_url = `${route_split[0]}?`+query_data;
+                route_content_url = `${route_split[0]}?`+query_data;
+                // Broute.content_url = `${route_split[0]}?`+query_data;
             }
-            Broute.meta_loader = false;
-            RoutesInitializer.route(Broute);
-        }else if(split_url.length < 4 && Broute.http_url == ''){
+            let meta_loader = false;
+            let Route: Route = {
+                method: Broute.method,
+                meta_loader: meta_loader,
+                content_url: route_content_url,
+                container: Broute.container,
+                preloader: Broute.preloader,
+                data: Broute.data,
+                error_content: Broute.error_content,
+                http_url_change: Broute.http_url_change,
+                http_url: http_url
+            }
+            RoutesInitializer.route(Route);
+        }else if(split_url.length < 4 && http_url == ''){
+            let route_content_url: RouteContentUrl = '';
             if (Broute.method == 'GET') {
                 let content_path = Broute.content_url;
                 let route_split = content_path.split("?");
-                Broute.content_url = `${route_split[0]}?`+query_data;
+                route_content_url = `${route_split[0]}?`+query_data;
+                // Broute.content_url = `${route_split[0]}?`+query_data;
             }
-            Broute.meta_loader = false;
-            RoutesInitializer.route(Broute);
+            let meta_loader = false;
+            let Route: Route = {
+                method: Broute.method,
+                meta_loader: meta_loader,
+                content_url: route_content_url,
+                container: Broute.container,
+                preloader: Broute.preloader,
+                data: Broute.data,
+                error_content: Broute.error_content,
+                http_url_change: Broute.http_url_change,
+                http_url: http_url
+            }
+            RoutesInitializer.route(Route);
         }
     });
 }
@@ -104,8 +138,13 @@ const renderFooter = (): void =>{
     query_data = RmValidator.parseObjectToQueryString(data);
 
     RoutesStorage.RoutesFooters.forEach(Froute => {
+        
         for (let i = 0; i < Froute.http_url.length; i++) {
-            if (Froute.http_url[i] == get_route_param[0]) {
+            let http_url = Froute.http_url[i];
+            if (http_url == "/") {
+                http_url = "";
+            }
+            if (http_url == get_route_param[0]) {
                 let content_path = Froute.content_url;
                 let route_split = content_path.split("?");
                 let content_url: RouteContentUrl = `${route_split[0]}?`+query_data;
@@ -119,7 +158,7 @@ const renderFooter = (): void =>{
                     data: {},
                     error_content: Froute.error_content,
                     http_url_change: false,
-                    http_url: Froute.http_url[i]
+                    http_url: http_url
                 }
 
                 RoutesInitializer.route(Route);

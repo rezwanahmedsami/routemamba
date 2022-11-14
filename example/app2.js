@@ -1,6 +1,6 @@
 routemamba.registerMetaUrl("inc/meta-content.php");
 
-routemamba.registerServerHost("http://localhost:3000/");
+routemamba.registerServerHost("http://localhost:3000/example/");
 
 routemamba.register_http_routes([
     {
@@ -12,7 +12,7 @@ routemamba.register_http_routes([
         data: {},
         error_content: 'error',
         http_url_change: false,
-        http_url: ""
+        http_url: "/"
      },
     {
         method: "GET",
@@ -33,7 +33,7 @@ routemamba.register_routes_headers([
         container: "#header_load",
         preloader: 'loading...',
         error_content: 'error',
-        http_url: ["","about.php"]
+        http_url: ["/","about.php"]
      },
 ]);
 
@@ -43,7 +43,7 @@ routemamba.register_routes_footers([
         container: "#footer_load",
         preloader: 'loading...',
         error_content: 'error',
-        http_url: ["","about.php"]
+        http_url: ["/","about.php"]
      },
 ]);
 
@@ -57,10 +57,9 @@ var back = document.getElementById("back");
 var next = document.getElementById("next");
 
 home_btn.addEventListener('click', ()=>{
-    routemamba.navigate("", {}, {
+    routemamba.navigate("/", {}, {
         header_load: true,
-        footer_load: true,
-        http_url_change: true
+        footer_load: true
     });
 });
 

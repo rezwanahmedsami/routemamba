@@ -1,33 +1,38 @@
 import { PersistStorage, RoutesStorage } from "./Global";
 
 import * as RoutesInitializer from "./RoutesInitializer";
-import {NavigateRoute, NavigateData, NavigateOptions, RouteHttpUrl, Route} from "./types";
+import {NavigateRoute, NavigateData, NavigateOptions, RouteHttpUrl, Route, RouteHttpUrlChange, RouteMethod, RouteMetaLoader, RegisterdRoutesPages} from "./types";
 
-export const navigate = (route_to: NavigateRoute = null, data: NavigateData = null, options: NavigateOptions = {}) =>{
-    if (route_to != null) {
-        RoutesStorage.RoutesPages.forEach((r, i) => {
-            // console.log(r)
-            if (route_to.indexOf(r.http_url) !== -1) {
+export const navigate = (route_to: NavigateRoute, data: NavigateData = null, options: NavigateOptions = {}) =>{
+    if (route_to != null || route_to != undefined) {
+        let r: RegisterdRoutesPages = RoutesStorage.RoutesPages;
+        for (let i = 0; i < r.length; i++) {
+            let http_url: RouteHttpUrl = route_to;
+            if (route_to.indexOf(r[i].http_url) !== -1) {
                 
-                let h_url: RouteHttpUrl = r.http_url;
-                r.http_url = route_to;
+                let h_url: RouteHttpUrl = r[i].http_url;
+                let http_url_change: RouteHttpUrlChange = true;
+                let method: RouteMethod = r[i].method;
+                let meta_loader: RouteMetaLoader = r[i].meta_loader;
+                if (data == null) {
+                    data = {};
+                }
 
-                if (data != null) {
-                    r.data = data;
+                // setting / root path to blank, so it can be define dir as  root path
+                if (route_to == "/") {
+                    http_url = "";
                 }
 
 
                     if (options.meta_loader != undefined && typeof options.meta_loader == "boolean") {
-                        r.meta_loader = options.meta_loader;
+                        meta_loader = options.meta_loader;
                     }
                     if (options.http_url_change != undefined && typeof options.http_url_change == "boolean") {
-                        r.http_url_change = options.http_url_change;
-                    }else{
-                        r.http_url_change = true;
+                        http_url_change = options.http_url_change;
                     }
 
                     if (options.method != undefined && options.method != "") {
-                        r.method = options.method;
+                        method = options.method;
                     }
 
                     if (options.header_load != undefined && typeof options.header_load == "boolean") {
@@ -73,17 +78,24 @@ export const navigate = (route_to: NavigateRoute = null, data: NavigateData = nu
                             }
                         });
                     }
-                
-                RoutesInitializer.route(r);
-            }else if((route_to.indexOf(r.http_url) === -1) && i == (RoutesStorage.RoutesPages.length - 1)){
-                // throw new Error(`${route_to} is not a registered routes.`);
+                let Route: Route = {
+                    method: method,
+                    meta_loader: meta_loader,
+                    content_url: r[i].content_url,
+                    container: r[i].container,
+                    preloader: r[i].preloader,
+                    data: data,
+                    error_content: r[i].error_content,
+                    http_url_change: http_url_change,
+                    http_url: http_url
+                }
+
+                RoutesInitializer.route(Route);
+                break;
+            }else if((route_to.indexOf(r[i].http_url) === -1) && i == (RoutesStorage.RoutesPages.length - 1)){
+                throw new Error(`${route_to} is not a registered routes.`);
             }
-        });
-
-        console.log(RoutesStorage.RoutesPages);
-        console.log(RoutesStorage.RoutesFooters);
-        console.log(RoutesStorage.RoutesHeaders);
-
+        }
     }else{
         throw Error(PersistStorage.DomContent.NavigateRoutePathUndefined);
     }
