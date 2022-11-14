@@ -1,5 +1,6 @@
 <?php
    if (isset($_GET['route'])) {
+      echo $_GET["route"];
       switch ($_GET['route']) {
          case 'index.php':
             $title = 'Home';
@@ -9,6 +10,9 @@
             break;
          case 'privacy.php':
             $title = 'Privacy';
+            break;
+         case 'tabs-example.php':
+            $title = 'Tabs example';
             break;
          default:
          $title = 'Home';

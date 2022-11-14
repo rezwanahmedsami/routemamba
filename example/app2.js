@@ -25,6 +25,28 @@ routemamba.register_http_routes([
         http_url_change: false,
         http_url: "about.php"
      },
+     {
+        method: "GET",
+        meta_loader: true,
+        content_url: "content/privacy.php",
+        container: "#root",
+        preloader: '<h1>loading...</h2>',
+        data: {},
+        error_content: 'error',
+        http_url_change: false,
+        http_url: "privacy.php"
+     },
+     {
+        method: "GET",
+        meta_loader: true,
+        content_url: "content/tabs-example.php",
+        container: "#root",
+        preloader: '<h1>loading...</h2>',
+        data: {},
+        error_content: 'error',
+        http_url_change: false,
+        http_url: "tabs-example.php"
+     },
 ]);
 
 routemamba.register_routes_headers([
@@ -33,7 +55,7 @@ routemamba.register_routes_headers([
         container: "#header_load",
         preloader: 'loading...',
         error_content: 'error',
-        http_url: ["/","about.php"]
+        http_url: ["/","about.php", "privacy.php", "tabs-example.php"]
      },
 ]);
 
@@ -43,7 +65,7 @@ routemamba.register_routes_footers([
         container: "#footer_load",
         preloader: 'loading...',
         error_content: 'error',
-        http_url: ["/","about.php"]
+        http_url: ["/","about.php", "privacy.php", "tabs-example.php"]
      },
 ]);
 
@@ -68,6 +90,20 @@ about_btn.addEventListener('click', ()=>{
        id: 43345,
        name: "rezwan"
     }, {
+       header_load: true,
+       footer_load: true
+    });
+ });
+
+ privacy_btn.addEventListener('click', ()=>{
+    routemamba.navigate("privacy.php");
+ });
+ 
+ tabs_example_btn.addEventListener('click', ()=>{
+    routemamba.navigate("tabs-example.php", {}, {
+       meta_loader: true,
+       method: "GET",
+       http_url_change: true,
        header_load: true,
        footer_load: true
     });
