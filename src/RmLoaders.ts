@@ -18,7 +18,7 @@ export const MetaLoader = (httpUrl: RouteHttpUrl): void =>{
             if (get_route_param.length > 1) {
                 query_data = RmValidator.parseQueryString(get_route_param[1]);
             }
-            query_data = get_route_param[0];
+            query_data.route = get_route_param[0];
         }else{
             let split_http_url = httpUrl.split("/");
             let http_url_path_split = split_http_url[split_http_url.length - 1];

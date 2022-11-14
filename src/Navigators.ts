@@ -1,11 +1,12 @@
 import { PersistStorage, RoutesStorage } from "./Global";
-import RmValidator from "./RmValidator";
+
 import * as RoutesInitializer from "./RoutesInitializer";
 import {NavigateRoute, NavigateData, NavigateOptions, RouteHttpUrl, Route} from "./types";
 
 export const navigate = (route_to: NavigateRoute = null, data: NavigateData = null, options: NavigateOptions = {}) =>{
     if (route_to != null) {
         RoutesStorage.RoutesPages.forEach((r, i) => {
+            // console.log(r)
             if (route_to.indexOf(r.http_url) !== -1) {
                 
                 let h_url: RouteHttpUrl = r.http_url;
@@ -75,9 +76,14 @@ export const navigate = (route_to: NavigateRoute = null, data: NavigateData = nu
                 
                 RoutesInitializer.route(r);
             }else if((route_to.indexOf(r.http_url) === -1) && i == (RoutesStorage.RoutesPages.length - 1)){
-                throw new Error(`${route_to} is not a registered routes.`);
+                // throw new Error(`${route_to} is not a registered routes.`);
             }
         });
+
+        console.log(RoutesStorage.RoutesPages);
+        console.log(RoutesStorage.RoutesFooters);
+        console.log(RoutesStorage.RoutesHeaders);
+
     }else{
         throw Error(PersistStorage.DomContent.NavigateRoutePathUndefined);
     }

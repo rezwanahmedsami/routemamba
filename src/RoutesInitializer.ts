@@ -1,6 +1,6 @@
 import { PersistStorage, RoutesStorage } from "./Global";
 import RmValidator from "./RmValidator";
-import { Route, RouteEngineInput } from "./types";
+import { Route, RouteContentUrl, RouteData, RouteEngineInput, RouteHttpUrl } from "./types";
 import * as DomRenderer from "./DomRenderer";
 import * as RmLoaders from "./RmLoaders";
 
@@ -139,7 +139,11 @@ export const RouteEngineInit = (Input: RouteEngineInput): void => {
 }
 
 export const route = (Route: Route): void =>{
+    console.log("From route: ", Route);
     let split_http_url: Array<string> = [];
+    let RouteHttpUrl: RouteHttpUrl = Route.http_url;
+    let RouteContentUrl: RouteContentUrl = Route.content_url;
+    let RouteData: RouteData = {};
 
     if (Route.http_url != undefined) {
         split_http_url = Route.http_url.split("?");
@@ -149,28 +153,28 @@ export const route = (Route: Route): void =>{
     }
 
     if (split_http_url[1] != undefined) {
-        Route.data = RmValidator.parseQueryString(split_http_url[1]);
-        Route.content_url = Route.content_url+"?"+RmValidator.parseObjectToQueryString(Route.data);
+        RouteData = RmValidator.parseQueryString(split_http_url[1]);
+        RouteContentUrl = RouteContentUrl+"?"+RmValidator.parseObjectToQueryString(Route.data);
     }else if(Route.data != undefined && Route.data != null && !RmValidator.isEmptyObject(Route.data)){
         let query = RmValidator.parseObjectToQueryString(Route.data);
-        Route.content_url = Route.content_url+"?"+query;
-        Route.http_url = Route.http_url+"?"+query;
+        RouteContentUrl = RouteContentUrl+"?"+query;
+        RouteHttpUrl = RouteHttpUrl+"?"+query;
     }
 
     if (Route.meta_loader) {
-        RmLoaders.MetaLoader(Route.http_url);
+        RmLoaders.MetaLoader(RouteHttpUrl);
     }
 
     const RouteEngineInput: RouteEngineInput = {
         method: Route.method,
-        content_url: Route.content_url,
+        content_url: RouteContentUrl,
         container: Route.container,
         preloader: Route.preloader,
         error_content: Route.preloader,
-        data: Route.data,
+        data: RouteData,
         http_url_change: Route.http_url_change,
         server_host: RoutesStorage.server_host,
-        http_url: Route.http_url
+        http_url: RouteHttpUrl
     }
 
     if (Route.http_url_change != undefined && !Route.http_url_change) {
@@ -183,4 +187,7 @@ export const route = (Route: Route): void =>{
             DomRenderer.__render_DOM_root(PersistStorage.DomContent.__404_ServerHostErrorContent);
         }
     }
+
+    console.log("After route: ", Route);
+
 }
