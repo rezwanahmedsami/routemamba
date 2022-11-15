@@ -1,5 +1,4 @@
 import { PersistStorage, RoutesStorage } from "./Global";
-import { historyRoutesLoader } from "./RmLoaders";
 
 import * as RoutesInitializer from "./RoutesInitializer";
 import {NavigateRoute, NavigateData, NavigateOptions, RouteHttpUrl, Route, RouteHttpUrlChange, RouteMethod, RouteMetaLoader, RegisterdRoutesPages} from "./types";
@@ -104,14 +103,8 @@ export const navigate = (route_to: NavigateRoute, data: NavigateData = null, opt
 
 export const pop_route = ():void =>{
     history.back();
-    window.addEventListener("popstate", (event)=>{
-        historyRoutesLoader(true);
-    })
 }
 
 export const push_route = ():void =>{
     history.go(1);
-    window.addEventListener("popstate", (event)=>{
-        historyRoutesLoader(true);
-    })
 }
