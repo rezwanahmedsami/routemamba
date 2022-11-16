@@ -24,7 +24,7 @@ SOFTWARE.
 
 
 */
-
+// done
 function nodeScriptReplace(node) {
 	if ( nodeScriptIs(node) === true ) {
 			node.parentNode.replaceChild( nodeScriptClone(node) , node );
@@ -38,6 +38,7 @@ function nodeScriptReplace(node) {
 
 		return node;
 }
+// done
 function nodeScriptClone(node){
 		var script  = document.createElement("script");
 		script.text = node.innerHTML;
@@ -48,11 +49,11 @@ function nodeScriptClone(node){
 		}
 		return script;
 }
-
+// done
 function nodeScriptIs(node) {
 		return node.tagName === 'SCRIPT';
 }
-
+// done
 function loadScript(component) {
 	let nodes;
 	nodes = document.querySelectorAll(component);
@@ -67,19 +68,19 @@ class routemamba_init {
     constructor() {
         this.error = [];
     }
-
+// done
     __render_DOM_root(content) {
         document.querySelector("body").innerHTML = content;
     }
-
+// done
     __render_DOM(component, content) {
         component.innerHTML = content;
     }
-
+// done
     __render_DOM_head(content) {
         document.querySelector("head").innerHTML = content;
     }
-
+// done
     __parse_object_to_param(parsed_qs) {
         let data = '';
         if (parsed_qs != null) {
@@ -96,7 +97,7 @@ class routemamba_init {
         }
         return data;
     }
-
+// done
     __parse_object_to_param(parsed_qs) {
         let data = '';
         if (parsed_qs != null) {
@@ -113,7 +114,7 @@ class routemamba_init {
         }
         return data;
     }
-
+// done
     parse_query_string(query) {
         let vars = query.split("&");
         let query_string = {};
@@ -132,7 +133,7 @@ class routemamba_init {
         }
         return query_string;
     }
-
+// done
      validURL(str) {
         var pattern = new RegExp('^(https?:\\/\\/)?'+ // protocol
           '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|'+ // domain name
@@ -142,11 +143,11 @@ class routemamba_init {
           '(\\#[-a-z\\d_]*)?$','i'); // fragment locator
         return !!pattern.test(str);
       }
-
+// done
     isEmptyObject(obj) {
         return Object.keys(obj).length === 0;
     }
-
+// done
     __init_routemamba(method, content_url, component, preloader='', error_handler='', data='',type, http_url_change=false, server_host='', http_url='') {
         let component_div = document.querySelector(component);
 
@@ -492,6 +493,7 @@ class Routemamba extends routemamba_init {
             http_url: "about.php" // This is http url, it will visible in browser url tab.
         })
     */
+   // done
     route(arr) {
         let method = arr.method;
         let content_url = arr.content_url;
@@ -546,7 +548,7 @@ class Routemamba extends routemamba_init {
         }
 
     }
-
+// done
     http_routes(routes_arr) {
         let routes_keys = Object.keys(routes_arr);
         let routes_values = Object.values(routes_arr);
@@ -565,7 +567,7 @@ class Routemamba extends routemamba_init {
         );
 
     }
-
+// done
     __history_routes_handler(status) {
         if (status == true) {
             let current_http_url = window.location.href;
@@ -595,7 +597,7 @@ class Routemamba extends routemamba_init {
         }
 
     }
-
+// done
     // This is pop route to go back url
     pop_route() {
         history.back();
@@ -603,7 +605,7 @@ class Routemamba extends routemamba_init {
             this.__history_routes_handler(true);
         });
     }
-
+// done
     // This is push route to go next url already you visited.
     push_route() {
         history.go(1);
@@ -611,7 +613,7 @@ class Routemamba extends routemamba_init {
             this.__history_routes_handler(true);
         });
     }
-
+// done
     navigate(route_to = null, data = null, options = {}){
         if (route_to != null) {
             this.construct_routes.forEach(r => {
@@ -658,7 +660,7 @@ class Routemamba extends routemamba_init {
             throw Error("naviagte method called but route path not defined.");
         }
     }
-
+// ignored
     header_load(arr) {
         arr.method = 'GET';
         arr.http_url_change = false;
@@ -675,7 +677,7 @@ class Routemamba extends routemamba_init {
         this.route(arr);
 
     }
-
+//ignored
     footer_load(arr) {
         arr.method = 'GET';
         arr.data = '';
@@ -692,7 +694,7 @@ class Routemamba extends routemamba_init {
             }
         this.route(arr);
     }
-
+// done
     page_headers_content(content_arr) {
         let routes_keys = Object.keys(content_arr);
         let routes_values = Object.values(content_arr);
@@ -703,7 +705,7 @@ class Routemamba extends routemamba_init {
 
         }
     }
-
+// done
     page_footers_content(content_arr) {
         let routes_keys = Object.keys(content_arr);
         let routes_values = Object.values(content_arr);
@@ -714,7 +716,7 @@ class Routemamba extends routemamba_init {
 
         }
     }
-
+// done
     meta_loader(route_url) {
         if (this.meta_content_url != undefined && this.meta_content_url != '') {
             let current_http_url = window.location.href;
@@ -759,6 +761,7 @@ class Routemamba extends routemamba_init {
         }
     }
 
+    // done
     initTabs(registerdTabs){
         registerdTabs.forEach(regTab => {
             if (regTab.tabSwitcher == undefined || regTab.tabSwitcher == "") {
@@ -839,6 +842,7 @@ class Routemamba extends routemamba_init {
             });
         });
     }
+    // done
     __render_header() {
         let current_http_url = window.location.href;
         let split_url = current_http_url.split('/');
@@ -865,7 +869,7 @@ class Routemamba extends routemamba_init {
         }
         );
     }
-
+// done
     __render_body() {
         let current_http_url = window.location.href;
         let split_url = current_http_url.split('/');
@@ -899,7 +903,7 @@ class Routemamba extends routemamba_init {
         }
         );
     }
-
+// done
     __render_footers() {
         let current_http_url = window.location.href;
         let split_url = current_http_url.split('/');
@@ -925,7 +929,7 @@ class Routemamba extends routemamba_init {
         }
         );
     }
-
+// done
     __render() {
         this.meta_loader();
         this.__render_header();
