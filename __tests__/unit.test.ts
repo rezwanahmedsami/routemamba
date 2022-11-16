@@ -2,19 +2,6 @@
 import {RoutesStorage} from "../src/Global";
 
 import * as RmRegister from "../src/RmRegister";
-import * as RoutesInitializer from "../src/RoutesInitializer";
-
-RoutesInitializer.route({
-    method: "GET",
-    meta_loader: true,
-    content_url: "/web/components/home.html",
-    container: "#root",
-    preloader: '<h1>loading...</h2>',
-    data: {},
-    error_content: 'error',
-    http_url_change: false,
-    http_url: "index.html"
- });
 
 test('should register server host', () => { 
     let serverHost = "https://example.com";

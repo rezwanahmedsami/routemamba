@@ -5,9 +5,12 @@ import { RegisterdRoutesPages, RegisterdRoutesHeaders, RegisterdRoutesFooters, R
 
 export const register_http_routes = (Routes: RegisterdRoutesPages): void => {
     RoutesStorage.RoutesPages = Routes;
-    window.addEventListener("popstate", (event)=>{
-        historyRoutesLoader(true);
-    })
+
+    if (typeof window !== 'undefined') {
+        window.addEventListener("popstate", (event)=>{
+            historyRoutesLoader(true);
+        });
+    }
 }
 
 export const register_routes_headers = (Headers: RegisterdRoutesHeaders<Array<string>>): void => {

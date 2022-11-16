@@ -761,6 +761,7 @@ class Routemamba extends routemamba_init {
         }
     }
 
+    // done
     initTabs(registerdTabs){
         registerdTabs.forEach(regTab => {
             if (regTab.tabSwitcher == undefined || regTab.tabSwitcher == "") {

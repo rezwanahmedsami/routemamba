@@ -95,7 +95,8 @@ export type TabConfig = {
     tabRoute:           string,
     content_url:        string,
     preloader:          string,
-    error_handler:      string
+    error_content:      string,
+    data?:              RouteData,
 }
 
 export type TabHandler = {
