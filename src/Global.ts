@@ -215,6 +215,6 @@ export namespace PersistStorage {
              font-weight: 700;
              width: 100%;
           }
-         </style><div class="error_body"><div class="error_card"><div class="error_header"><h1>404 SERVER HOST</h1></div><div class="error_desc"><p><p class="red-box">Routemamba rendering error !!</p>Did you forget to declare <span class="red-box">server_host</span> on: </p><code class="bg-code"><span class="r">routemamba</span><span class="c">.</span><span class="b">server_host</span><span class="w">&nbsp=</span>&nbsp<b class="red-box-l">undefined</b> &nbsp <b class="red"><<-- error!!!</b><br><br></span></code><p>Set <span class="red-box">server_host</span> to solve this problem</p><hr><p>Developed by: Rezwan Ahmod Sami</p></div></div></div>`
+         </style><div class="error_body"><div class="error_card"><div class="error_header"><h1>404 SERVER HOST</h1></div><div class="error_desc"><p><p class="red-box">Routemamba rendering error !!</p>Did you forget to declare <span class="red-box">server_host</span> on: </p><code class="bg-code"><span class="r">routemamba</span><span class="c">.</span><span class="b">registerServerHost</span><span class="w">(</span>&nbsp<b class="red-box-l">undefined</b> ); <b class="red"><<-- error!!!</b><br><br></span></code><p>Set <span class="red-box">registerServerHost()</span> to solve this problem</p><hr><p>Developed by: Rezwan Ahmod Sami</p></div></div></div>`
     };
 }
