@@ -1,19 +1,19 @@
 routemamba.registerMetaUrl("/web/components/meta/meta.html");
 
-routemamba.registerServerHost("http://localhost:3000/");
+routemamba.registerServerHost("http://localhost:3000");
 
 routemamba.register_http_routes([
-    // {
-    //     method: "GET",
-    //     meta_loader: true,
-    //     content_url: "/web/components/home.html",
-    //     container: "#root",
-    //     preloader: '<h1>loading...</h2>',
-    //     data: {},
-    //     error_content: 'error',
-    //     http_url_change: false,
-    //     http_url: "/"
-    //  },
+    {
+        method: "GET",
+        meta_loader: true,
+        content_url: "/web/components/home.html",
+        container: "#root",
+        preloader: '<h1>loading...</h2>',
+        data: {},
+        error_content: 'error',
+        http_url_change: false,
+        http_url: "/"
+     },
      {
         method: "GET",
         meta_loader: true,

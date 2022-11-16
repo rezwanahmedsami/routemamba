@@ -14,6 +14,17 @@ routemamba.register_http_routes([
         http_url_change: false,
         http_url: "/"
      },
+     {
+      method: "GET",
+      meta_loader: true,
+      content_url: "content/home.php",
+      container: "#root",
+      preloader: '<h1>loading...</h2>',
+      data: {},
+      error_content: 'error',
+      http_url_change: false,
+      http_url: "index.php"
+   },
     {
         method: "GET",
         meta_loader: true,
