@@ -701,7 +701,7 @@ To use local states you have to do like that:
     setCount(4534);
 
     // call count to get count value
-    console.log("Total count is:", count);
+    console.log("Total count is:", count());
 ```
 
 ___
