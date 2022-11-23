@@ -63,7 +63,7 @@ npm i routemamba
 OR
 by copy script tag:
 ``` html
-<script src="https://cdn.rezwanahmodsami.com/routemamba/v3.0.x/routemamba.min.js"></script>
+<script src="https://cdn.rezwanahmodsami.com/routemamba/v3.1.x/routemamba.min.js"></script>
 ```
 
 Then Linked the routemamba.min.js file in your projects html ``` <head> ``` Tag
@@ -72,7 +72,7 @@ Example linking:
 
 ``` html
 <head>
-   <script src="https://cdn.rezwanahmodsami.com/routemamba/v3.0.x/routemamba.min.js"></script>
+   <script src="https://cdn.rezwanahmodsami.com/routemamba/v3.1.x/routemamba.min.js"></script>
 </head>
 ```
 
