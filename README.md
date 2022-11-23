@@ -682,7 +682,7 @@ _______
 In routemamba you can perform reactive system also by managing  states.
 You can manage state by two types:
 * Local states.
-* Global States.
+* Global States. (Coming soon)
 
 #### Local states: 
 Local states are used for particular section, Suppose you want to show a data reactively in single particular section or mutiple section, 
