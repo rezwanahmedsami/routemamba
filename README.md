@@ -679,14 +679,12 @@ Note: you must need to initialize this method where tabs will load. if you want 
 _______
 
 ## Reactive system by State Management in routemamba
-In routemamba you can perform reactive system also by managing  states.
-You can manage state by two types:
+In routemamba, you can perform reactive system by managing states. This can be done in two ways.
 * Local states.
 * Global States. (Coming soon)
 
 #### Local states: 
-Local states are used for particular section, Suppose you want to show a data reactively in single particular section or mutiple section, 
-then you can use it.
+Local states are used to show data that is reactive in a specific section or multiple sections.
 
 To use local states you have to do like that: 
 ```javascript
