@@ -1,1 +1,10 @@
 <h1>home</h1>
+<h1>Count 1: <span id="count1">0</span></h1>
+<h1>Count 2: <span id="count2">0</span></h1>
+<button onclick="setState(state()+1);" id="inc_state_val">Inc</button>
+<script>
+    
+    // const [state, setState] = routemamba.localState.useState(0, "#count1");
+    const [state, setState] = routemamba.localState.useState(0, ["#count1", "#count2"]);
+    
+</script>

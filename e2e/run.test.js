@@ -37,6 +37,23 @@ describe('Open browser and go to localhost website built using routemamba',  () 
         expect(indexContent).toBe("home");
     });
 
+    // check local state change working or not
+    test('Check localstate.useState() function working perfectly or not', async () =>{
+        await page.click("#inc_state_val");
+        let stateValue = await page.$eval("#count1", (tag) => {
+            return tag.innerHTML;
+        });
+        expect(stateValue).toBe("1");
+    });
+
+    test('Should localstate.useState() function working perfectly or not from console', async () =>{
+        let stateValue = await page.$eval("#count1", (tag) => {
+            setState(567);
+            return tag.innerHTML;
+        });
+        expect(stateValue).toBe("567");
+    });
+
     // check navigation header is loaded or not
     test('Check header loaded or not', async () => { 
         let nav = await page.$$("#header_load > nav");

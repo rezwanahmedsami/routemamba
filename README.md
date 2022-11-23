@@ -678,6 +678,33 @@ Note: you must need to initialize this method where tabs will load. if you want 
 
 _______
 
+## Reactive system by State Management in routemamba
+In routemamba you can perform reactive system also by managing  states.
+You can manage state by two types:
+* Local states.
+* Global States.
+
+#### Local states: 
+Local states are used for particular section, Suppose you want to show a data reactively in single particular section or mutiple section, 
+then you can use it.
+
+To use local states you have to do like that: 
+```javascript
+
+    // To display changes in particular section
+    const [count, setCount] = routemamba.localState.useState(0, "#count1");
+
+    // to display changes at a time multiple section
+    const [count, setCount] = routemamba.localState.useState(0, ["#count1", "#count2"]);
+
+    // use setCount() to set state value
+    setCount(4534);
+
+    // call count to get count value
+    console.log("Total count is:", count);
+```
+
+___
 ## Contributing
 
 In general, we follow the "fork-and-pull" Git workflow.

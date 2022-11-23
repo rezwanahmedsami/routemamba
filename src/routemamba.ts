@@ -2,6 +2,8 @@ import {registerMetaUrl, registerServerHost, register_http_routes, register_rout
 import { navigate, pop_route, push_route } from "./Navigators";
 import {initTabs} from "./RmTabsHandler";
 import {render} from "./RmRender";
+import { localState } from "./RmStateManager";
+
 export {
     registerMetaUrl,
     registerServerHost,
@@ -13,4 +15,5 @@ export {
     pop_route,
     push_route,
     initTabs,
+    localState
 }
