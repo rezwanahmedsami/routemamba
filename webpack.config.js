@@ -1,3 +1,5 @@
+var webpack = require("webpack");
+var fs = require("fs");
 const path = require('path');
 const libraryName = 'routemamba'
 const outputFile = `${libraryName}.min.js` 
@@ -19,6 +21,9 @@ module.exports = {
         { test: /\.ts?$/, loader: "ts-loader" }
       ]
     },
+    plugins: [
+      new webpack.BannerPlugin(fs.readFileSync('./LICENSE', 'utf8')),
+    ],
     devServer: {
         static: {
           directory: path.join(__dirname, './'),
