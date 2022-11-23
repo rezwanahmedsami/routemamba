@@ -48,7 +48,7 @@ describe('Open browser and go to localhost website built using routemamba',  () 
 
     test('Should localstate.useState() function working perfectly or not from console', async () =>{
         let stateValue = await page.$eval("#count1", (tag) => {
-            setState(567);
+            setCount(567);
             return tag.innerHTML;
         });
         expect(stateValue).toBe("567");
