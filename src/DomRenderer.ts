@@ -79,16 +79,18 @@ export const __render_DOM = (container: RouteContainer, content: RouteDomContent
 }
 
 export const __render_state_value = (container: RouteContainer, content: RouteDomContent): boolean => {
-    const dom = document.querySelector(container) as HTMLElement;
-
-    if (dom == undefined) {
-        throw new Error(`Can't render state value!!. ${container} Element not found.`);
-    }
-
-    if (dom == null) {
-        throw new Error(`Can't render state value!!. ${container} Element not found.`);
-    }
-    dom.innerHTML = content;
+    const doms: NodeListOf<Element> = document.querySelectorAll(container);
+    
+    doms.forEach(dom =>{
+        if (dom == undefined) {
+            throw new Error(`Can't render state value!!. ${container} Element not found.`);
+        }
+    
+        if (dom == null) {
+            throw new Error(`Can't render state value!!. ${container} Element not found.`);
+        }
+        dom.innerHTML = content;
+    });
     loadScript(container);
     return true;
 }
