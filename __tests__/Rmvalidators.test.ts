@@ -5,10 +5,12 @@ test('should cehck valid server host or not', () => {
     let localhost = PersistStorage.NetworkConfig.localhost;
     let localIp = PersistStorage.NetworkConfig.localIp;
     let tauriHost = PersistStorage.NetworkConfig.tauriHost;
+    let LiveDomain = "https://example.com";
 
     expect(RmValidator.isValidServerHost(localhost)).toBe(true);
     expect(RmValidator.isValidServerHost(localIp)).toBe(true);
     expect(RmValidator.isValidServerHost(tauriHost)).toBe(true);
+    expect(RmValidator.isValidServerHost(LiveDomain)).toBe(true);
  })
 
 test('checking "http://www.google.com" is url or correct should true', () => { 
