@@ -27,6 +27,8 @@ ___
 And also it's easy to use. You can use directly to your php project. To use that script you can directly add our cdn link in your html <head> tag or also you can add by downloading `routemamba.min.js` . 
 Follow the guideline to use routemamba  in your project.
 
+Enjoying routemamba? [Please leave a short review on Openbase](https://openbase.com/js/routemamba#rate)
+
 ## Project setup ```file/folder``` stuctures:
 set files and folder like this to use ```routemamba.min.js```:
 ```bash
