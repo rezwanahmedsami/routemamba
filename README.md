@@ -3,8 +3,8 @@
 [![routemamba Versions](https://badges.openbase.com/js/versions/routemamba.svg?token=gvmAJQCxO2/PJgrc0EvODXOOaqAt69wEOFibwA2qPu0=)](https://openbase.com/js/routemamba?utm_source=embedded&amp;utm_medium=badge&amp;utm_campaign=rate-badge)
 [![Featured on Openbase](https://badges.openbase.com/js/featured/routemamba.svg?token=gvmAJQCxO2/PJgrc0EvODXOOaqAt69wEOFibwA2qPu0=)](https://openbase.com/js/routemamba?utm_source=embedded&amp;utm_medium=badge&amp;utm_campaign=rate-badge)
 [![routemamba Tutorials](https://badges.openbase.com/js/tutorials/routemamba.svg?token=gvmAJQCxO2/PJgrc0EvODXOOaqAt69wEOFibwA2qPu0=)](https://openbase.com/js/routemamba?utm_source=embedded&amp;utm_medium=badge&amp;utm_campaign=rate-badge)
-[![Verified on Openbase](https://badges.openbase.com/js/verified/routemamba.svg?token=gvmAJQCxO2/PJgrc0EvODXOOaqAt69wEOFibwA2qPu0=)](https://openbase.com/js/routemamba?utm_source=embedded&amp;utm_medium=badge&amp;utm_campaign=rate-badge)
-# Routemamba
+
+# Routemamba [![Verified on Openbase](https://badges.openbase.com/js/verified/routemamba.svg?token=gvmAJQCxO2/PJgrc0EvODXOOaqAt69wEOFibwA2qPu0=)](https://openbase.com/js/routemamba?utm_source=embedded&amp;utm_medium=badge&amp;utm_campaign=rate-badge)
 
 <img src="https://cdn.rezwanahmodsami.com/routemamba/logo/routemamba-logo.png" align="right" width="150px">
 
