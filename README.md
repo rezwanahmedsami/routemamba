@@ -6,7 +6,7 @@
 
 # Routemamba [![Verified on Openbase](https://badges.openbase.com/js/verified/routemamba.svg?token=gvmAJQCxO2/PJgrc0EvODXOOaqAt69wEOFibwA2qPu0=)](https://openbase.com/js/routemamba?utm_source=embedded&amp;utm_medium=badge&amp;utm_campaign=rate-badge)
 
-<img src="https://cdn.rezwanahmodsami.com/routemamba/logo/routemamba-logo.png" align="right" width="150px">
+<img src="https://cdn.rezwanahmodsami.com/routemamba/logo/routemamba-js-logo-transparent.png" align="right" width="150px">
 
 Routemamba is a javascript library to develop php single page/without reload web application more easily. you don't need to use node js environment and import package etc. To use that just you need to link by <script> tag in your project.
 Check the documentation for understand. You can use this library in completely free.
