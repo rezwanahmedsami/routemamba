@@ -156,7 +156,8 @@ export const route = (Route: Route): void =>{
 
     if (split_http_url[1] != undefined) {
         RouteData = RmValidator.parseQueryString(split_http_url[1]);
-        RouteContentUrl = RouteContentUrl+"?"+RmValidator.parseObjectToQueryString(Route.data);
+
+        RouteContentUrl = RouteContentUrl+"?"+split_http_url[1];
     }else if(Route.data != undefined && Route.data != null && !RmValidator.isEmptyObject(Route.data)){
         let query = RmValidator.parseObjectToQueryString(Route.data);
         RouteContentUrl = RouteContentUrl+"?"+query;
