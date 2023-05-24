@@ -25,6 +25,11 @@ export type NavigateOptions        = {
     footer_load?:        boolean;
 };
 
+export type Containers = {
+    header: string | null,
+    footer: string | null,
+    body:   string | null,
+}
 
 /**
  * Route engine types @param
