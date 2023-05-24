@@ -3,6 +3,21 @@ import { RegisterdRoutesFooters, RegisterdRoutesHeaders, RegisterdRoutesPages, R
 /**
  * there all golbal array, object and variable initialized
  */
+export enum RouteComponentTypes {
+   HEADER,
+   META,
+   BODY,
+   FOOTER,
+   TAB
+};
+
+export namespace HtmlSelector {
+      export var Root:   string = "root";
+      export var Header: string = "header-root";
+      export var Footer: string = "footer-root";
+      export var Body:   string = "body-root";
+}
+
 export namespace  RoutesStorage {
     export var RoutesPages:             RegisterdRoutesPages = [];
     export var RoutesHeaders:           RegisterdRoutesHeaders<Array<string>> = [];

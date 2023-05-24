@@ -1,4 +1,4 @@
-
+import { RouteComponentTypes } from "./Global";
 /**
  * types of every route method objects @param
  */
@@ -11,6 +11,7 @@ export type RouteData              = object;
 export type RouteErrorContent      = string;
 export type RouteHttpUrlChange     = boolean;
 export type RouteHttpUrl           = string;
+export type RouteComponentType     = RouteComponentTypes;
 export type RouteMetaUrl           = string;
 export type RouteDomContent        = string;
 export type RouteServerHost        = string;
@@ -37,6 +38,7 @@ export type Containers = {
 export type RouteEngineInput = {
     method:             RouteMethod,
     content_url:        RouteContentUrl,
+    component_type:     RouteComponentType,
     container:          RouteContainer,
     preloader:          RoutePreloader,
     error_content:      RouteErrorContent,
@@ -54,6 +56,7 @@ export type RouteEngineInput = {
     method:             RouteMethod,
     meta_loader:        RouteMetaLoader,
     content_url:        RouteContentUrl,
+    component_type:     RouteComponentType,
     container:          RouteContainer,
     preloader:          RoutePreloader,
     data:               RouteData,

@@ -1,4 +1,4 @@
-import { PersistStorage, RoutesStorage } from "./Global";
+import { PersistStorage, RoutesStorage, RouteComponentTypes } from "./Global";
 import RmValidator from "./RmValidator";
 import { Route, RouteContentUrl, RouteData, RouteEngineInput, RouteHttpUrl } from "./types";
 import * as DomRenderer from "./DomRenderer";
@@ -146,7 +146,10 @@ export const route = (Route: Route): void =>{
     let RouteHttpUrl: RouteHttpUrl = Route.http_url;
     let RouteContentUrl: RouteContentUrl = Route.content_url;
     let RouteData: RouteData = {};
-
+    let ComponentType: RouteComponentTypes = Route.component_type;
+    console.log("url: "+RouteContentUrl);
+    console.log("component type: "+ComponentType);
+    DomRenderer.generate_required_all_root_elements();
     if (Route.http_url != undefined) {
         split_http_url = Route.http_url.split("?");
     }else{
@@ -171,6 +174,7 @@ export const route = (Route: Route): void =>{
     const RouteEngineInput: RouteEngineInput = {
         method: Route.method,
         content_url: RouteContentUrl,
+        component_type: Route.component_type,
         container: Route.container,
         preloader: Route.preloader,
         error_content: Route.preloader,

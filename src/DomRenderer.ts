@@ -1,5 +1,5 @@
 import { RouteContainer, RouteDomContent } from "./types";
-
+import { HtmlSelector } from "./Global";
 /**
  * Node Script renderer @functions
  */
@@ -110,4 +110,58 @@ export const __render_DOM_head = (content: RouteDomContent): boolean => {
 
     headDom.innerHTML = content;
     return true;
-} 
+}
+
+// generate body root element
+export const generate_body_root_element = (): void => {
+    const Root = document.querySelector(`${HtmlSelector.Root}`) as HTMLElement;
+    if (Root == undefined || Root == null) {
+        throw new Error(`Can't render DOM Root!!. DOM Root ${HtmlSelector.Root} tag not found.`);
+    }
+    
+    const body_root = document.querySelector(`${HtmlSelector.Root} ${HtmlSelector.Body}`) as HTMLElement;
+    if (body_root == undefined || body_root == null) {
+        // create element
+        const body_root = document.createElement(`${HtmlSelector.Body}`);
+        // append to Root
+        Root.appendChild(body_root);
+    }
+}
+
+// generate header root element
+export const generate_header_root_element = (): void => {
+    const Root = document.querySelector(`${HtmlSelector.Root}`) as HTMLElement;
+    if (Root == undefined || Root == null) {
+        throw new Error(`Can't render DOM Root!!. DOM Root ${HtmlSelector.Root} tag not found.`);
+    }
+    
+    const header_root = document.querySelector(`${HtmlSelector.Root} ${HtmlSelector.Header}`) as HTMLElement;
+    if (header_root == undefined || header_root == null) {
+        // create element
+        const header_root = document.createElement(`${HtmlSelector.Header}`);
+        // append to Root
+        Root.appendChild(header_root);
+    }
+}
+
+// generate footer root element
+export const generate_footer_root_element = (): void => {
+    const Root = document.querySelector(`${HtmlSelector.Root}`) as HTMLElement;
+    if (Root == undefined || Root == null) {
+        throw new Error(`Can't render DOM Root!!. DOM Root ${HtmlSelector.Root} tag not found.`);
+    }
+    
+    const footer_root = document.querySelector(`${HtmlSelector.Root} ${HtmlSelector.Footer}`) as HTMLElement;
+    if (footer_root == undefined || footer_root == null) {
+        // create element
+        const footer_root = document.createElement(`${HtmlSelector.Footer}`);
+        // append to Root
+        Root.appendChild(footer_root);
+    }
+}
+
+export const generate_required_all_root_elements = (): void => {
+    generate_header_root_element();
+    generate_body_root_element();
+    generate_footer_root_element();
+}

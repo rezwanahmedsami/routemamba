@@ -1,4 +1,4 @@
-import { PersistStorage, RoutesStorage } from "./Global";
+import { PersistStorage, RoutesStorage, RouteComponentTypes } from "./Global";
 
 import * as RoutesInitializer from "./RoutesInitializer";
 import {NavigateRoute, NavigateData, NavigateOptions, RouteHttpUrl, Route, RouteHttpUrlChange, RouteMethod, RouteMetaLoader, RegisterdRoutesPages} from "./types";
@@ -43,6 +43,7 @@ export const navigate = (route_to: NavigateRoute, data: NavigateData = null, opt
                                         method: 'GET',
                                         meta_loader: false,
                                         content_url: h.content_url,
+                                        component_type: RouteComponentTypes.HEADER,
                                         container: h.container,
                                         preloader: h.preloader,
                                         data: {},
@@ -65,6 +66,7 @@ export const navigate = (route_to: NavigateRoute, data: NavigateData = null, opt
                                         method: 'GET',
                                         meta_loader: false,
                                         content_url: f.content_url,
+                                        component_type: RouteComponentTypes.FOOTER,
                                         container: f.container,
                                         preloader: f.preloader,
                                         data: {},
@@ -82,6 +84,7 @@ export const navigate = (route_to: NavigateRoute, data: NavigateData = null, opt
                     method: method,
                     meta_loader: meta_loader,
                     content_url: r[i].content_url,
+                    component_type: RouteComponentTypes.BODY,
                     container: r[i].container,
                     preloader: r[i].preloader,
                     data: data,

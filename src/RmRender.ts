@@ -6,11 +6,11 @@
 import { RoutesStorage } from "./Global";
 import RmValidator from "./RmValidator";
 import { Route, RouteContentUrl, RouteData } from "./types";
-
+import { RouteComponentTypes } from "./Global";
 import * as RoutesInitializer from "./RoutesInitializer";
 import * as RmLoaders from "./RmLoaders";
 
-export const renderHeader = (): void =>{
+export const renderHeader = (): void => {
     let current_http_url: string = window.location.href;
     let split_url: Array<string> = current_http_url.split('/');
     let last_index: number = (split_url.length - 1);
@@ -40,6 +40,7 @@ export const renderHeader = (): void =>{
                     method: 'GET',
                     meta_loader: false,
                     content_url: content_url,
+                    component_type: RouteComponentTypes.HEADER,
                     container: Hroute.container,
                     preloader: Hroute.preloader,
                     data: {},
@@ -88,6 +89,7 @@ export const renderBody = (): void =>{
                 method: Broute.method,
                 meta_loader: meta_loader,
                 content_url: route_content_url,
+                component_type: RouteComponentTypes.BODY,
                 container: Broute.container,
                 preloader: Broute.preloader,
                 data: Broute.data,
@@ -108,6 +110,7 @@ export const renderBody = (): void =>{
                 method: Broute.method,
                 meta_loader: meta_loader,
                 content_url: route_content_url,
+                component_type: RouteComponentTypes.BODY,
                 container: Broute.container,
                 preloader: Broute.preloader,
                 data: Broute.data,
@@ -151,6 +154,7 @@ export const renderFooter = (): void =>{
                     method: 'GET',
                     meta_loader: false,
                     content_url: content_url,
+                    component_type: RouteComponentTypes.FOOTER,
                     container: Froute.container,
                     preloader: Froute.preloader,
                     data: {},
