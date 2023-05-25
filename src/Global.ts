@@ -26,16 +26,15 @@ export namespace  RoutesStorage {
     export var meta_content_url:        RouteMetaUrl = "";
 
     export namespace RouteContentsState {
+        export var ShouldHeaderload:   boolean = true;
+        export var ShouldFooterload:   boolean = true;
+
         export var HeaderContent:      string | null = null;
         export var FooterContent:      string | null = null;
         export var BodyContent:        string | null = null;
         export var MetaContent:        string | null = null;
         export var HttpUrl:            string | null = null;
-        export var Containers:         Containers    = {
-            header: null,
-            footer: null,
-            body: null
-        };
+
     }
 }
 

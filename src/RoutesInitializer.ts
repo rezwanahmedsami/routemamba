@@ -1,12 +1,29 @@
-import { PersistStorage, RoutesStorage, RouteComponentTypes } from "./Global";
+import { PersistStorage, RoutesStorage, RouteComponentTypes, HtmlSelector } from "./Global";
 import RmValidator from "./RmValidator";
 import { Route, RouteContentUrl, RouteData, RouteEngineInput, RouteHttpUrl } from "./types";
 import * as DomRenderer from "./DomRenderer";
 import * as RmLoaders from "./RmLoaders";
+import { RenderConfig } from "./Global";
+import * as Controllers from "./Controllers"
 
 export const RouteEngineInit = (Input: RouteEngineInput): void => {
 
     let current_url: string = window.location.href;
+
+    switch (Input.component_type) {
+        case RouteComponentTypes.HEADER:
+            Input.container = HtmlSelector.Header
+            break;
+        case RouteComponentTypes.BODY:
+            Input.container = HtmlSelector.Body
+            break;
+        case RouteComponentTypes.FOOTER:
+            Input.container = HtmlSelector.Footer
+            break;
+    
+        default:
+            break;
+    }
 
     if(Input.server_host != ""){
         const isValidServerHost = RmValidator.isValidServerHost(Input.server_host);
@@ -88,21 +105,29 @@ export const RouteEngineInit = (Input: RouteEngineInput): void => {
         }
     }
 
-    if (Input.container != '' && Input.content_url != '') {
+    if (Input.container != '' && Input.container != undefined && Input.content_url != '') {
         const xhttp: XMLHttpRequest = new XMLHttpRequest();
 
         xhttp.onprogress = function(){
-            if (Input.preloader != undefined && Input.preloader != '') {
+            if (Input.preloader != undefined && Input.preloader != '' && Input.container != undefined) {
                 DomRenderer.__render_DOM(Input.container, Input.preloader);
             }
         }
 
         xhttp.onload = function (this: XMLHttpRequest, e: ProgressEvent){
-            DomRenderer.__render_DOM(Input.container, this.response);
+            if (RenderConfig.await_rendering) {
+                Controllers.store_content(Input.component_type, this.response)
+            }else{
+                if (Input.container != undefined) {
+                    DomRenderer.__render_DOM(Input.container, this.response);
+                }
+            }
         }
 
         xhttp.onerror = function (this: XMLHttpRequest, e: ProgressEvent) {
-            DomRenderer.__render_DOM(Input.container, Input.error_content);
+            if (Input.container != undefined) {
+                DomRenderer.__render_DOM(Input.container, Input.error_content);
+            }
             throw new Error(this.response);
         }
 
@@ -146,10 +171,7 @@ export const route = (Route: Route): void =>{
     let RouteHttpUrl: RouteHttpUrl = Route.http_url;
     let RouteContentUrl: RouteContentUrl = Route.content_url;
     let RouteData: RouteData = {};
-    let ComponentType: RouteComponentTypes = Route.component_type;
-    console.log("url: "+RouteContentUrl);
-    console.log("component type: "+ComponentType);
-    DomRenderer.generate_required_all_root_elements();
+
     if (Route.http_url != undefined) {
         split_http_url = Route.http_url.split("?");
     }else{
@@ -177,7 +199,7 @@ export const route = (Route: Route): void =>{
         component_type: Route.component_type,
         container: Route.container,
         preloader: Route.preloader,
-        error_content: Route.preloader,
+        error_content: Route.error_content,
         data: RouteData,
         http_url_change: Route.http_url_change,
         server_host: RoutesStorage.server_host,

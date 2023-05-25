@@ -34,58 +34,63 @@ export const navigate = (route_to: NavigateRoute, data: NavigateData = null, opt
                     if (options.method != undefined && options.method != "") {
                         method = options.method;
                     }
-
+                    
                     if (options.header_load != undefined && typeof options.header_load == "boolean") {
-                        RoutesStorage.RoutesHeaders.forEach(h => {
-                            for (let i = 0; i < h.http_url.length; i++) {
-                                if (h.http_url[i] == h_url) {
-                                    let Route: Route = {
-                                        method: 'GET',
-                                        meta_loader: false,
-                                        content_url: h.content_url,
-                                        component_type: RouteComponentTypes.HEADER,
-                                        container: h.container,
-                                        preloader: h.preloader,
-                                        data: {},
-                                        error_content: h.error_content,
-                                        http_url_change: false,
-                                        http_url: h.http_url[i]
+                        RoutesStorage.RouteContentsState.ShouldHeaderload = options.header_load;
+
+                        if(options.header_load){
+                            RoutesStorage.RoutesHeaders.forEach(h => {
+                                for (let i = 0; i < h.http_url.length; i++) {
+                                    if (h.http_url[i] == h_url) {
+                                        let Route: Route = {
+                                            method: 'GET',
+                                            meta_loader: false,
+                                            content_url: h.content_url,
+                                            component_type: RouteComponentTypes.HEADER,
+                                            preloader: h.preloader,
+                                            data: {},
+                                            error_content: h.error_content,
+                                            http_url_change: false,
+                                            http_url: h.http_url[i]
+                                        }
+                                        RoutesInitializer.route(Route);
+                                        break;
                                     }
-                                    RoutesInitializer.route(Route);
-                                    break;
                                 }
-                            }
-                        });
+                            });
+                        }
                     }
 
                     if (options.footer_load != undefined && typeof options.footer_load == "boolean") {
-                        RoutesStorage.RoutesFooters.forEach(f => {
-                            for (let i = 0; i < f.http_url.length; i++) {
-                                if (f.http_url[i] == h_url) {
-                                    let Route: Route = {
-                                        method: 'GET',
-                                        meta_loader: false,
-                                        content_url: f.content_url,
-                                        component_type: RouteComponentTypes.FOOTER,
-                                        container: f.container,
-                                        preloader: f.preloader,
-                                        data: {},
-                                        error_content: f.error_content,
-                                        http_url_change: false,
-                                        http_url: f.http_url[i]
+                        RoutesStorage.RouteContentsState.ShouldFooterload = options.footer_load;
+
+                        if (options.footer_load) {
+                            RoutesStorage.RoutesFooters.forEach(f => {
+                                for (let i = 0; i < f.http_url.length; i++) {
+                                    if (f.http_url[i] == h_url) {
+                                        let Route: Route = {
+                                            method: 'GET',
+                                            meta_loader: false,
+                                            content_url: f.content_url,
+                                            component_type: RouteComponentTypes.FOOTER,
+                                            preloader: f.preloader,
+                                            data: {},
+                                            error_content: f.error_content,
+                                            http_url_change: false,
+                                            http_url: f.http_url[i]
+                                        }
+                                        RoutesInitializer.route(Route);
+                                        break;
                                     }
-                                    RoutesInitializer.route(Route);
-                                    break;
                                 }
-                            }
-                        });
+                            });
+                        }
                     }
                 let Route: Route = {
                     method: method,
                     meta_loader: meta_loader,
                     content_url: r[i].content_url,
                     component_type: RouteComponentTypes.BODY,
-                    container: r[i].container,
                     preloader: r[i].preloader,
                     data: data,
                     error_content: r[i].error_content,

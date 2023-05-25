@@ -39,7 +39,7 @@ export type RouteEngineInput = {
     method:             RouteMethod,
     content_url:        RouteContentUrl,
     component_type:     RouteComponentType,
-    container:          RouteContainer,
+    container?:          RouteContainer,
     preloader:          RoutePreloader,
     error_content:      RouteErrorContent,
     data:               RouteData,
@@ -57,7 +57,7 @@ export type RouteEngineInput = {
     meta_loader:        RouteMetaLoader,
     content_url:        RouteContentUrl,
     component_type:     RouteComponentType,
-    container:          RouteContainer,
+    container?:         RouteContainer,
     preloader:          RoutePreloader,
     data:               RouteData,
     error_content:      RouteErrorContent,
@@ -65,10 +65,22 @@ export type RouteEngineInput = {
     http_url:           RouteHttpUrl,
 }
 
-export type RegisterdRoutesPages = Array<Route>;
+export type RegisterRoute  = {
+    method:             RouteMethod,
+    meta_loader:        RouteMetaLoader,
+    content_url:        RouteContentUrl,
+    container?:         RouteContainer,
+    preloader:          RoutePreloader,
+    data:               RouteData,
+    error_content:      RouteErrorContent,
+    http_url_change:    RouteHttpUrlChange,
+    http_url:           RouteHttpUrl,
+}
+
+export type RegisterdRoutesPages = Array<RegisterRoute>;
 
 export type RouteHeaderFooter<T> = {
-    container:          RouteContainer,
+    container?:         RouteContainer,
     content_url:        RouteContentUrl,
     preloader:          RoutePreloader,
     error_content:      RouteErrorContent,

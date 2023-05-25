@@ -3,12 +3,13 @@
  * @functions
  */
 
-import { RoutesStorage } from "./Global";
+import { RoutesStorage, RenderConfig } from "./Global";
 import RmValidator from "./RmValidator";
 import { Route, RouteContentUrl, RouteData } from "./types";
 import { RouteComponentTypes } from "./Global";
 import * as RoutesInitializer from "./RoutesInitializer";
 import * as RmLoaders from "./RmLoaders";
+import {generate_required_all_root_elements} from "./DomRenderer";
 
 export const renderHeader = (): void => {
     let current_http_url: string = window.location.href;
@@ -41,7 +42,6 @@ export const renderHeader = (): void => {
                     meta_loader: false,
                     content_url: content_url,
                     component_type: RouteComponentTypes.HEADER,
-                    container: Hroute.container,
                     preloader: Hroute.preloader,
                     data: {},
                     error_content: Hroute.error_content,
@@ -155,7 +155,6 @@ export const renderFooter = (): void =>{
                     meta_loader: false,
                     content_url: content_url,
                     component_type: RouteComponentTypes.FOOTER,
-                    container: Froute.container,
                     preloader: Froute.preloader,
                     data: {},
                     error_content: Froute.error_content,
@@ -171,8 +170,13 @@ export const renderFooter = (): void =>{
 }
 
 export const render = (): void =>{
+    generate_required_all_root_elements();
     RmLoaders.MetaLoader("");
     renderHeader();
-    renderBody();
     renderFooter();
+    renderBody();
+}
+
+export const await_rendering = (status: boolean) => {
+    RenderConfig.await_rendering = status
 }

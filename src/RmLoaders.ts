@@ -64,9 +64,13 @@ export const historyRoutesLoader = (status: boolean): void =>{
                 http_url = "";
             }
             if (http_url == get_route_param[0]) {
-                RmRender.renderHeader();
+                if (RoutesStorage.RouteContentsState.ShouldHeaderload) {
+                    RmRender.renderHeader();
+                }
                 RmRender.renderBody();
-                RmRender.renderFooter();
+                if (RoutesStorage.RouteContentsState.ShouldFooterload) {
+                    RmRender.renderFooter();
+                }
                 break;
             }
         }
