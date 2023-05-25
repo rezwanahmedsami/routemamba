@@ -1,6 +1,6 @@
-let home_nav = document.getElementById("home_nav");
-let about_nav = document.getElementById("about_nav");
-let tabs_nav = document.getElementById("tabs_nav");
+var home_nav = document.getElementById("home_nav");
+var about_nav = document.getElementById("about_nav");
+var tabs_nav = document.getElementById("tabs_nav");
 
 home_nav.addEventListener("click", (e) => {
     e.preventDefault();
