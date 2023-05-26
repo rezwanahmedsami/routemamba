@@ -9,15 +9,18 @@ export const initTabs = (RegisterdTabs: TabRegister): void => {
   RegisterdTabs.forEach((regTab) => {
     if (regTab.tabSwitcher == undefined || regTab.tabSwitcher == '') {
       throw new Error(
+        // eslint-disable-next-line quotes
         "`tabSwitcher` field can't be undefined or empty in Tabs register."
       );
     }
     if (regTab.initialTab == undefined || regTab.initialTab == '') {
       throw new Error(
+        // eslint-disable-next-line quotes
         "`initialTab` field can't be undefined or empty in Tabs register."
       );
     }
     if (regTab.tabs == undefined) {
+      // eslint-disable-next-line quotes
       throw new Error("`tabs` field can't be undefined in Tabs register.");
     }
 
@@ -89,11 +92,13 @@ export const initTabs = (RegisterdTabs: TabRegister): void => {
             }
           } else {
             throw new Error(
+              // eslint-disable-next-line quotes
               '`' + tabRoute + "` tabRoute container can't be undefined."
             );
           }
         } else {
           throw new Error(
+            // eslint-disable-next-line quotes
             "`tabRoute` Attribute can't be undefined in tab switcher."
           );
         }
@@ -119,6 +124,7 @@ export const initTabs = (RegisterdTabs: TabRegister): void => {
           }
         } else {
           throw new Error(
+            // eslint-disable-next-line quotes
             '`' + Tab.tabRoute + "` tabRoute container can't be undefined."
           );
         }

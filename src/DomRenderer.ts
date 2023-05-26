@@ -49,10 +49,12 @@ export const loadScript = (container: RouteContainer): void => {
 export const __render_DOM_root = (content: RouteDomContent): boolean => {
   const body = document.querySelector('body') as HTMLElement;
   if (body == undefined) {
+    // eslint-disable-next-line quotes
     throw new Error("Can't render DOM Root!!. DOM Root body tag not found.");
   }
 
   if (body == null) {
+    // eslint-disable-next-line quotes
     throw new Error("Can't render DOM Root!!. DOM Root body tag not found.");
   }
   body.innerHTML = content;
@@ -111,10 +113,12 @@ export const __render_DOM_head = (content: RouteDomContent): boolean => {
   const headDom = document.querySelector('head') as HTMLHeadElement;
 
   if (headDom == undefined) {
+    // eslint-disable-next-line quotes
     throw new Error("Can't render DOM Root!!. DOM Root Head tag not found.");
   }
 
   if (headDom == null) {
+    // eslint-disable-next-line quotes
     throw new Error("Can't render DOM Root!!. DOM Root Head tag not found.");
   }
 
