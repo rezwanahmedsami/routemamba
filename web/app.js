@@ -70,3 +70,5 @@ routemamba.register_routes_footers([
 ]);
 
 routemamba.render();
+
+console.log("app.js loaded");

@@ -115,7 +115,7 @@ export const RouteEngineInit = (Input: RouteEngineInput): void => {
         }
 
         xhttp.onload = function (this: XMLHttpRequest, e: ProgressEvent){
-            if (RenderConfig.await_rendering) {
+            if (RenderConfig.await_rendering && Input.component_type != RouteComponentTypes.TAB && Input.component_type != RouteComponentTypes.META) {
                 Controllers.store_content(Input.component_type, this.response)
             }else{
                 if (Input.container != undefined) {

@@ -21,7 +21,6 @@ test('Should register http routes in Routes pages storage', () => {
             method: "GET",
             meta_loader: true,
             content_url: "/web/components/home.html",
-            container: "#root",
             preloader: '<h1>loading...</h2>',
             data: {},
             error_content: 'error',
@@ -32,7 +31,6 @@ test('Should register http routes in Routes pages storage', () => {
             method: "GET",
             meta_loader: true,
             content_url: "/web/components/home.html",
-            container: "#root",
             preloader: '<h1>loading...</h2>',
             data: {},
             error_content: 'error',
@@ -43,7 +41,6 @@ test('Should register http routes in Routes pages storage', () => {
             method: "GET",
             meta_loader: true,
             content_url: "/web/components/about.html",
-            container: "#root",
             preloader: '<h1>loading...</h2>',
             data: {},
             error_content: 'error',
@@ -54,7 +51,6 @@ test('Should register http routes in Routes pages storage', () => {
             method: "GET",
             meta_loader: true,
             content_url: "/web/components/tabs.html",
-            container: "#root",
             preloader: '<h1>loading...</h2>',
             data: {},
             error_content: 'error',
@@ -73,7 +69,6 @@ test('Should register http routes footers in storage', () => {
     RmRegister.register_routes_footers([
         {
             content_url: "/web/components/header-footer/footer.html",
-            container: "#footer_load",
             preloader: 'loading...',
             error_content: 'error',
             http_url: ["index.html"]
@@ -87,7 +82,6 @@ test('Should register http routes footers in storage', () => {
 
 test('Push header footer data into routes footer and header storage', () => { 
     RoutesStorage.RoutesFooters.push({
-        container: "#footer_load",
         content_url: "content/footer.php",
         preloader: 'loading...',
         error_content: 'error',
@@ -95,7 +89,6 @@ test('Push header footer data into routes footer and header storage', () => {
     });
     
     RoutesStorage.RoutesHeaders.push({
-        container: "#header_load",
         content_url: "content/header.php",
         preloader: 'loading...',
         error_content: 'error',
@@ -104,14 +97,12 @@ test('Push header footer data into routes footer and header storage', () => {
     
 
     expect(RoutesStorage.RoutesFooters[0]).toEqual({
-        container: "#footer_load",
         content_url: "content/footer.php",
         preloader: 'loading...',
         error_content: 'error',
         http_url: ["index.php"]
     });
     expect(RoutesStorage.RoutesHeaders[0]).toEqual({
-        container: "#header_load",
         content_url: "content/header.php",
         preloader: 'loading...',
         error_content: 'error',
@@ -124,7 +115,6 @@ test('Push header footer data into routes footer and header storage', () => {
         method: "GET",
         meta_loader: true,
         content_url: "content/home.php",
-        container: "#root",
         preloader: '<h1>loading...</h2>',
         data: {name: "rezwan", description: "This is just a jest test for description"},
         error_content: 'error',
@@ -134,13 +124,12 @@ test('Push header footer data into routes footer and header storage', () => {
     expect(RoutesStorage.RoutesPages[0]).toEqual({
         method: "GET",
         meta_loader: true,
-        content_url: "content/home.php",
-        container: "#root",
+        content_url: 'content/home.php',
         preloader: '<h1>loading...</h2>',
-        data: {name: "rezwan", description: "This is just a jest test for description"},
+        data: {name: 'rezwan', description: 'This is just a jest test for description'},
         error_content: 'error',
         http_url_change: false,
-        http_url: ""
+        http_url: ''
     });
  })
 

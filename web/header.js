@@ -4,6 +4,7 @@ var tabs_nav = document.getElementById("tabs_nav");
 
 home_nav.addEventListener("click", (e) => {
     e.preventDefault();
+    e.stopImmediatePropagation();
     let href = home_nav.getAttribute("href");
 
     routemamba.navigate(href);
@@ -11,6 +12,7 @@ home_nav.addEventListener("click", (e) => {
 
 about_nav.addEventListener("click", (e) => {
     e.preventDefault();
+    e.stopImmediatePropagation();
     let href = about_nav.getAttribute("href");
 
     routemamba.navigate(href);
@@ -18,6 +20,7 @@ about_nav.addEventListener("click", (e) => {
 
 tabs_nav.addEventListener("click", (e) => {
     e.preventDefault();
+    e.stopImmediatePropagation();
     let href = tabs_nav.getAttribute("href");
 
     routemamba.navigate(href);
