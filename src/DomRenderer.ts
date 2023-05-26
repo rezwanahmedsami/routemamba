@@ -61,7 +61,7 @@ export const __render_DOM_root = (content: RouteDomContent): boolean => {
 };
 
 /**
- * @function is for render DOM in specific container
+ * @function is for render DOM in specific container >>
  */
 export const __render_DOM = (
   container: RouteContainer,

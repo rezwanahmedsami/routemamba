@@ -3,7 +3,7 @@ import * as RoutesInitializer from './RoutesInitializer';
 import { RouteComponentTypes } from './Global';
 /**
  *
- * @param RegisterdTabs
+ * @param RegisterdTabs >> @type TabRegister
  */
 export const initTabs = (RegisterdTabs: TabRegister): void => {
   RegisterdTabs.forEach((regTab) => {
