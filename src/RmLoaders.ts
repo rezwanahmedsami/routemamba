@@ -1,4 +1,4 @@
-import { PersistStorage, RoutesStorage } from "./Global";
+import { PersistStorage, RoutesStorage, RouteComponentTypes } from "./Global";
 import { RouteEngineInput, RouteHttpUrl } from "./types";
 import * as DomRenderer from "./DomRenderer";
 import RmValidator from "./RmValidator";
@@ -33,6 +33,7 @@ export const MetaLoader = (httpUrl: RouteHttpUrl): void =>{
         const RouteEngineInput: RouteEngineInput = {
             method: 'GET',
             content_url: RoutesStorage.meta_content_url,
+            component_type: RouteComponentTypes.META,
             container: 'head meta',
             preloader: '',
             error_content: '',
@@ -63,9 +64,13 @@ export const historyRoutesLoader = (status: boolean): void =>{
                 http_url = "";
             }
             if (http_url == get_route_param[0]) {
-                RmRender.renderHeader();
+                if (RoutesStorage.RouteContentsState.ShouldHeaderload) {
+                    RmRender.renderHeader();
+                }
                 RmRender.renderBody();
-                RmRender.renderFooter();
+                if (RoutesStorage.RouteContentsState.ShouldFooterload) {
+                    RmRender.renderFooter();
+                }
                 break;
             }
         }

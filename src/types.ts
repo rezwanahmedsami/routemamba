@@ -1,4 +1,4 @@
-
+import { RouteComponentTypes } from "./Global";
 /**
  * types of every route method objects @param
  */
@@ -11,6 +11,7 @@ export type RouteData              = object;
 export type RouteErrorContent      = string;
 export type RouteHttpUrlChange     = boolean;
 export type RouteHttpUrl           = string;
+export type RouteComponentType     = RouteComponentTypes;
 export type RouteMetaUrl           = string;
 export type RouteDomContent        = string;
 export type RouteServerHost        = string;
@@ -25,6 +26,11 @@ export type NavigateOptions        = {
     footer_load?:        boolean;
 };
 
+export type Containers = {
+    header: string | null,
+    footer: string | null,
+    body:   string | null,
+}
 
 /**
  * Route engine types @param
@@ -32,7 +38,8 @@ export type NavigateOptions        = {
 export type RouteEngineInput = {
     method:             RouteMethod,
     content_url:        RouteContentUrl,
-    container:          RouteContainer,
+    component_type:     RouteComponentType,
+    container?:          RouteContainer,
     preloader:          RoutePreloader,
     error_content:      RouteErrorContent,
     data:               RouteData,
@@ -49,7 +56,8 @@ export type RouteEngineInput = {
     method:             RouteMethod,
     meta_loader:        RouteMetaLoader,
     content_url:        RouteContentUrl,
-    container:          RouteContainer,
+    component_type:     RouteComponentType,
+    container?:         RouteContainer,
     preloader:          RoutePreloader,
     data:               RouteData,
     error_content:      RouteErrorContent,
@@ -57,10 +65,22 @@ export type RouteEngineInput = {
     http_url:           RouteHttpUrl,
 }
 
-export type RegisterdRoutesPages = Array<Route>;
+export type RegisterRoute  = {
+    method:             RouteMethod,
+    meta_loader:        RouteMetaLoader,
+    content_url:        RouteContentUrl,
+    container?:         RouteContainer,
+    preloader:          RoutePreloader,
+    data:               RouteData,
+    error_content:      RouteErrorContent,
+    http_url_change:    RouteHttpUrlChange,
+    http_url:           RouteHttpUrl,
+}
+
+export type RegisterdRoutesPages = Array<RegisterRoute>;
 
 export type RouteHeaderFooter<T> = {
-    container:          RouteContainer,
+    container?:         RouteContainer,
     content_url:        RouteContentUrl,
     preloader:          RoutePreloader,
     error_content:      RouteErrorContent,

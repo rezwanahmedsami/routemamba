@@ -1,5 +1,6 @@
 import { Route, TabRegister } from "./types";
 import * as RoutesInitializer from "./RoutesInitializer";
+import { RouteComponentTypes } from "./Global";
 /**
  * 
  * @param RegisterdTabs 
@@ -95,6 +96,7 @@ export const initTabs = (RegisterdTabs: TabRegister): void =>{
                 method: "GET",
                 meta_loader: false,
                 content_url: Tab.content_url,
+                component_type: RouteComponentTypes.TAB,
                 container: `#${Tab.tabRoute}`,
                 preloader: Tab.preloader,
                 error_content: Tab.error_content,

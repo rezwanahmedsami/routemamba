@@ -3,14 +3,15 @@
  * @functions
  */
 
-import { RoutesStorage } from "./Global";
+import { RoutesStorage, RenderConfig } from "./Global";
 import RmValidator from "./RmValidator";
 import { Route, RouteContentUrl, RouteData } from "./types";
-
+import { RouteComponentTypes } from "./Global";
 import * as RoutesInitializer from "./RoutesInitializer";
 import * as RmLoaders from "./RmLoaders";
+import {generate_required_all_root_elements} from "./DomRenderer";
 
-export const renderHeader = (): void =>{
+export const renderHeader = (): void => {
     let current_http_url: string = window.location.href;
     let split_url: Array<string> = current_http_url.split('/');
     let last_index: number = (split_url.length - 1);
@@ -40,7 +41,7 @@ export const renderHeader = (): void =>{
                     method: 'GET',
                     meta_loader: false,
                     content_url: content_url,
-                    container: Hroute.container,
+                    component_type: RouteComponentTypes.HEADER,
                     preloader: Hroute.preloader,
                     data: {},
                     error_content: Hroute.error_content,
@@ -88,6 +89,7 @@ export const renderBody = (): void =>{
                 method: Broute.method,
                 meta_loader: meta_loader,
                 content_url: route_content_url,
+                component_type: RouteComponentTypes.BODY,
                 container: Broute.container,
                 preloader: Broute.preloader,
                 data: Broute.data,
@@ -108,6 +110,7 @@ export const renderBody = (): void =>{
                 method: Broute.method,
                 meta_loader: meta_loader,
                 content_url: route_content_url,
+                component_type: RouteComponentTypes.BODY,
                 container: Broute.container,
                 preloader: Broute.preloader,
                 data: Broute.data,
@@ -151,7 +154,7 @@ export const renderFooter = (): void =>{
                     method: 'GET',
                     meta_loader: false,
                     content_url: content_url,
-                    container: Froute.container,
+                    component_type: RouteComponentTypes.FOOTER,
                     preloader: Froute.preloader,
                     data: {},
                     error_content: Froute.error_content,
@@ -167,8 +170,13 @@ export const renderFooter = (): void =>{
 }
 
 export const render = (): void =>{
+    generate_required_all_root_elements();
     RmLoaders.MetaLoader("");
     renderHeader();
-    renderBody();
     renderFooter();
+    renderBody();
+}
+
+export const await_rendering = (status: boolean) => {
+    RenderConfig.await_rendering = status
 }

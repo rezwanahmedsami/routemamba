@@ -1,14 +1,45 @@
-import { RegisterdRoutesFooters, RegisterdRoutesHeaders, RegisterdRoutesPages, RouteErrorHead, RouteMetaUrl, RouteServerHost } from "./types";
+import { RegisterdRoutesFooters, RegisterdRoutesHeaders, RegisterdRoutesPages, RouteErrorHead, RouteMetaUrl, RouteServerHost, Containers } from "./types";
 
 /**
  * there all golbal array, object and variable initialized
  */
+export enum RouteComponentTypes {
+   HEADER,
+   META,
+   BODY,
+   FOOTER,
+   TAB
+};
+
+export namespace HtmlSelector {
+      export var Root:   string = "root";
+      export var Header: string = "header-root";
+      export var Footer: string = "footer-root";
+      export var Body:   string = "body-root";
+}
+
 export namespace  RoutesStorage {
     export var RoutesPages:             RegisterdRoutesPages = [];
     export var RoutesHeaders:           RegisterdRoutesHeaders<Array<string>> = [];
     export var RoutesFooters:           RegisterdRoutesFooters<Array<string>> = [];
     export var server_host:             RouteServerHost = "";
     export var meta_content_url:        RouteMetaUrl = "";
+
+    export namespace RouteContentsState {
+        export var ShouldHeaderload:   boolean = true;
+        export var ShouldFooterload:   boolean = true;
+
+        export var HeaderContent:      string | null = null;
+        export var FooterContent:      string | null = null;
+        export var BodyContent:        string | null = null;
+        export var MetaContent:        string | null = null;
+        export var HttpUrl:            string | null = null;
+
+    }
+}
+
+export namespace RenderConfig {
+    export var await_rendering:        boolean = true;
 }
 
 /**

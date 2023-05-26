@@ -29,8 +29,8 @@ describe('Open browser and go to localhost website built using routemamba',  () 
     });
     //  test page index content loaded or not
     test('Check index.html page content loaded or not', async () => { 
-        await page.waitForSelector("#root > h1");
-        let indexContent = await page.$eval("#root > h1", (tag) => {
+        await page.waitForSelector("root > body-root > h1");
+        let indexContent = await page.$eval("root > body-root > h1", (tag) => {
             return tag.innerHTML;
         });
 
@@ -56,15 +56,15 @@ describe('Open browser and go to localhost website built using routemamba',  () 
 
     // check navigation header is loaded or not
     test('Check header loaded or not', async () => { 
-        let nav = await page.$$("#header_load > nav");
+        let nav = await page.$$("root > header-root > nav");
         expect(nav.length).toBe(1);
     });
     
     // check after onlick on about, routing ok or not
     test('On click about navigation, it should load about page in root', async() => {
         await page.click("#about_nav");
-        await page.waitForSelector("#root > h1");
-        let indexContent = await page.$eval("#root > h1", (tag) => {
+        await page.waitForSelector("root > body-root > h1");
+        let indexContent = await page.$eval("root > body-root > h1", (tag) => {
             return tag.innerHTML;
         });
 
@@ -74,8 +74,8 @@ describe('Open browser and go to localhost website built using routemamba',  () 
      // check after onlick on tabs navigation, routing ok or not
      test('On click tabs navigation, it should load tabs page in root', async() => {
         await page.click("#tabs_nav");
-        await page.waitForSelector("#root > h1");
-        let indexContent = await page.$eval("#root > h1", (tag) => {
+        await page.waitForSelector("root > body-root > h1");
+        let indexContent = await page.$eval("root > body-root > h1", (tag) => {
             return tag.innerHTML;
         });
 

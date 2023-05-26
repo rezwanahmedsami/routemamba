@@ -7,5 +7,5 @@
 <button id="inc_state_val" onclick="setCount(count() + 1)">Inc</button> | <button onclick="setCount(count() - 1)">Dec</button>
 
 <script>
-const [count, setCount] = routemamba.localState.useState(0, ["#count", ".count",]);
+var [count, setCount] = routemamba.localState.useState(0, ["#count", ".count",]);
 </script>
