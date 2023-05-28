@@ -1,27 +1,29 @@
-var home_nav = document.getElementById("home_nav");
-var about_nav = document.getElementById("about_nav");
-var tabs_nav = document.getElementById("tabs_nav");
+/* eslint-disable no-undef */
+/* eslint-disable camelcase */
+var home_nav = document.getElementById('home_nav');
+var about_nav = document.getElementById('about_nav');
+var tabs_nav = document.getElementById('tabs_nav');
 
-home_nav.addEventListener("click", (e) => {
-    e.preventDefault();
-    e.stopImmediatePropagation();
-    let href = home_nav.getAttribute("href");
+home_nav.addEventListener('click', (e) => {
+  e.preventDefault();
+  e.stopImmediatePropagation();
+  const href = home_nav.getAttribute('href');
 
-    routemamba.navigate(href);
-})
+  routemamba.navigate(href);
+});
 
-about_nav.addEventListener("click", (e) => {
-    e.preventDefault();
-    e.stopImmediatePropagation();
-    let href = about_nav.getAttribute("href");
+about_nav.addEventListener('click', (e) => {
+  e.preventDefault();
+  e.stopImmediatePropagation();
+  const href = about_nav.getAttribute('href');
 
-    routemamba.navigate(href);
-})
+  routemamba.navigate(href);
+});
 
-tabs_nav.addEventListener("click", (e) => {
-    e.preventDefault();
-    e.stopImmediatePropagation();
-    let href = tabs_nav.getAttribute("href");
+tabs_nav.addEventListener('click', (e) => {
+  e.preventDefault();
+  e.stopImmediatePropagation();
+  const href = tabs_nav.getAttribute('href');
 
-    routemamba.navigate(href);
-})
+  routemamba.navigate(href);
+});

@@ -1,0 +1,23 @@
+# Mac.
+.DS_STORE
+**.DS_STORE
+
+# Node.
+node_modules
+npm-debug.log
+
+# Yarn
+yarn.lock
+yarn-error.log
+
+# parcel bundler cache
+.cache
+
+# code coverage
+__coverage__
+
+# webstorm
+.idea
+
+# distribution
+dist

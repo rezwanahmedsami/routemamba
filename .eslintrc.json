@@ -1,0 +1,31 @@
+{
+  "env": {
+    "browser": true,
+    "es2021": true
+  },
+  "extends": ["eslint:recommended", "plugin:@typescript-eslint/recommended"],
+  "overrides": [],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": "latest",
+    "sourceType": "module",
+    "project": "./tsconfig.json"
+  },
+  "plugins": ["@typescript-eslint"],
+  "ignorePatterns": [
+    "__tests__/register.test.ts",
+    "e2e/**/*",
+    "dist/**/*",
+    "node_modules/**/*",
+    "web/**/*",
+    "webpack-dev-server.js",
+    "webpack.config.js",
+    "rollup.config.js"
+  ],
+  "rules": {
+    "semi": ["error", "always"],
+    "quotes": ["error", "single"],
+    "@typescript-eslint/no-namespace": "off",
+    "no-var": "off"
+  }
+}

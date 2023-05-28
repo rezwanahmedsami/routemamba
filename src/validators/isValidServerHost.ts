@@ -1,10 +1,15 @@
-import { PersistStorage } from "../Global";
-import { RouteServerHost } from "../types";
-import isValidUrl from "./isValidUrl";
+import { PersistStorage } from '../Global';
+import { type RouteServerHost } from '../types';
+import isValidUrl from './isValidUrl';
 
 const isValidServerHost = (server_host: RouteServerHost): boolean => {
-
-    return (server_host.indexOf(PersistStorage.NetworkConfig.localIp) !== -1) ||          (server_host.indexOf(PersistStorage.NetworkConfig.localhost) !== -1) || (server_host.indexOf(PersistStorage.NetworkConfig.localFilePath) !== -1) || (server_host.indexOf(PersistStorage.NetworkConfig.tauriHost) !== -1) || isValidUrl(server_host);
-}
+  return (
+    server_host.includes(PersistStorage.NetworkConfig.localIp) ||
+    server_host.includes(PersistStorage.NetworkConfig.localhost) ||
+    server_host.includes(PersistStorage.NetworkConfig.localFilePath) ||
+    server_host.includes(PersistStorage.NetworkConfig.tauriHost) ||
+    isValidUrl(server_host)
+  );
+};
 
 export default isValidServerHost;

@@ -1,220 +1,273 @@
-import { PersistStorage, RoutesStorage, RouteComponentTypes, HtmlSelector } from "./Global";
-import RmValidator from "./RmValidator";
-import { Route, RouteContentUrl, RouteData, RouteEngineInput, RouteHttpUrl } from "./types";
-import * as DomRenderer from "./DomRenderer";
-import * as RmLoaders from "./RmLoaders";
-import { RenderConfig } from "./Global";
-import * as Controllers from "./Controllers"
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import {
+  PersistStorage,
+  RoutesStorage,
+  RouteComponentTypes,
+  HtmlSelector,
+  RenderConfig,
+} from './Global';
+import RmValidator from './RmValidator';
+import {
+  type Route,
+  type RouteContentUrl,
+  type RouteData,
+  type RouteEngineInput,
+  type RouteHttpUrl,
+} from './types';
+import * as DomRenderer from './DomRenderer';
+import * as RmLoaders from './RmLoaders';
+import * as Controllers from './Controllers';
 
 export const RouteEngineInit = (Input: RouteEngineInput): void => {
+  const current_url: string = window.location.href;
 
-    let current_url: string = window.location.href;
+  switch (Input.component_type) {
+    case RouteComponentTypes.HEADER:
+      Input.container = HtmlSelector.Header;
+      break;
+    case RouteComponentTypes.BODY:
+      Input.container = HtmlSelector.Body;
+      break;
+    case RouteComponentTypes.FOOTER:
+      Input.container = HtmlSelector.Footer;
+      break;
 
-    switch (Input.component_type) {
-        case RouteComponentTypes.HEADER:
-            Input.container = HtmlSelector.Header
-            break;
-        case RouteComponentTypes.BODY:
-            Input.container = HtmlSelector.Body
-            break;
-        case RouteComponentTypes.FOOTER:
-            Input.container = HtmlSelector.Footer
-            break;
-    
-        default:
-            break;
+    default:
+      break;
+  }
+
+  if (Input.server_host != '') {
+    const isValidServerHost = RmValidator.isValidServerHost(Input.server_host);
+
+    if (!isValidServerHost) {
+      alert('The server host is invalid');
+    } else {
+      if (
+        Input.server_host.includes(PersistStorage.NetworkConfig.https_www) ||
+        Input.server_host.includes(PersistStorage.NetworkConfig.http_www)
+      ) {
+        const split_url: string[] = current_url.split('/');
+        let new_url = '';
+
+        for (let i = 0; i < 3; i++) {
+          if (i == 1) {
+            new_url += '//';
+          } else {
+            new_url += split_url[i];
+          }
+        }
+
+        new_url += '/';
+        if (Input.http_url == Input.server_host) {
+          Input.http_url = new_url;
+        }
+        Input.server_host = new_url;
+      } else if (
+        Input.server_host.includes(PersistStorage.NetworkConfig.localIp) ||
+        Input.server_host.includes(PersistStorage.NetworkConfig.localhost)
+      ) {
+        if (current_url.includes(PersistStorage.NetworkConfig.localIp)) {
+          if (
+            Input.server_host.includes(PersistStorage.NetworkConfig.localhost)
+          ) {
+            Input.server_host = Input.server_host.replace(
+              PersistStorage.NetworkConfig.localhost,
+              PersistStorage.NetworkConfig.localIp
+            );
+          }
+        } else if (
+          current_url.includes(PersistStorage.NetworkConfig.localhost)
+        ) {
+          if (
+            Input.server_host.includes(PersistStorage.NetworkConfig.localIp)
+          ) {
+            Input.server_host = Input.server_host.replace(
+              PersistStorage.NetworkConfig.localIp,
+              PersistStorage.NetworkConfig.localhost
+            );
+          }
+        }
+      } else {
+        const split_server_host: string[] = Input.server_host.split('/');
+        let new_host = '';
+
+        for (let x = 0; x < split_server_host.length; x++) {
+          if (
+            (x == 0 && split_server_host[x] == 'https:') ||
+            split_server_host[x] == 'http:'
+          ) {
+            new_host = split_server_host[x] + '/';
+            continue;
+          }
+
+          if (
+            x == 1 &&
+            (current_url.includes(PersistStorage.NetworkConfig.http_www) ||
+              Input.server_host.includes(PersistStorage.NetworkConfig.http_www))
+          ) {
+            new_host += 'www.';
+          }
+          if (split_server_host[x] == '') {
+            new_host += '/';
+            continue;
+          }
+
+          new_host += split_server_host[x];
+        }
+        if (Input.http_url == Input.server_host) {
+          Input.http_url = new_host;
+        }
+
+        Input.server_host = new_host;
+      }
     }
+  }
 
-    if(Input.server_host != ""){
-        const isValidServerHost = RmValidator.isValidServerHost(Input.server_host);
+  if (Input.http_url_change) {
+    if (Input.http_url != undefined) {
+      if (Input.http_url == '') {
+        Input.http_url = Input.server_host;
+      }
+      window.history.pushState(Input.server_host, '', Input.http_url);
+    }
+  }
 
-        if(!isValidServerHost){
-            alert("The server host is invalid");
-        }else{
-            if ((Input.server_host.indexOf(PersistStorage.NetworkConfig.https_www) !== -1) || (Input.server_host.indexOf(PersistStorage.NetworkConfig.http_www) !== -1)) {
+  if (
+    Input.container != '' &&
+    Input.container != undefined &&
+    Input.content_url != ''
+  ) {
+    const xhttp: XMLHttpRequest = new XMLHttpRequest();
 
-                
-                let split_url: Array<string> = current_url.split("/");
-                let new_url: string = "";
+    xhttp.onprogress = function () {
+      if (
+        Input.preloader != undefined &&
+        Input.preloader != '' &&
+        Input.container != undefined
+      ) {
+        DomRenderer.__render_DOM(Input.container, Input.preloader);
+      }
+    };
 
-                for (let i = 0; i < 3; i++) {
-                    
-                    if (i == 1) {
-                        new_url += "//";
-                    }else{
-                        new_url += split_url[i];
-                    }
-                    
-                }
+    xhttp.onload = function (this: XMLHttpRequest, e: ProgressEvent) {
+      if (
+        RenderConfig.await_rendering &&
+        Input.component_type != RouteComponentTypes.TAB &&
+        Input.component_type != RouteComponentTypes.META
+      ) {
+        Controllers.store_content(Input.component_type, this.response);
+      } else {
+        if (Input.container != undefined) {
+          DomRenderer.__render_DOM(Input.container, this.response);
+        }
+      }
+    };
 
-                new_url += "/";
-                if (Input.http_url == Input.server_host) {
-                    Input.http_url = new_url;
-                }
-                Input.server_host = new_url;
-                
-            }else if((Input.server_host.indexOf(PersistStorage.NetworkConfig.localIp) !== -1) || (Input.server_host.indexOf(PersistStorage.NetworkConfig.localhost) !== -1)){
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    xhttp.onerror = function (this: XMLHttpRequest, e: ProgressEvent) {
+      if (Input.container != undefined) {
+        DomRenderer.__render_DOM(Input.container, Input.error_content);
+      }
+      throw new Error(this.response);
+    };
 
-                if (current_url.indexOf(PersistStorage.NetworkConfig.localIp) !== -1) {
-                    if (Input.server_host.indexOf(PersistStorage.NetworkConfig.localhost) !== -1) {
-                        Input.server_host = Input.server_host.replace(PersistStorage.NetworkConfig.localhost, PersistStorage.NetworkConfig.localIp);
-                    }
-                }else if(current_url.indexOf(PersistStorage.NetworkConfig.localhost) !== -1){
-                    if (Input.server_host.indexOf(PersistStorage.NetworkConfig.localIp) !== -1) {
-                        Input.server_host = Input.server_host.replace(PersistStorage.NetworkConfig.localIp, PersistStorage.NetworkConfig.localhost);
-                    }
-                }
-            }else{
-                let split_server_host: Array<string> = Input.server_host.split("/");
-                let new_host: string = "";
+    let finalData = '';
 
-                for (let x = 0; x < split_server_host.length; x++) {
-                    
-                    if ((x == 0) && (split_server_host[x] == "https:") || (split_server_host[x] == "http:")) {
-                        new_host = split_server_host[x]+"/";
-                        continue;
-                    }
-
-                    if (x == 1 && ((current_url.indexOf(PersistStorage.NetworkConfig.http_www) !== -1) || (Input.server_host.indexOf(PersistStorage.NetworkConfig.http_www) !== -1))) {
-                        new_host += "www.";
-                    }
-                    if (split_server_host[x] == "") {
-                        new_host += "/";
-                        continue;
-                    }
-
-                    new_host += split_server_host[x];
-                    
-                }
-                if (Input.http_url == Input.server_host) {
-                    Input.http_url = new_host;
-                }
-
-                Input.server_host = new_host
+    if (Input.method == 'POST') {
+      finalData = RmValidator.parseObjectToQueryString(Input.data);
+    } else if (Input.method == 'GET') {
+      if (RoutesStorage.meta_content_url == Input.content_url) {
+        if (!RmValidator.isEmptyObject(Input.data)) {
+          const exist_q_mark: boolean = Input.content_url.includes('?');
+          if (exist_q_mark) {
+            const split_c_u: string[] = Input.content_url.split('?');
+            if (
+              split_c_u[split_c_u.length - 1] != '' &&
+              split_c_u[split_c_u.length - 1] != undefined
+            ) {
+              Input.content_url += '&';
             }
-        }
-    }
-
-
-    if (Input.http_url_change != false) {
-        if (Input.http_url != undefined) {
-            if(Input.http_url == ""){
-                Input.http_url = Input.server_host;
-            }
-            window.history.pushState(Input.server_host, '', Input.http_url);
-        }
-    }
-
-    if (Input.container != '' && Input.container != undefined && Input.content_url != '') {
-        const xhttp: XMLHttpRequest = new XMLHttpRequest();
-
-        xhttp.onprogress = function(){
-            if (Input.preloader != undefined && Input.preloader != '' && Input.container != undefined) {
-                DomRenderer.__render_DOM(Input.container, Input.preloader);
-            }
+          } else {
+            Input.content_url += '?';
+          }
         }
 
-        xhttp.onload = function (this: XMLHttpRequest, e: ProgressEvent){
-            if (RenderConfig.await_rendering && Input.component_type != RouteComponentTypes.TAB && Input.component_type != RouteComponentTypes.META) {
-                Controllers.store_content(Input.component_type, this.response)
-            }else{
-                if (Input.container != undefined) {
-                    DomRenderer.__render_DOM(Input.container, this.response);
-                }
-            }
-        }
-
-        xhttp.onerror = function (this: XMLHttpRequest, e: ProgressEvent) {
-            if (Input.container != undefined) {
-                DomRenderer.__render_DOM(Input.container, Input.error_content);
-            }
-            throw new Error(this.response);
-        }
-
-        let finalData: string = "";
-
-        if (Input.method == "POST") {
-            finalData = RmValidator.parseObjectToQueryString(Input.data);
-        }else if(Input.method == "GET"){
-
-            if (RoutesStorage.meta_content_url == Input.content_url) {
-                if(!RmValidator.isEmptyObject(Input.data)){
-                    let exist_q_mark: boolean = Input.content_url.includes("?");
-                    if (exist_q_mark) {
-                        let split_c_u: Array<string> = Input.content_url.split("?");
-                        if (split_c_u[split_c_u.length - 1] != '' && split_c_u[split_c_u.length - 1] != undefined) {
-                            Input.content_url += "&";
-                        }
-                    }else{
-                        Input.content_url += "?";
-                    }
-                }
-    
-                Input.content_url += RmValidator.parseObjectToQueryString(Input.data);
-            }
-
-        }
-
-        xhttp.open(Input.method, Input.content_url);
-
-        if (Input.method == "POST") {
-            xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        }
-
-        xhttp.send(finalData);
-        
-    }
-}
-
-export const route = (Route: Route): void =>{
-    let split_http_url: Array<string> = [];
-    let RouteHttpUrl: RouteHttpUrl = Route.http_url;
-    let RouteContentUrl: RouteContentUrl = Route.content_url;
-    let RouteData: RouteData = {};
-
-    if (Route.http_url != undefined) {
-        split_http_url = Route.http_url.split("?");
-    }else{
-        DomRenderer.__render_DOM_head(PersistStorage.DomContent.ErrorHeadContent);
-        DomRenderer.__render_DOM_root(PersistStorage.DomContent.__404_urlErrorContent);
+        Input.content_url += RmValidator.parseObjectToQueryString(Input.data);
+      }
     }
 
-    if (split_http_url[1] != undefined) {
-        RouteData = RmValidator.parseQueryString(split_http_url[1]);
+    xhttp.open(Input.method, Input.content_url);
 
-        RouteContentUrl = RouteContentUrl+"?"+split_http_url[1];
-    }else if(Route.data != undefined && Route.data != null && !RmValidator.isEmptyObject(Route.data)){
-        let query = RmValidator.parseObjectToQueryString(Route.data);
-        RouteContentUrl = RouteContentUrl+"?"+query;
-        RouteHttpUrl = RouteHttpUrl+"?"+query;
+    if (Input.method == 'POST') {
+      xhttp.setRequestHeader(
+        'Content-type',
+        'application/x-www-form-urlencoded'
+      );
     }
 
-    if (Route.meta_loader) {
-        RmLoaders.MetaLoader(RouteHttpUrl);
-    }
+    xhttp.send(finalData);
+  }
+};
 
-    const RouteEngineInput: RouteEngineInput = {
-        method: Route.method,
-        content_url: RouteContentUrl,
-        component_type: Route.component_type,
-        container: Route.container,
-        preloader: Route.preloader,
-        error_content: Route.error_content,
-        data: RouteData,
-        http_url_change: Route.http_url_change,
-        server_host: RoutesStorage.server_host,
-        http_url: RouteHttpUrl
-    }
+export const route = (Route: Route): void => {
+  let split_http_url: string[] = [];
+  let RouteHttpUrl: RouteHttpUrl = Route.http_url;
+  let RouteContentUrl: RouteContentUrl = Route.content_url;
+  let RouteData: RouteData = {};
 
-    if (Route.http_url_change != undefined && !Route.http_url_change) {
-        RouteEngineInit(RouteEngineInput);
-    }else if(Route.http_url_change == true){
-        if (RoutesStorage.server_host != undefined && RoutesStorage.server_host != '') {
-            RouteEngineInit(RouteEngineInput);
-        }else{
-            DomRenderer.__render_DOM_head(PersistStorage.DomContent.ErrorHeadContent);
-            DomRenderer.__render_DOM_root(PersistStorage.DomContent.__404_ServerHostErrorContent);
-        }
-    }
+  if (Route.http_url != undefined) {
+    split_http_url = Route.http_url.split('?');
+  } else {
+    DomRenderer.__render_DOM_head(PersistStorage.DomContent.ErrorHeadContent);
+    DomRenderer.__render_DOM_root(
+      PersistStorage.DomContent.__404_urlErrorContent
+    );
+  }
 
-}
+  if (split_http_url[1] != undefined) {
+    RouteData = RmValidator.parseQueryString(split_http_url[1]);
+
+    RouteContentUrl = RouteContentUrl + '?' + split_http_url[1];
+  } else if (
+    Route.data != undefined &&
+    Route.data != null &&
+    !RmValidator.isEmptyObject(Route.data)
+  ) {
+    const query = RmValidator.parseObjectToQueryString(Route.data);
+    RouteContentUrl = RouteContentUrl + '?' + query;
+    RouteHttpUrl = RouteHttpUrl + '?' + query;
+  }
+
+  if (Route.meta_loader) {
+    RmLoaders.MetaLoader(RouteHttpUrl);
+  }
+
+  const RouteEngineInput: RouteEngineInput = {
+    method: Route.method,
+    content_url: RouteContentUrl,
+    component_type: Route.component_type,
+    container: Route.container,
+    preloader: Route.preloader,
+    error_content: Route.error_content,
+    data: RouteData,
+    http_url_change: Route.http_url_change,
+    server_host: RoutesStorage.server_host,
+    http_url: RouteHttpUrl,
+  };
+
+  if (Route.http_url_change != undefined && !Route.http_url_change) {
+    RouteEngineInit(RouteEngineInput);
+  } else if (Route.http_url_change) {
+    if (
+      RoutesStorage.server_host != undefined &&
+      RoutesStorage.server_host != ''
+    ) {
+      RouteEngineInit(RouteEngineInput);
+    } else {
+      DomRenderer.__render_DOM_head(PersistStorage.DomContent.ErrorHeadContent);
+      DomRenderer.__render_DOM_root(
+        PersistStorage.DomContent.__404_ServerHostErrorContent
+      );
+    }
+  }
+};
