@@ -24,7 +24,9 @@ export const renderHeader = (): void => {
 
   query_data = RmValidator.parseObjectToQueryString(data);
 
-  RoutesStorage.RoutesHeaders.forEach((Hroute) => {
+  let found = false;
+  for (let Hindex = 0; Hindex < RoutesStorage.RoutesHeaders.length; Hindex++) {
+    const Hroute = RoutesStorage.RoutesHeaders[Hindex];
     for (let i = 0; i < Hroute.http_url.length; i++) {
       let http_url = Hroute.http_url[i];
       if (http_url == '/') {
@@ -33,9 +35,9 @@ export const renderHeader = (): void => {
       if (http_url == get_route_param[0]) {
         const content_path = Hroute.content_url;
         const route_split = content_path.split('?');
-        const content_url: RouteContentUrl = `${route_split[0]}?` + query_data;
+        const content_url = `${route_split[0]}?` + query_data;
 
-        const Route: Route = {
+        const Route = {
           method: 'GET',
           meta_loader: false,
           content_url,
@@ -48,10 +50,21 @@ export const renderHeader = (): void => {
         };
 
         RoutesInitializer.route(Route);
+        found = true;
         break;
+      } else if (
+        http_url != get_route_param[0] &&
+        i == Hroute.http_url.length - 1 &&
+        Hindex == RoutesStorage.RoutesHeaders.length - 1
+      ) {
+        RoutesStorage.RouteContentsState.ShouldHeaderload = false;
+        RoutesStorage.RouteContentsState.HeaderContent = '';
       }
     }
-  });
+    if (found) {
+      break;
+    }
+  }
 };
 
 export const renderBody = (): void => {
@@ -135,7 +148,10 @@ export const renderFooter = (): void => {
 
   query_data = RmValidator.parseObjectToQueryString(data);
 
-  RoutesStorage.RoutesFooters.forEach((Froute) => {
+  let found = false;
+
+  for (let Findex = 0; Findex < RoutesStorage.RoutesFooters.length; Findex++) {
+    const Froute = RoutesStorage.RoutesFooters[Findex];
     for (let i = 0; i < Froute.http_url.length; i++) {
       let http_url = Froute.http_url[i];
       if (http_url == '/') {
@@ -144,9 +160,9 @@ export const renderFooter = (): void => {
       if (http_url == get_route_param[0]) {
         const content_path = Froute.content_url;
         const route_split = content_path.split('?');
-        const content_url: RouteContentUrl = `${route_split[0]}?` + query_data;
+        const content_url = `${route_split[0]}?` + query_data;
 
-        const Route: Route = {
+        const Route = {
           method: 'GET',
           meta_loader: false,
           content_url,
@@ -159,10 +175,21 @@ export const renderFooter = (): void => {
         };
 
         RoutesInitializer.route(Route);
+        found = true;
         break;
+      } else if (
+        http_url != get_route_param[0] &&
+        i == Froute.http_url.length - 1 &&
+        Findex == RoutesStorage.RoutesFooters.length - 1
+      ) {
+        RoutesStorage.RouteContentsState.ShouldFooterload = false;
+        RoutesStorage.RouteContentsState.FooterContent = '';
       }
     }
-  });
+    if (found) {
+      break;
+    }
+  }
 };
 
 export const render = (): void => {

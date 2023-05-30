@@ -18,6 +18,9 @@ export const PageRenderController = () => {
     if (RoutesStorage.RouteContentsState.ShouldFooterload) {
       __render_DOM(HtmlSelector.Footer, footer_content);
     }
+    // RoutesStorage.RouteContentsState.HeaderContent = null;
+    // RoutesStorage.RouteContentsState.BodyContent = null;
+    // RoutesStorage.RouteContentsState.FooterContent = null;
   }
 };
 

@@ -61,10 +61,16 @@ export const navigate = (
             options.header_load;
 
           if (options.header_load) {
-            RoutesStorage.RoutesHeaders.forEach((h) => {
+            for (
+              let hIndex = 0;
+              hIndex < RoutesStorage.RoutesHeaders.length;
+              hIndex++
+            ) {
+              const h = RoutesStorage.RoutesHeaders[hIndex];
+              let found = false;
               for (let i = 0; i < h.http_url.length; i++) {
                 if (h.http_url[i] == h_url) {
-                  const Route: Route = {
+                  const Route = {
                     method: 'GET',
                     meta_loader: false,
                     content_url: h.content_url,
@@ -76,10 +82,21 @@ export const navigate = (
                     http_url: h.http_url[i],
                   };
                   RoutesInitializer.route(Route);
+                  found = true;
                   break;
+                } else if (
+                  h.http_url[i] != h_url &&
+                  i == h.http_url.length - 1 &&
+                  hIndex == RoutesStorage.RoutesHeaders.length - 1
+                ) {
+                  RoutesStorage.RouteContentsState.ShouldHeaderload = false;
+                  RoutesStorage.RouteContentsState.HeaderContent = '';
                 }
               }
-            });
+              if (found) {
+                break;
+              }
+            }
           }
         }
 
@@ -91,10 +108,16 @@ export const navigate = (
             options.footer_load;
 
           if (options.footer_load) {
-            RoutesStorage.RoutesFooters.forEach((f) => {
+            for (
+              let fIndex = 0;
+              fIndex < RoutesStorage.RoutesFooters.length;
+              fIndex++
+            ) {
+              const f = RoutesStorage.RoutesFooters[fIndex];
+              let found = false;
               for (let i = 0; i < f.http_url.length; i++) {
                 if (f.http_url[i] == h_url) {
-                  const Route: Route = {
+                  const Route = {
                     method: 'GET',
                     meta_loader: false,
                     content_url: f.content_url,
@@ -106,10 +129,21 @@ export const navigate = (
                     http_url: f.http_url[i],
                   };
                   RoutesInitializer.route(Route);
+                  found = true;
                   break;
+                } else if (
+                  f.http_url[i] != h_url &&
+                  i == f.http_url.length - 1 &&
+                  fIndex == RoutesStorage.RoutesFooters.length - 1
+                ) {
+                  RoutesStorage.RouteContentsState.ShouldFooterload = false;
+                  RoutesStorage.RouteContentsState.FooterContent = '';
                 }
               }
-            });
+              if (found) {
+                break;
+              }
+            }
           }
         }
         const Route: Route = {
