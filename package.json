@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "build": "npm run clean && npx rollup -c",
+    "build": "npx rollup -c",
     "dist": "npm run build",
     "clean": "del ./dist",
     "prepare": "husky install",
