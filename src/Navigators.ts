@@ -16,8 +16,10 @@ import {
 export const navigate = (
   route_to: NavigateRoute,
   data: NavigateData = null,
-  options: NavigateOptions = {}
+  options: NavigateOptions = {},
+  callback: Function | null = null
 ) => {
+  RoutesStorage.RouteContentsState.navigationCallback = callback;
   if (route_to != null || route_to != undefined) {
     const r: RegisterdRoutesPages = RoutesStorage.RoutesPages;
     for (let i = 0; i < r.length; i++) {

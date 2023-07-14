@@ -41,6 +41,7 @@ export namespace RoutesStorage {
     export var BodyContent: string | null = null;
     export var MetaContent: string | null = null;
     export var HttpUrl: string | null = null;
+    export var navigationCallback: Function | null;
   }
 }
 
