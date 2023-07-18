@@ -21,3 +21,8 @@ __coverage__
 
 # distribution
 dist
+
+# ignore html files
+.html
+**.html
+**/*.html

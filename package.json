@@ -36,7 +36,7 @@
     "dist/"
   ],
   "lint-staged": {
-    "**/*": "npx prettier --write --ignore-unknown"
+    "**/*": "npx prettier --write \"**/*.{js,ts}\" --ignore-unknown "
   },
   "unpkg": "dist/routemamba.min.js",
   "devDependencies": {
