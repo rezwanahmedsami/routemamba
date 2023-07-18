@@ -24,7 +24,9 @@ export const navigate = (
     const r: RegisterdRoutesPages = RoutesStorage.RoutesPages;
     for (let i = 0; i < r.length; i++) {
       let http_url: RouteHttpUrl = route_to;
-      if (route_to.includes(r[i].http_url)) {
+      let split_route_to = route_to.split('?')[0];
+
+      if (split_route_to != undefined && split_route_to == r[i].http_url) {
         const h_url: RouteHttpUrl = r[i].http_url;
         let http_url_change: RouteHttpUrlChange = true;
         let method: RouteMethod = r[i].method;

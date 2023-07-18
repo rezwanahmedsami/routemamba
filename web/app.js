@@ -24,7 +24,7 @@ routemamba.register_http_routes([
     data: {},
     error_content: 'error',
     http_url_change: false,
-    http_url: 'index.html',
+    http_url: '/index.html',
   },
   {
     method: 'GET',
@@ -35,7 +35,18 @@ routemamba.register_http_routes([
     data: {},
     error_content: 'error',
     http_url_change: false,
-    http_url: 'about.html',
+    http_url: '/about.html',
+  },
+  {
+    method: 'GET',
+    meta_loader: true,
+    content_url: '/web/components/about2.html',
+    //   container: "#root", -- Removed at V4.0.0
+    preloader: '<h1>loading...</h2>',
+    data: {},
+    error_content: 'error',
+    http_url_change: false,
+    http_url: '/sub/about.html',
   },
   {
     method: 'GET',
@@ -46,7 +57,7 @@ routemamba.register_http_routes([
     data: {},
     error_content: 'error',
     http_url_change: false,
-    http_url: 'tabs.html',
+    http_url: '/tabs.html',
   },
 ]);
 
@@ -56,7 +67,13 @@ routemamba.register_routes_headers([
     //   container: "#header_load", -- Removed at V4.0.0
     preloader: 'loading...',
     error_content: 'error',
-    http_url: ['/', 'index.html', 'about.html', 'tabs.html'],
+    http_url: [
+      '/',
+      '/index.html',
+      '/about.html',
+      '/sub/about.html',
+      '/tabs.html',
+    ],
   },
 ]);
 
@@ -66,7 +83,13 @@ routemamba.register_routes_footers([
     //   container: "#footer_load", -- Removed at V4.0.0
     preloader: 'loading...',
     error_content: 'error',
-    http_url: ['/', 'index.html', 'about.html', 'tabs.html'],
+    http_url: [
+      '/',
+      '/index.html',
+      '/about.html',
+      '/sub/about.html',
+      '/tabs.html',
+    ],
   },
 ]);
 
