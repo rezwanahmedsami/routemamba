@@ -14,9 +14,8 @@ import {
 
 export const renderHeader = (): void => {
   const current_http_url: string = window.location.href;
-  const split_url: string[] = current_http_url.split('/');
-  const last_index: number = split_url.length - 1;
-  const route_path: string = '/' + split_url[last_index];
+  const url = new URL(current_http_url);
+  const route_path = url.pathname + url.search;
   const get_route_param: string[] = route_path.split('?');
   let data: RouteData = {};
   let query_data = '';
@@ -32,9 +31,6 @@ export const renderHeader = (): void => {
     const Hroute = RoutesStorage.RoutesHeaders[Hindex];
     for (let i = 0; i < Hroute.http_url.length; i++) {
       let http_url = Hroute.http_url[i];
-      // if (http_url == '/') {
-      //   http_url = '';
-      // }
       if (http_url == get_route_param[0]) {
         const content_path = Hroute.content_url;
         const route_split = content_path.split('?');
@@ -72,13 +68,11 @@ export const renderHeader = (): void => {
 
 export const renderBody = (): void => {
   const current_http_url: string = window.location.href;
-  const split_url: string[] = current_http_url.split('/');
-  const last_index: number = split_url.length - 1;
-  const route_path: string = '/' + split_url[last_index];
+  const url = new URL(current_http_url);
+  const route_path = url.pathname + url.search;
   const get_route_param: string[] = route_path.split('?');
   let data: RouteData = {};
   let query_data = '';
-  console.log(get_route_param);
   if (get_route_param[1] != undefined) {
     data = RmValidator.parseQueryString(get_route_param[1]);
   }
@@ -88,34 +82,7 @@ export const renderBody = (): void => {
   for (let i = 0; i < RoutesStorage.RoutesPages.length; i++) {
     let Broute = RoutesStorage.RoutesPages[i];
     let http_url = Broute.http_url;
-    console.log('route url: ', get_route_param[0]);
-    console.log(http_url);
-    // if (http_url == '/') {
-    //   http_url = '';
-    // }
     if (http_url == get_route_param[0]) {
-      let route_content_url = '';
-      if (Broute.method == 'GET') {
-        const content_path = Broute.content_url;
-        const route_split = content_path.split('?');
-        route_content_url = `${route_split[0]}?` + query_data;
-      }
-      const meta_loader = true;
-      const Route = {
-        method: Broute.method,
-        meta_loader,
-        content_url: route_content_url,
-        component_type: RouteComponentTypes.BODY,
-        container: Broute.container,
-        preloader: Broute.preloader,
-        data: Broute.data,
-        error_content: Broute.error_content,
-        http_url_change: Broute.http_url_change,
-        http_url,
-      };
-      RoutesInitializer.route(Route);
-      break;
-    } else if (split_url.length < 4 && http_url == '') {
       let route_content_url = '';
       if (Broute.method == 'GET') {
         const content_path = Broute.content_url;
@@ -149,9 +116,8 @@ export const renderBody = (): void => {
 
 export const renderFooter = (): void => {
   const current_http_url: string = window.location.href;
-  const split_url: string[] = current_http_url.split('/');
-  const last_index: number = split_url.length - 1;
-  const route_path: string = '/' + split_url[last_index];
+  const url = new URL(current_http_url);
+  const route_path = url.pathname + url.search;
   const get_route_param: string[] = route_path.split('?');
   let data: RouteData = {};
   let query_data = '';

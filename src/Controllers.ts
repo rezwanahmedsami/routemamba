@@ -18,6 +18,10 @@ export const PageRenderController = () => {
     if (RoutesStorage.RouteContentsState.ShouldFooterload) {
       __render_DOM(HtmlSelector.Footer, footer_content);
     }
+
+    console.log('header: ', header_content);
+    console.log('body: ', body_content);
+    console.log('footer: ', footer_content);
     if (
       RoutesStorage.RouteContentsState.navigationCallback != null &&
       RoutesStorage.RouteContentsState.navigationCallback != undefined
