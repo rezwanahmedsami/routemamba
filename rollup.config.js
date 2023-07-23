@@ -21,6 +21,13 @@ export default {
       exports: 'auto',
       plugins: [terser()],
     },
+    {
+      file: 'projects/expressjs/public/dist/routemamba.min.js',
+      format: 'umd',
+      name: 'routemamba',
+      exports: 'auto',
+      plugins: [terser()],
+    },
   ],
   plugins: [
     nodeResolve(),
