@@ -33,6 +33,12 @@ export namespace RoutesStorage {
   export var meta_content_url: RouteMetaUrl = '';
 
   export namespace RouteContentsState {
+    export namespace renderStatus {
+      export var header = false;
+      export var body = false;
+      export var footer = false;
+    }
+
     export var ShouldHeaderload = true;
     export var ShouldFooterload = true;
 

@@ -20,6 +20,8 @@ export const navigate = (
   callback: Function | null = null
 ) => {
   RoutesStorage.RouteContentsState.navigationCallback = callback;
+  RoutesStorage.RouteContentsState.ShouldHeaderload = false;
+  RoutesStorage.RouteContentsState.ShouldFooterload = false;
   if (route_to != null || route_to != undefined) {
     const r: RegisterdRoutesPages = RoutesStorage.RoutesPages;
     for (let i = 0; i < r.length; i++) {

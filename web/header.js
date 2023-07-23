@@ -10,7 +10,9 @@ home_nav.addEventListener('click', (e) => {
   e.stopImmediatePropagation();
   const href = home_nav.getAttribute('href');
 
-  routemamba.navigate(href);
+  routemamba.navigate(href, {}, {}, () => {
+    console.log('I am from callback of home navigation');
+  });
 });
 
 about_nav.addEventListener('click', (e) => {
@@ -21,11 +23,9 @@ about_nav.addEventListener('click', (e) => {
   routemamba.navigate(
     href,
     {},
-    { header_load: true, footer_load: false },
+    { header_load: true, footer_load: true },
     () => {
-      console.log(
-        'About name loaded and i just prinitng from callback function of navigate'
-      );
+      console.log('I am from callback of about navigation');
     }
   );
 });
@@ -34,7 +34,14 @@ about_nav2.addEventListener('click', (e) => {
   e.stopImmediatePropagation();
   const href = about_nav2.getAttribute('href');
 
-  routemamba.navigate(href);
+  routemamba.navigate(
+    href,
+    {},
+    { header_load: true, footer_load: false },
+    () => {
+      console.log('I am from callback of about2 navigation');
+    }
+  );
 });
 
 tabs_nav.addEventListener('click', (e) => {
@@ -42,5 +49,12 @@ tabs_nav.addEventListener('click', (e) => {
   e.stopImmediatePropagation();
   const href = tabs_nav.getAttribute('href');
 
-  routemamba.navigate(href);
+  routemamba.navigate(
+    href,
+    {},
+    { header_load: false, footer_load: true },
+    () => {
+      console.log('I am from callback of tabs navigation');
+    }
+  );
 });
