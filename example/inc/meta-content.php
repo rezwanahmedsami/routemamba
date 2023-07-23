@@ -2,16 +2,16 @@
    if (isset($_GET['route'])) {
       echo $_GET["route"];
       switch ($_GET['route']) {
-         case 'index.php':
+         case '/example/index.php':
             $title = 'Home';
             break;
-         case 'about.php':
+         case '/example/about.php':
                $title = 'About';
             break;
-         case 'privacy.php':
+         case '/example/privacy.php':
             $title = 'Privacy';
             break;
-         case 'tabs-example.php':
+         case '/example/tabs-example.php':
             $title = 'Tabs example';
             break;
          default:

@@ -7,76 +7,79 @@ routemamba.register_http_routes([
     method: 'GET',
     meta_loader: true,
     content_url: 'content/home.php',
-    container: '#root',
     preloader: '<h1>loading...</h2>',
     data: {},
     error_content: 'error',
     http_url_change: false,
-    http_url: '/',
+    http_url: '/example/',
   },
   {
     method: 'GET',
     meta_loader: true,
     content_url: 'content/home.php',
-    container: '#root',
     preloader: '<h1>loading...</h2>',
     data: {},
     error_content: 'error',
     http_url_change: false,
-    http_url: 'index.php',
+    http_url: '/example/index.php',
   },
   {
     method: 'GET',
     meta_loader: true,
     content_url: 'content/about.php',
-    container: '#root',
     preloader: '<h1>loading...</h2>',
     data: {},
     error_content: 'error',
     http_url_change: false,
-    http_url: 'about.php',
+    http_url: '/example/about.php',
   },
   {
     method: 'GET',
     meta_loader: true,
     content_url: 'content/privacy.php',
-    container: '#root',
     preloader: '<h1>loading...</h2>',
     data: {},
     error_content: 'error',
     http_url_change: false,
-    http_url: 'privacy.php',
+    http_url: '/example/privacy.php',
   },
   {
     method: 'GET',
     meta_loader: true,
     content_url: 'content/tabs-example.php',
-    container: '#root',
     preloader: '<h1>loading...</h2>',
     data: {},
     error_content: 'error',
     http_url_change: false,
-    http_url: 'tabs-example.php',
+    http_url: '/example/tabs-example.php',
   },
 ]);
 
 routemamba.register_routes_headers([
   {
     content_url: 'content/header.php',
-    container: '#header_load',
     preloader: 'loading...',
     error_content: 'error',
-    http_url: ['/', 'about.php', 'privacy.php', 'tabs-example.php'],
+    http_url: [
+      '/example/',
+      '/example/about.php',
+      '/example/privacy.php',
+      '/example/tabs-example.php',
+    ],
   },
 ]);
 
 routemamba.register_routes_footers([
   {
     content_url: 'content/footer.php',
-    container: '#footer_load',
     preloader: 'loading...',
     error_content: 'error',
-    http_url: ['/', 'about.php', 'privacy.php', 'tabs-example.php'],
+    http_url: [
+      '/example/',
+      '/example/about.php',
+      '/example/privacy.php',
+      '/example/tabs-example.php',
+    ],
   },
 ]);
 
@@ -99,7 +102,7 @@ next.addEventListener('click', () => {
 
 home_btn.addEventListener('click', () => {
   routemamba.navigate(
-    '/',
+    '/example/',
     {},
     {
       header_load: true,
@@ -110,7 +113,7 @@ home_btn.addEventListener('click', () => {
 
 about_btn.addEventListener('click', () => {
   routemamba.navigate(
-    'about.php',
+    '/example/about.php',
     {
       id: 43345,
       name: 'rezwan',
@@ -123,12 +126,12 @@ about_btn.addEventListener('click', () => {
 });
 
 privacy_btn.addEventListener('click', () => {
-  routemamba.navigate('privacy.php');
+  routemamba.navigate('/example/privacy.php');
 });
 
 tabs_example_btn.addEventListener('click', () => {
   routemamba.navigate(
-    'tabs-example.php',
+    '/example/tabs-example.php',
     {},
     {
       meta_loader: true,

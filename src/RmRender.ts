@@ -174,7 +174,6 @@ export const renderFooter = (): void => {
 
 export const render = (): void => {
   generate_required_all_root_elements();
-  RmLoaders.MetaLoader('');
   renderHeader();
   renderFooter();
   renderBody();

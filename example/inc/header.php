@@ -3,16 +3,19 @@
 <head>
    <meta>
       <?php
-         $route = basename($_SERVER['PHP_SELF']);
+         $route = $_SERVER['PHP_SELF'];
          switch ($route) {
-            case 'index.php':
+            case '/example/index.php':
                $title = 'Home';
                break;
-            case 'about.php':
+            case '/example/about.php':
                   $title = 'About';
                break;
-            case 'privacy.php':
+            case '/example/privacy.php':
                $title = 'Privacy';
+               break;
+            case '/example/tabs-example.php':
+               $title = 'Tabs example';
                break;
             default:
             $title = 'Home';
