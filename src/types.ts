@@ -7,7 +7,10 @@ export type RouteMetaLoader = boolean;
 export type RouteContentUrl = string;
 export type RouteContainer = string;
 export type RoutePreloader = string;
-export type RouteData = object;
+export interface RouteData {
+  [key: string]: any;
+}
+export type PathParamData = object | null;
 export type RouteErrorContent = string;
 export type RouteHttpUrlChange = boolean;
 export type RouteHttpUrl = string;
@@ -60,9 +63,11 @@ export interface Route {
   container?: RouteContainer;
   preloader: RoutePreloader;
   data: RouteData;
+  PathParamData?: PathParamData;
   error_content: RouteErrorContent;
   http_url_change: RouteHttpUrlChange;
   http_url: RouteHttpUrl;
+  registered_url_pattern?: string;
 }
 
 export interface RegisterRoute {

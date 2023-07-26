@@ -5,6 +5,8 @@ import isEmptyObject from './validators/isEmptyObject';
 import parseQueryString from './validators/parseQueryString';
 import parseObjectToQueryString from './validators/parseObjectToQueryString';
 import isValidServerHost from './validators/isValidServerHost';
+import checkPathParam from './validators/checkPathParam';
+import isPathParamPattern from './validators/isPathParamPattern';
 
 const RmValidator = {
   isValidUrl,
@@ -12,6 +14,8 @@ const RmValidator = {
   parseQueryString,
   parseObjectToQueryString,
   isValidServerHost,
+  checkPathParam,
+  isPathParamPattern,
 };
 
 export default RmValidator;

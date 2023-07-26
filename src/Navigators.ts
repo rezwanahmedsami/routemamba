@@ -12,6 +12,7 @@ import {
   type RouteMetaLoader,
   type RegisterdRoutesPages,
 } from './types';
+import RmValidator from './RmValidator';
 
 export const navigate = (
   route_to: NavigateRoute,
@@ -28,11 +29,20 @@ export const navigate = (
       let http_url: RouteHttpUrl = route_to;
       let split_route_to = route_to.split('?')[0];
 
-      if (split_route_to != undefined && split_route_to == r[i].http_url) {
+      if (
+        split_route_to != undefined &&
+        (split_route_to == r[i].http_url ||
+          RmValidator.checkPathParam(split_route_to, r[i].http_url) != null)
+      ) {
         const h_url: RouteHttpUrl = r[i].http_url;
+        let registered_url_pattern = h_url;
         let http_url_change: RouteHttpUrlChange = true;
         let method: RouteMethod = r[i].method;
         let meta_loader: RouteMetaLoader = r[i].meta_loader;
+        let PathParamData = RmValidator.checkPathParam(
+          split_route_to,
+          r[i].http_url
+        );
         if (data == null) {
           data = {};
         }
@@ -82,10 +92,12 @@ export const navigate = (
                     content_url: h.content_url,
                     component_type: RouteComponentTypes.HEADER,
                     preloader: h.preloader,
-                    data: {},
+                    data: data,
+                    PathParamData: PathParamData,
                     error_content: h.error_content,
                     http_url_change: false,
-                    http_url: h.http_url[i],
+                    http_url: http_url,
+                    registered_url_pattern: registered_url_pattern,
                   };
                   RoutesInitializer.route(Route);
                   found = true;
@@ -129,10 +141,12 @@ export const navigate = (
                     content_url: f.content_url,
                     component_type: RouteComponentTypes.FOOTER,
                     preloader: f.preloader,
-                    data: {},
+                    data: data,
+                    PathParamData: PathParamData,
                     error_content: f.error_content,
                     http_url_change: false,
-                    http_url: f.http_url[i],
+                    http_url: http_url,
+                    registered_url_pattern: registered_url_pattern,
                   };
                   RoutesInitializer.route(Route);
                   found = true;
@@ -159,9 +173,11 @@ export const navigate = (
           component_type: RouteComponentTypes.BODY,
           preloader: r[i].preloader,
           data,
+          PathParamData: PathParamData,
           error_content: r[i].error_content,
           http_url_change,
           http_url,
+          registered_url_pattern: registered_url_pattern,
         };
 
         RoutesInitializer.route(Route);

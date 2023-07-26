@@ -215,6 +215,13 @@ export const route = (Route: Route): void => {
   let RouteContentUrl: RouteContentUrl = Route.content_url;
   let RouteData: RouteData = {};
 
+  if (
+    Route.PathParamData != undefined ||
+    (Route.PathParamData == null && typeof Route.PathParamData == 'object')
+  ) {
+    Object.assign(RouteData, Route.PathParamData);
+  }
+
   if (Route.http_url != undefined) {
     split_http_url = Route.http_url.split('?');
   } else {
@@ -225,21 +232,60 @@ export const route = (Route: Route): void => {
   }
 
   if (split_http_url[1] != undefined) {
-    RouteData = RmValidator.parseQueryString(split_http_url[1]);
+    let queryData: RouteData = RmValidator.parseQueryString(split_http_url[1]);
 
-    RouteContentUrl = RouteContentUrl + '?' + split_http_url[1];
+    if (!RmValidator.isEmptyObject(queryData)) {
+      // Loop through the keys in queryData
+      for (let key in queryData) {
+        // Check if the key doesn't exist in RouteData
+        if (!RouteData.hasOwnProperty(key)) {
+          // Assign the key-value pair from queryData to RouteData
+          RouteData[key] = queryData[key];
+        }
+      }
+    }
+
+    const query = RmValidator.parseObjectToQueryString(RouteData);
+    if (RouteContentUrl.includes('?')) {
+      RouteContentUrl = RouteContentUrl + '&' + query;
+    } else {
+      RouteContentUrl = RouteContentUrl + '?' + query;
+    }
   } else if (
     Route.data != undefined &&
     Route.data != null &&
     !RmValidator.isEmptyObject(Route.data)
   ) {
-    const query = RmValidator.parseObjectToQueryString(Route.data);
-    RouteContentUrl = RouteContentUrl + '?' + query;
-    RouteHttpUrl = RouteHttpUrl + '?' + query;
+    Object.assign(RouteData, Route.data);
+    const query1 = RmValidator.parseObjectToQueryString(Route.data);
+    const query2 = RmValidator.parseObjectToQueryString(RouteData);
+    if (RouteContentUrl.includes('?')) {
+      RouteContentUrl = RouteContentUrl + '&' + query2;
+    } else {
+      RouteContentUrl = RouteContentUrl + '?' + query2;
+    }
+    if (RouteHttpUrl.includes('?')) {
+      RouteContentUrl = RouteHttpUrl + '&' + query1;
+    } else {
+      RouteHttpUrl = RouteHttpUrl + '?' + query1;
+    }
+  } else if (
+    split_http_url[1] == undefined &&
+    ((Route.data == undefined && Route.data == null) ||
+      RmValidator.isEmptyObject(Route.data)) &&
+    !RmValidator.isEmptyObject(RouteData)
+  ) {
+    // console.log("condition accepted")
+    const query = RmValidator.parseObjectToQueryString(RouteData);
+    if (RouteContentUrl.includes('?')) {
+      RouteContentUrl = RouteContentUrl + '&' + query;
+    } else {
+      RouteContentUrl = RouteContentUrl + '?' + query;
+    }
   }
 
   if (Route.meta_loader) {
-    RmLoaders.MetaLoader(RouteHttpUrl);
+    RmLoaders.MetaLoader(RouteHttpUrl, Route.registered_url_pattern);
   }
 
   const RouteEngineInput: RouteEngineInput = {

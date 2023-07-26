@@ -4,9 +4,8 @@
 
 import { RoutesStorage, RenderConfig, RouteComponentTypes } from './Global';
 import RmValidator from './RmValidator';
-import { type Route, type RouteContentUrl, type RouteData } from './types';
+import { type RouteData } from './types';
 import * as RoutesInitializer from './RoutesInitializer';
-import * as RmLoaders from './RmLoaders';
 import {
   generate_required_all_root_elements,
   __render_DOM_root,
@@ -18,23 +17,28 @@ export const renderHeader = (): void => {
   const route_path = url.pathname + url.search;
   const get_route_param: string[] = route_path.split('?');
   let data: RouteData = {};
-  let query_data = '';
 
   if (get_route_param[1] != undefined) {
     data = RmValidator.parseQueryString(get_route_param[1]);
   }
-
-  query_data = RmValidator.parseObjectToQueryString(data);
 
   let found = false;
   for (let Hindex = 0; Hindex < RoutesStorage.RoutesHeaders.length; Hindex++) {
     const Hroute = RoutesStorage.RoutesHeaders[Hindex];
     for (let i = 0; i < Hroute.http_url.length; i++) {
       let http_url = Hroute.http_url[i];
-      if (http_url == get_route_param[0]) {
+      if (
+        http_url == get_route_param[0] ||
+        RmValidator.checkPathParam(get_route_param[0], http_url) != null
+      ) {
+        let registered_url_pattern = http_url;
+        let PathParamData = RmValidator.checkPathParam(
+          get_route_param[0],
+          http_url
+        );
         const content_path = Hroute.content_url;
         const route_split = content_path.split('?');
-        const content_url = `${route_split[0]}?` + query_data;
+        const content_url = route_split[0];
 
         const Route = {
           method: 'GET',
@@ -42,10 +46,12 @@ export const renderHeader = (): void => {
           content_url,
           component_type: RouteComponentTypes.HEADER,
           preloader: Hroute.preloader,
-          data: {},
+          data: data,
+          PathParamData: PathParamData,
           error_content: Hroute.error_content,
           http_url_change: false,
-          http_url,
+          http_url: route_path,
+          registered_url_pattern: registered_url_pattern,
         };
 
         RoutesInitializer.route(Route);
@@ -72,22 +78,27 @@ export const renderBody = (): void => {
   const route_path = url.pathname + url.search;
   const get_route_param: string[] = route_path.split('?');
   let data: RouteData = {};
-  let query_data = '';
   if (get_route_param[1] != undefined) {
     data = RmValidator.parseQueryString(get_route_param[1]);
   }
 
-  query_data = RmValidator.parseObjectToQueryString(data);
-
   for (let i = 0; i < RoutesStorage.RoutesPages.length; i++) {
     let Broute = RoutesStorage.RoutesPages[i];
     let http_url = Broute.http_url;
-    if (http_url == get_route_param[0]) {
+    if (
+      http_url == get_route_param[0] ||
+      RmValidator.checkPathParam(get_route_param[0], http_url) != null
+    ) {
+      let registered_url_pattern = http_url;
+      let PathParamData = RmValidator.checkPathParam(
+        get_route_param[0],
+        http_url
+      );
       let route_content_url = '';
       if (Broute.method == 'GET') {
         const content_path = Broute.content_url;
         const route_split = content_path.split('?');
-        route_content_url = `${route_split[0]}?` + query_data;
+        route_content_url = `${route_split[0]}`;
       }
       const meta_loader = true;
       const Route = {
@@ -97,10 +108,12 @@ export const renderBody = (): void => {
         component_type: RouteComponentTypes.BODY,
         container: Broute.container,
         preloader: Broute.preloader,
-        data: Broute.data,
+        data: data,
+        PathParamData: PathParamData,
         error_content: Broute.error_content,
         http_url_change: Broute.http_url_change,
-        http_url,
+        http_url: route_path,
+        registered_url_pattern: registered_url_pattern,
       };
       RoutesInitializer.route(Route);
       break;
@@ -120,13 +133,10 @@ export const renderFooter = (): void => {
   const route_path = url.pathname + url.search;
   const get_route_param: string[] = route_path.split('?');
   let data: RouteData = {};
-  let query_data = '';
 
   if (get_route_param[1] != undefined) {
     data = RmValidator.parseQueryString(get_route_param[1]);
   }
-
-  query_data = RmValidator.parseObjectToQueryString(data);
 
   let found = false;
 
@@ -134,13 +144,18 @@ export const renderFooter = (): void => {
     const Froute = RoutesStorage.RoutesFooters[Findex];
     for (let i = 0; i < Froute.http_url.length; i++) {
       let http_url = Froute.http_url[i];
-      // if (http_url == '/') {
-      //   http_url = '';
-      // }
-      if (http_url == get_route_param[0]) {
+      if (
+        http_url == get_route_param[0] ||
+        RmValidator.checkPathParam(get_route_param[0], http_url) != null
+      ) {
+        let registered_url_pattern = http_url;
+        let PathParamData = RmValidator.checkPathParam(
+          get_route_param[0],
+          http_url
+        );
         const content_path = Froute.content_url;
         const route_split = content_path.split('?');
-        const content_url = `${route_split[0]}?` + query_data;
+        const content_url = route_split[0];
 
         const Route = {
           method: 'GET',
@@ -148,10 +163,12 @@ export const renderFooter = (): void => {
           content_url,
           component_type: RouteComponentTypes.FOOTER,
           preloader: Froute.preloader,
-          data: {},
+          data: data,
+          PathParamData: PathParamData,
           error_content: Froute.error_content,
           http_url_change: false,
-          http_url,
+          http_url: route_path,
+          registered_url_pattern: registered_url_pattern,
         };
 
         RoutesInitializer.route(Route);

@@ -53,6 +53,16 @@ routemamba.register_http_routes([
     http_url_change: false,
     http_url: '/post/:id',
   },
+  {
+    method: 'GET',
+    meta_loader: true,
+    content_url: '/components/news',
+    preloader: '<h1>loading...</h2>',
+    data: {},
+    error_content: 'error',
+    http_url_change: false,
+    http_url: '/news/:date/:title',
+  },
 ]);
 
 routemamba.register_routes_headers([
@@ -65,7 +75,8 @@ routemamba.register_routes_headers([
       '/about',
       '/privacy',
       '/tabs-example',
-      '/post/:id'
+      '/post/:id',
+      '/news/:date/:title'
     ],
   },
 ]);
@@ -80,7 +91,8 @@ routemamba.register_routes_footers([
         '/about',
         '/privacy',
         '/tabs-example',
-        '/post/:id'
+        '/post/:id',
+        '/news/:date/:title'
     ],
   },
 ]);
@@ -92,6 +104,7 @@ var about_btn = document.getElementById('about');
 var privacy_btn = document.getElementById('privacy');
 var tabs_example_btn = document.getElementById('tabs-example');
 var post_btn = document.getElementById('post');
+var news_btn = document.getElementById('news');
 var back = document.getElementById('back');
 var next = document.getElementById('next');
 
@@ -149,7 +162,18 @@ tabs_example_btn.addEventListener('click', () => {
 
 post_btn.addEventListener('click', () => {
   routemamba.navigate(
-    '/post/56456546546',
+    '/post/56456546546?test=1',
+    {},
+    {
+      header_load: true,
+      footer_load: true,
+    }
+  );
+});
+
+news_btn.addEventListener('click', () => {
+  routemamba.navigate(
+    '/news/01-05-2023/Currency-inflation-rate-is-higher-in-bangladesh',
     {},
     {
       header_load: true,
