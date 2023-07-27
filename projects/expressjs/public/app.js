@@ -129,7 +129,7 @@ home_btn.addEventListener('click', () => {
 
 about_btn.addEventListener('click', () => {
   routemamba.navigate(
-    '/about',
+    '/about/',
     {
       id: 43345,
       name: 'rezwan',
@@ -148,7 +148,7 @@ privacy_btn.addEventListener('click', () => {
 
 tabs_example_btn.addEventListener('click', () => {
   routemamba.navigate(
-    '/tabs-example',
+    '/tabs-example/',
     {},
     {
       meta_loader: true,
@@ -162,7 +162,7 @@ tabs_example_btn.addEventListener('click', () => {
 
 post_btn.addEventListener('click', () => {
   routemamba.navigate(
-    '/post/56456546546?test=1',
+    '/post/56456546546/?test=1',
     {},
     {
       header_load: true,
@@ -173,7 +173,7 @@ post_btn.addEventListener('click', () => {
 
 news_btn.addEventListener('click', () => {
   routemamba.navigate(
-    '/news/01-05-2023/Currency-inflation-rate-is-higher-in-bangladesh',
+    '/news/01-05-2023/Currency-inflation-rate-is-higher-in-bangladesh/',
     {},
     {
       header_load: true,

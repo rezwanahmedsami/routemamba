@@ -16,6 +16,11 @@ export const renderHeader = (): void => {
   const url = new URL(current_http_url);
   const route_path = url.pathname + url.search;
   const get_route_param: string[] = route_path.split('?');
+
+  // if in url in last char exist any / then remove it
+  if (get_route_param[0][get_route_param[0].length - 1] == '/') {
+    get_route_param[0] = get_route_param[0].slice(0, -1);
+  }
   let data: RouteData = {};
 
   if (get_route_param[1] != undefined) {
@@ -77,6 +82,12 @@ export const renderBody = (): void => {
   const url = new URL(current_http_url);
   const route_path = url.pathname + url.search;
   const get_route_param: string[] = route_path.split('?');
+
+  // if in url in last char exist any / then remove it
+  if (get_route_param[0][get_route_param[0].length - 1] == '/') {
+    get_route_param[0] = get_route_param[0].slice(0, -1);
+  }
+  console.log('last: ', get_route_param[0][get_route_param[0].length - 1]);
   let data: RouteData = {};
   if (get_route_param[1] != undefined) {
     data = RmValidator.parseQueryString(get_route_param[1]);
@@ -132,6 +143,11 @@ export const renderFooter = (): void => {
   const url = new URL(current_http_url);
   const route_path = url.pathname + url.search;
   const get_route_param: string[] = route_path.split('?');
+
+  // if in url in last char exist any / then remove it
+  if (get_route_param[0][get_route_param[0].length - 1] == '/') {
+    get_route_param[0] = get_route_param[0].slice(0, -1);
+  }
   let data: RouteData = {};
 
   if (get_route_param[1] != undefined) {

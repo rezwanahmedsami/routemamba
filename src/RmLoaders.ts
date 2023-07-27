@@ -15,6 +15,10 @@ export const MetaLoader = (
     RoutesStorage.meta_content_url != ''
   ) {
     const get_route_param = httpUrl.split('?');
+    // if in url in last char exist any / then remove it
+    if (get_route_param[0][get_route_param[0].length - 1] == '/') {
+      get_route_param[0] = get_route_param[0].slice(0, -1);
+    }
     let query_data: any = {};
     if (
       RegisteredUrlPattern != undefined &&
