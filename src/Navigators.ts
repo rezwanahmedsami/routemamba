@@ -30,7 +30,10 @@ export const navigate = (
       let split_route_to = route_to.split('?')[0];
 
       // if in url in last char exist any / then remove it
-      if (split_route_to[split_route_to.length - 1] == '/') {
+      if (
+        split_route_to.length > 1 &&
+        split_route_to[split_route_to.length - 1] == '/'
+      ) {
         split_route_to = split_route_to.slice(0, -1);
       }
       if (
