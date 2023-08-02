@@ -35,6 +35,7 @@ export const renderHeader = (): void => {
     const Hroute = RoutesStorage.RoutesHeaders[Hindex];
     for (let i = 0; i < Hroute.http_url.length; i++) {
       let http_url = Hroute.http_url[i];
+
       if (
         http_url == get_route_param[0] ||
         RmValidator.checkPathParam(get_route_param[0], http_url) != null
@@ -71,7 +72,7 @@ export const renderHeader = (): void => {
         Hindex == RoutesStorage.RoutesHeaders.length - 1
       ) {
         RoutesStorage.RouteContentsState.ShouldHeaderload = false;
-        RoutesStorage.RouteContentsState.HeaderContent = '';
+        RoutesStorage.RouteContentsState.HeaderContent = null;
       }
     }
     if (found) {
@@ -204,7 +205,7 @@ export const renderFooter = (): void => {
         Findex == RoutesStorage.RoutesFooters.length - 1
       ) {
         RoutesStorage.RouteContentsState.ShouldFooterload = false;
-        RoutesStorage.RouteContentsState.FooterContent = '';
+        RoutesStorage.RouteContentsState.FooterContent = null;
       }
     }
     if (found) {

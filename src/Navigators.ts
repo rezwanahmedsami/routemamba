@@ -115,7 +115,7 @@ export const navigate = (
                   hIndex == RoutesStorage.RoutesHeaders.length - 1
                 ) {
                   RoutesStorage.RouteContentsState.ShouldHeaderload = false;
-                  RoutesStorage.RouteContentsState.HeaderContent = '';
+                  RoutesStorage.RouteContentsState.HeaderContent = null;
                 }
               }
               if (found) {
@@ -164,7 +164,7 @@ export const navigate = (
                   fIndex == RoutesStorage.RoutesFooters.length - 1
                 ) {
                   RoutesStorage.RouteContentsState.ShouldFooterload = false;
-                  RoutesStorage.RouteContentsState.FooterContent = '';
+                  RoutesStorage.RouteContentsState.FooterContent = null;
                 }
               }
               if (found) {
