@@ -22,6 +22,11 @@ const getmetaData = (route) => {
                         title: "Privacy"
                     }
                     break;
+                case '/page-not-exist':
+                    data = {
+                        title: "404 PAGE"
+                    }
+                    break;
                     case '/tabs-example':
                         data = {
                             title: "Tabs Example"
@@ -57,6 +62,10 @@ app.get('/about', (req, res) => {
     res.render('index');
   });
   app.get('/privacy', (req, res) => {
+    // Render the 'index' view (index.ejs) from the 'views' directory
+    res.render('index');
+  });
+  app.get('/page-not-exist', (req, res) => {
     // Render the 'index' view (index.ejs) from the 'views' directory
     res.render('index');
   });
@@ -110,6 +119,9 @@ app.get('/components/footer2', (req, res)=> {
 });
 app.get('/components/home', (req, res)=> {
     res.render('components/home');
+});
+app.get('/components/pagenotExist', (req, res)=> {
+    res.render('components/pagenotExist');
 });
 app.get('/components/about', (req, res)=> {
     let data = {

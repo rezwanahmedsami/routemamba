@@ -36,6 +36,16 @@ routemamba.register_http_routes([
   {
     method: 'GET',
     meta_loader: true,
+    content_url: '/components/pagenotExist',
+    preloader: '<h1>404 loading...</h2>',
+    data: {},
+    error_content: 'error',
+    http_url_change: false,
+    http_url: '/page-not-exist',
+  },
+  {
+    method: 'GET',
+    meta_loader: true,
     content_url: '/components/tabs-example',
     preloader: '<h1>loading...</h2>',
     data: {},
@@ -77,6 +87,7 @@ routemamba.register_routes_headers([
       '/tabs-example',
       '/post/:id',
       '/news/:date/:title'
+      // ,'/page-not-exist'
     ],
   },
 ]);
@@ -93,6 +104,7 @@ routemamba.register_routes_footers([
         '/tabs-example',
         '/post/:id',
         '/news/:date/:title'
+        // ,'/page-not-exist'
     ],
   },
 ]);
@@ -102,6 +114,7 @@ routemamba.render();
 var home_btn = document.getElementById('home');
 var about_btn = document.getElementById('about');
 var privacy_btn = document.getElementById('privacy');
+var page_not_exist = document.getElementById('page-not-exist');
 var tabs_example_btn = document.getElementById('tabs-example');
 var post_btn = document.getElementById('post');
 var news_btn = document.getElementById('news');
@@ -143,6 +156,12 @@ about_btn.addEventListener('click', () => {
 
 privacy_btn.addEventListener('click', () => {
   routemamba.navigate('/privacy');
+});
+page_not_exist.addEventListener('click', () => {
+  routemamba.navigate('/page-not-exist',{},{
+    header_load:true,
+    footer_load:true
+  });
 });
 
 
