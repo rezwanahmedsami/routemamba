@@ -1,33 +1,26 @@
 [![](https://data.jsdelivr.com/v1/package/npm/routemamba/badge)](https://www.jsdelivr.com/package/npm/routemamba)
-[![Rate this package](https://badges.openbase.com/js/rating/routemamba.svg?token=gvmAJQCxO2/PJgrc0EvODXOOaqAt69wEOFibwA2qPu0=)](https://openbase.com/js/routemamba?utm_source=embedded&amp;utm_medium=badge&amp;utm_campaign=rate-badge)
-[![routemamba Versions](https://badges.openbase.com/js/versions/routemamba.svg?token=gvmAJQCxO2/PJgrc0EvODXOOaqAt69wEOFibwA2qPu0=)](https://openbase.com/js/routemamba?utm_source=embedded&amp;utm_medium=badge&amp;utm_campaign=rate-badge)
-[![Featured on Openbase](https://badges.openbase.com/js/featured/routemamba.svg?token=gvmAJQCxO2/PJgrc0EvODXOOaqAt69wEOFibwA2qPu0=)](https://openbase.com/js/routemamba?utm_source=embedded&amp;utm_medium=badge&amp;utm_campaign=rate-badge)
-[![routemamba Tutorials](https://badges.openbase.com/js/tutorials/routemamba.svg?token=gvmAJQCxO2/PJgrc0EvODXOOaqAt69wEOFibwA2qPu0=)](https://openbase.com/js/routemamba?utm_source=embedded&amp;utm_medium=badge&amp;utm_campaign=rate-badge)
+[![Rate this package](https://badges.openbase.com/js/rating/routemamba.svg?token=gvmAJQCxO2/PJgrc0EvODXOOaqAt69wEOFibwA2qPu0=)](https://openbase.com/js/routemamba?utm_source=embedded&utm_medium=badge&utm_campaign=rate-badge)
+[![routemamba Versions](https://badges.openbase.com/js/versions/routemamba.svg?token=gvmAJQCxO2/PJgrc0EvODXOOaqAt69wEOFibwA2qPu0=)](https://openbase.com/js/routemamba?utm_source=embedded&utm_medium=badge&utm_campaign=rate-badge)
+[![Featured on Openbase](https://badges.openbase.com/js/featured/routemamba.svg?token=gvmAJQCxO2/PJgrc0EvODXOOaqAt69wEOFibwA2qPu0=)](https://openbase.com/js/routemamba?utm_source=embedded&utm_medium=badge&utm_campaign=rate-badge)
+[![routemamba Tutorials](https://badges.openbase.com/js/tutorials/routemamba.svg?token=gvmAJQCxO2/PJgrc0EvODXOOaqAt69wEOFibwA2qPu0=)](https://openbase.com/js/routemamba?utm_source=embedded&utm_medium=badge&utm_campaign=rate-badge)
 
-# Routemamba [![Verified on Openbase](https://badges.openbase.com/js/verified/routemamba.svg?token=gvmAJQCxO2/PJgrc0EvODXOOaqAt69wEOFibwA2qPu0=)](https://openbase.com/js/routemamba?utm_source=embedded&amp;utm_medium=badge&amp;utm_campaign=rate-badge)
+# Routemamba [![Verified on Openbase](https://badges.openbase.com/js/verified/routemamba.svg?token=gvmAJQCxO2/PJgrc0EvODXOOaqAt69wEOFibwA2qPu0=)](https://openbase.com/js/routemamba?utm_source=embedded&utm_medium=badge&utm_campaign=rate-badge)
 
 <img src="https://cdn.rezwanahmodsami.com/routemamba/logo/routemamba-js-logo-transparent.png" align="right" width="150px">
 
-**RouteMamba** is a powerful JavaScript library designed to streamline the development of PHP single-page web applications without the need for complex setups. With RouteMamba, you can effortlessly create seamless web experiences without page reloads, eliminating the hassle of using a Node.js environment or importing packages. To get started, simply link the library in your project using a `<script>` tag. Best of all, RouteMamba is completely free to use.
+**RouteMamba** is a powerful JavaScript library that revolutionizes the development of single-page web applications. Say goodbye to complex setups and page reloads – with RouteMamba, building seamless web experiences becomes effortless. This cutting-edge library empowers developers to create highly customizable single-page applications with unparalleled control, without the need for additional frameworks like React.js or Next.js. Experience the freedom of crafting dynamic and interactive web apps while keeping your development process simple and efficient. Best of all, RouteMamba is completely free to use, making it the ultimate tool for crafting modern and innovative web applications. Unleash your creativity and embrace the future of web development with RouteMamba.
 
 For a comprehensive understanding of the library and its features, make sure to check out the [official website](https://www.routemamba.com). If you have any questions or encounter any issues during development, the developer, [Rezwan Ahmod Sami](https://facebook.com/rezwanahmodsami), is readily available to assist you. Don't hesitate to reach out for support.
 
+---
 
-# Introduction
-
-RouteMamba is an innovative JavaScript library specifically tailored for PHP projects. With the widespread use of PHP in web application development, it's crucial to enhance user experiences and stay competitive with technologies like Node.js. This is where RouteMamba comes in. By leveraging the power of RouteMamba, PHP developers can transform their web applications into fully-fledged single-page applications, offering seamless navigation and improved user experiences.
-
-Gone are the days when PHP was limited in providing user interactivity. RouteMamba empowers PHP developers to create dynamic and responsive web applications, rivaling the capabilities of Node.js. With its intuitive and easy-to-use features, RouteMamba enables developers to deliver exceptional user experiences, making their PHP projects stand out in the modern web development landscape.
-
-Experience the transformation in your PHP web applications with RouteMamba and unlock the full potential of single-page application development while providing your users with a superior interactive experience.
-
-___
 #### What is a Single-Page Web Application?
+
 A single-page application is a web application or website that interacts with the user by dynamically rewriting the current web page with new data from the web server, instead of the default method of a web browser loading entire new pages.
 
-___
-# Check here The Documentation: [Read Documentation](https://www.routemamba.com)
+---
 
+# Check here The Documentation: [Read Documentation](https://www.routemamba.com)
 
 ## Contributing
 
@@ -36,26 +29,14 @@ In general, we follow the "fork-and-pull" Git workflow.
 1. Fork the repo on GitHub
 2. Clone the project to your own machine
 3. Work on your fork
-    1. Make your changes and additions
-        - Most of your changes should be focused on `src/` and `__tests__/` folders and/or `README.md`.
-        - Files such as `/dist/routemamba.min.js` and `/dist/routemamba.min.js.LICENSE.txt` are autogenerated when running tests (`npm run build`) and need not to be changed **manually**.
-    2. Change or add tests if needed
-    3. Run tests and make sure they pass
-    4. Add changes to README.md if needed
+   1. Make your changes and additions
+      - Most of your changes should be focused on `src/` and `__tests__/` folders and/or `README.md`.
+      - Files such as `/dist/routemamba.min.js` and `/dist/routemamba.min.js.LICENSE.txt` are autogenerated when running tests (`npm run build`) and need not to be changed **manually**.
+   2. Change or add tests if needed
+   3. Run tests and make sure they pass
+   4. Add changes to README.md if needed
 4. Commit changes to your own branch
 5. **Make sure** you merge the latest from "upstream" and resolve conflicts if there is any
 6. Repeat step 3(3) above
 7. Push your work back up to your fork
 8. Submit a Pull request so that we can review your changes
-
-## Author Info:
-
-**Name:** Rezwan Ahmod Sami.\
-**Profession:** Software Engineer, Entrepreneur.\
-**Lives In:** Bangladesh.\
-**Socials:**
-- [Facebook](https://facebook.com/rezwanahmodsami)
-- [Twitter](https://twitter.com/rezwanahmodsami)
-- [Linkedin](https://linkedin.com/rezwanahmodsami)
-- [github](https://github.com/rezwanahmodsami)
-- [Instagram](https://instagram.com/rezwanahmodsami)
