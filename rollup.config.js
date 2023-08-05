@@ -28,6 +28,13 @@ export default {
       exports: 'auto',
       plugins: [terser()],
     },
+    {
+      file: 'projects/golang/public/dist/routemamba.min.js',
+      format: 'umd',
+      name: 'routemamba',
+      exports: 'auto',
+      plugins: [terser()],
+    },
   ],
   plugins: [
     nodeResolve(),
