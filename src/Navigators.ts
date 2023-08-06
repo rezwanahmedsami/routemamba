@@ -84,6 +84,10 @@ export const navigate = (
             options.header_load;
 
           if (options.header_load) {
+            if (RoutesStorage.RoutesHeaders.length == 0) {
+              RoutesStorage.RouteContentsState.ShouldHeaderload = false;
+              RoutesStorage.RouteContentsState.HeaderContent = null;
+            }
             for (
               let hIndex = 0;
               hIndex < RoutesStorage.RoutesHeaders.length;
@@ -133,6 +137,10 @@ export const navigate = (
             options.footer_load;
 
           if (options.footer_load) {
+            if (RoutesStorage.RoutesFooters.length == 0) {
+              RoutesStorage.RouteContentsState.ShouldFooterload = false;
+              RoutesStorage.RouteContentsState.FooterContent = null;
+            }
             for (
               let fIndex = 0;
               fIndex < RoutesStorage.RoutesFooters.length;

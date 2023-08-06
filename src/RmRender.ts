@@ -31,6 +31,10 @@ export const renderHeader = (): void => {
   }
 
   let found = false;
+  if (RoutesStorage.RoutesHeaders.length == 0) {
+    RoutesStorage.RouteContentsState.ShouldHeaderload = false;
+    RoutesStorage.RouteContentsState.HeaderContent = null;
+  }
   for (let Hindex = 0; Hindex < RoutesStorage.RoutesHeaders.length; Hindex++) {
     const Hroute = RoutesStorage.RoutesHeaders[Hindex];
     for (let i = 0; i < Hroute.http_url.length; i++) {
@@ -164,6 +168,10 @@ export const renderFooter = (): void => {
   }
 
   let found = false;
+  if (RoutesStorage.RoutesFooters.length == 0) {
+    RoutesStorage.RouteContentsState.ShouldFooterload = false;
+    RoutesStorage.RouteContentsState.FooterContent = null;
+  }
 
   for (let Findex = 0; Findex < RoutesStorage.RoutesFooters.length; Findex++) {
     const Froute = RoutesStorage.RoutesFooters[Findex];
