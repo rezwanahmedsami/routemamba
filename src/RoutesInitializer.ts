@@ -21,6 +21,16 @@ import * as Controllers from './Controllers';
 export const RouteEngineInit = (Input: RouteEngineInput): void => {
   const current_url: string = window.location.href;
 
+  const addPreloader = (): void => {
+    if (
+      Input.preloader != undefined &&
+      Input.preloader != '' &&
+      Input.container != undefined
+    ) {
+      DomRenderer.__render_DOM(Input.container, Input.preloader);
+    }
+  };
+
   switch (Input.component_type) {
     case RouteComponentTypes.HEADER:
       Input.container = HtmlSelector.Header;
@@ -138,15 +148,11 @@ export const RouteEngineInit = (Input: RouteEngineInput): void => {
     Input.content_url != ''
   ) {
     const xhttp: XMLHttpRequest = new XMLHttpRequest();
+    // add preloader
+    addPreloader();
 
     xhttp.onprogress = function () {
-      if (
-        Input.preloader != undefined &&
-        Input.preloader != '' &&
-        Input.container != undefined
-      ) {
-        DomRenderer.__render_DOM(Input.container, Input.preloader);
-      }
+      // void
     };
 
     xhttp.onload = function (this: XMLHttpRequest, e: ProgressEvent) {
@@ -155,9 +161,19 @@ export const RouteEngineInit = (Input: RouteEngineInput): void => {
         Input.component_type != RouteComponentTypes.TAB &&
         Input.component_type != RouteComponentTypes.META
       ) {
+        // if any kind of error status then store error-content else store response
+        if (this.status >= 400) {
+          Controllers.store_content(Input.component_type, Input.error_content);
+          throw new Error(`Error ${this.status}: ${this.statusText}`);
+        }
         Controllers.store_content(Input.component_type, this.response);
       } else {
         if (Input.container != undefined) {
+          // if any kind of error status then store error-content else store response
+          if (this.status >= 400) {
+            DomRenderer.__render_DOM(Input.container, Input.error_content);
+            throw new Error(`Error ${this.status}: ${this.statusText}`);
+          }
           DomRenderer.__render_DOM(Input.container, this.response);
         }
       }

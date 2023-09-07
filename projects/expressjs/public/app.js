@@ -75,39 +75,39 @@ routemamba.register_http_routes([
   },
 ]);
 
-// routemamba.register_routes_headers([
-//   {
-//     content_url: '/components/header',
-//     preloader: 'loading...',
-//     error_content: 'error',
-//     http_url: [
-//       '/',
-//       '/about',
-//       '/privacy',
-//       '/tabs-example',
-//       '/post/:id',
-//       '/news/:date/:title'
-//       // ,'/page-not-exist'
-//     ],
-//   },
-// ]);
+routemamba.register_routes_headers([
+  {
+    content_url: '/components/header',
+    preloader: '<h1>loading Header...</h2>',
+    error_content: 'error',
+    http_url: [
+      '/',
+      '/about',
+      '/privacy',
+      '/tabs-example',
+      '/post/:id',
+      '/news/:date/:title'
+      // ,'/page-not-exist'
+    ],
+  },
+]);
 
-// routemamba.register_routes_footers([
-//   {
-//     content_url: '/components/footer',
-//     preloader: 'loading...',
-//     error_content: 'error',
-//     http_url: [
-//         '/',
-//         '/about',
-//         '/privacy',
-//         '/tabs-example',
-//         '/post/:id',
-//         '/news/:date/:title'
-//         // ,'/page-not-exist'
-//     ],
-//   },
-// ]);
+routemamba.register_routes_footers([
+  {
+    content_url: '/components/footer',
+    preloader: '<h1>loading Footer...</h2>',
+    error_content: 'error',
+    http_url: [
+        '/',
+        '/about',
+        '/privacy',
+        '/tabs-example',
+        '/post/:id',
+        '/news/:date/:title'
+        // ,'/page-not-exist'
+    ],
+  },
+]);
 
 routemamba.render();
 
