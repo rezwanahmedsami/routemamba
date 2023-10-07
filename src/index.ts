@@ -9,7 +9,7 @@ import { navigate, pop_route, push_route } from './Navigators';
 import { initTabs } from './RmTabsHandler';
 import { render, await_rendering } from './RmRender';
 import { localState } from './RmStateManager';
-
+import { registerOnDemandTabView } from './OnDemanTabViewHandler';
 export {
   registerMetaUrl,
   registerServerHost,
@@ -23,4 +23,5 @@ export {
   push_route,
   initTabs,
   localState,
+  registerOnDemandTabView,
 };

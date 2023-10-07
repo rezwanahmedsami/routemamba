@@ -95,4 +95,50 @@ routemamba.register_routes_footers([
 
 routemamba.render();
 
+let DemandTabView = routemamba.registerOnDemandTabView([
+  {
+    TabViewId: 'tab1',
+    TabViewUrl: '/web/components/tab1.html',
+    HttpUrlChange: false,
+  },
+  {
+    TabViewId: 'tab2',
+    TabViewUrl: '/web/components/tab2.html',
+    HttpUrlChange: false,
+  },
+  {
+    TabViewId: 'tab3',
+    TabViewUrl: '/web/components/tab3.html',
+    HttpUrlChange: false,
+  },
+  {
+    TabViewId: 'tab4',
+    TabViewUrl: '/web/components/tab4.html',
+    HttpUrlChange: false,
+  },
+  {
+    TabViewId: 'tab5',
+    TabViewUrl: '/web/components/tab5.html',
+    HttpUrlChange: false,
+  },
+  {
+    TabViewId: 'tab6',
+    TabViewUrl: '/web/components/tab6.html',
+    HttpUrlChange: false,
+  },
+  {
+    TabViewId: 'tab7',
+    TabViewUrl: '/web/components/tab7.html',
+    HttpUrlChange: false,
+  },
+  {
+    TabViewId: 'tab8',
+    TabViewUrl: '/web/components/tab8.html',
+    HttpUrlChange: false,
+  },
+]);
+
+DemandTabView.loadTabView('tab1');
+DemandTabView.reloadTabView('tab1');
+
 console.log('app.js loaded');

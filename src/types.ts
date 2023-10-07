@@ -131,3 +131,16 @@ export interface TabHandler {
 }
 
 export type TabRegister = TabHandler[];
+
+// On Demand TabView types @param
+export type TabViewId = string;
+export interface OnDemandTabView {
+  TabViewId: TabViewId;
+  TabContentPath: string;
+  HttpUrlChange: boolean;
+}
+export type OnDemandTabViewRegisterdData = OnDemandTabView[];
+export interface OnDemandTabViewRegister {
+  loadTabView: Function;
+  reloadTabView: Function;
+}
