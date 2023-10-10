@@ -1,4 +1,6 @@
 import {
+  OnDemandTabViewRegisterdData,
+  RegisterdTabViewsContentsStorage,
   type RegisterdRoutesFooters,
   type RegisterdRoutesHeaders,
   type RegisterdRoutesPages,
@@ -6,6 +8,13 @@ import {
   type RouteMetaUrl,
   type RouteServerHost,
 } from './types';
+
+export namespace Info {
+  export var website = 'https://www.routemamba.com';
+  export var documentation = `${website}/documentation`;
+  export var version = process.env.VERSION;
+  export var build_date = process.env.BUILD_DATE;
+}
 
 /**
  * there all golbal array, object and variable initialized
@@ -16,6 +25,7 @@ export enum RouteComponentTypes {
   BODY,
   FOOTER,
   TAB,
+  ON_DEMAND_TABVIEW,
 }
 
 export namespace HtmlSelector {
@@ -23,6 +33,7 @@ export namespace HtmlSelector {
   export var Header = 'header-root';
   export var Footer = 'footer-root';
   export var Body = 'body-root';
+  export var OnDemandTabView = 'on-demand-tab-view';
 }
 
 export namespace RoutesStorage {
@@ -49,6 +60,14 @@ export namespace RoutesStorage {
     export var HttpUrl: string | null = null;
     export var navigationCallback: Function | null;
   }
+}
+
+export namespace OnDemandTabViewStorage {
+  export namespace states {
+    export var RequestedTabViewid: string | null = null;
+  }
+  export var RegisteredOnDemandTabViews: OnDemandTabViewRegisterdData = [];
+  export var RegisterdTabViewsContents: RegisterdTabViewsContentsStorage = [];
 }
 
 export namespace RenderConfig {

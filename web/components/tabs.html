@@ -75,6 +75,17 @@
     </div>
 </div>
 
+<!-- on demand tabviews -->
+<h1>On demands tab view</h1>
+<div class="TabRoot">
+    <div class="tabs-btns">
+        <button id="tabview1">Tab1</button>
+        <button id="tabview2">Tab2</button>
+        <button id="tabview3">Tab3</button>
+    </div>
+    <on-demand-tab-view></on-demand-tab-view>
+</div>
+
 <script>
     routemamba.initTabs([
         {
@@ -130,4 +141,42 @@
             ]
         },
     ]);
+
+    // on demand tabview
+    var DemandTabView = routemamba.registerOnDemandTabView([
+        {
+            TabViewId: 'tab1',
+            TabContentPath: '/web/components/tabs/tab1.html',
+            HttpUrlChange: true,
+        },
+        {
+            TabViewId: 'tab2',
+            TabContentPath: '/web/components/tabs/tab2.html',
+            HttpUrlChange: true,
+        },
+        {
+            TabViewId: 'tab3',
+            TabContentPath: '/web/components/tabs/tab3.html',
+            HttpUrlChange: true,
+        }
+    ]);
+
+    var tabview1 = document.getElementById('tabview1');
+    var tabview2 = document.getElementById('tabview2');
+    var tabview3 = document.getElementById('tabview3');
+
+    tabview1.addEventListener('click', function () {
+        DemandTabView.loadTabView('tab1');
+    });
+    tabview2.addEventListener('click', function () {
+        DemandTabView.loadTabView('tab2');
+    });
+    tabview3.addEventListener('click', function () {
+        DemandTabView.loadTabView('tab3');
+    });
+    // let DemandTabView = routemamba.registerOnDemandTabView([]);
+    // let DemandTabView = routemamba.registerOnDemandTabView();
+
+    // DemandTabView.loadTabView('tab1');
+    // DemandTabView.reloadTabView('tab1');
 </script>

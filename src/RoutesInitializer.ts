@@ -5,6 +5,8 @@ import {
   RouteComponentTypes,
   HtmlSelector,
   RenderConfig,
+  Info,
+  OnDemandTabViewStorage,
 } from './Global';
 import RmValidator from './RmValidator';
 import {
@@ -41,7 +43,20 @@ export const RouteEngineInit = (Input: RouteEngineInput): void => {
     case RouteComponentTypes.FOOTER:
       Input.container = HtmlSelector.Footer;
       break;
-
+    case RouteComponentTypes.ON_DEMAND_TABVIEW:
+      Input.container = HtmlSelector.OnDemandTabView;
+      let OnDemandTabViewElement = document.querySelector(
+        `${Input.container}`
+      ) as HTMLElement;
+      if (
+        OnDemandTabViewElement == undefined ||
+        OnDemandTabViewElement == null
+      ) {
+        throw new Error(
+          `<on-demand-tab-view> tag not found. can't load on-demand tab view. see documentation for more details. ${Info.documentation}`
+        );
+      }
+      break;
     default:
       break;
   }
@@ -159,6 +174,7 @@ export const RouteEngineInit = (Input: RouteEngineInput): void => {
       if (
         RenderConfig.await_rendering &&
         Input.component_type != RouteComponentTypes.TAB &&
+        Input.component_type != RouteComponentTypes.ON_DEMAND_TABVIEW &&
         Input.component_type != RouteComponentTypes.META
       ) {
         // if any kind of error status then store error-content else store response
@@ -175,6 +191,16 @@ export const RouteEngineInit = (Input: RouteEngineInput): void => {
             throw new Error(`Error ${this.status}: ${this.statusText}`);
           }
           DomRenderer.__render_DOM(Input.container, this.response);
+          // check its on demand tab view or not
+          if (Input.component_type == RouteComponentTypes.ON_DEMAND_TABVIEW) {
+            console.log(Input);
+            if (OnDemandTabViewStorage.states.RequestedTabViewid != null) {
+              OnDemandTabViewStorage.RegisterdTabViewsContents.push({
+                TabViewId: OnDemandTabViewStorage.states.RequestedTabViewid,
+                TabViewContent: this.response,
+              });
+            }
+          }
         }
       }
     };
@@ -222,6 +248,8 @@ export const RouteEngineInit = (Input: RouteEngineInput): void => {
     }
 
     xhttp.send(finalData);
+  } else {
+    throw new Error('Container or Content Url is not defined.');
   }
 };
 

@@ -136,11 +136,19 @@ export type TabRegister = TabHandler[];
 export type TabViewId = string;
 export interface OnDemandTabView {
   TabViewId: TabViewId;
-  TabContentPath: string;
-  HttpUrlChange: boolean;
+  TabContentPath: RouteContentUrl;
+  TabViewData?: RouteData;
+  Preloader?: RoutePreloader;
+  Error_content?: RouteErrorContent;
+  HttpUrlChange: RouteHttpUrlChange;
 }
 export type OnDemandTabViewRegisterdData = OnDemandTabView[];
 export interface OnDemandTabViewRegister {
   loadTabView: Function;
   reloadTabView: Function;
 }
+export interface RegisterdTabViewContent {
+  TabViewId: TabViewId;
+  TabViewContent: string;
+}
+export type RegisterdTabViewsContentsStorage = RegisterdTabViewContent[];
