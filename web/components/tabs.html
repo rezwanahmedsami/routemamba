@@ -82,6 +82,7 @@
         <button id="tabview1">Tab1</button>
         <button id="tabview2">Tab2</button>
         <button id="tabview3">Tab3</button>
+        <button id="reloadTab1">reload tab1</button>
     </div>
     <on-demand-tab-view></on-demand-tab-view>
 </div>
@@ -164,6 +165,7 @@
     var tabview1 = document.getElementById('tabview1');
     var tabview2 = document.getElementById('tabview2');
     var tabview3 = document.getElementById('tabview3');
+    var reloadTab1 = document.getElementById('reloadTab1');
 
     tabview1.addEventListener('click', function () {
         DemandTabView.loadTabView('tab1');
@@ -173,6 +175,9 @@
     });
     tabview3.addEventListener('click', function () {
         DemandTabView.loadTabView('tab3');
+    });
+    reloadTab1.addEventListener('click', function () {
+        DemandTabView.reloadTabView('tab1');
     });
     // let DemandTabView = routemamba.registerOnDemandTabView([]);
     // let DemandTabView = routemamba.registerOnDemandTabView();

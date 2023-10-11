@@ -42,6 +42,7 @@ export namespace RoutesStorage {
   export var RoutesFooters: RegisterdRoutesFooters<string[]> = [];
   export var server_host: RouteServerHost = '';
   export var meta_content_url: RouteMetaUrl = '';
+  export var last_http_url: string = '';
 
   export namespace RouteContentsState {
     export namespace renderStatus {

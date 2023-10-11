@@ -74,10 +74,28 @@ export const MetaLoader = (
 
 export const historyRoutesLoader = (status: boolean): void => {
   if (status) {
+    // console.log('historyRoutesLoader called');
+
+    // console.log('LAST HTTP URL: ', RoutesStorage.last_http_url);
+    // console.log('last_http_url_path: ', last_http_url_path);
+
     const current_http_url: string = window.location.href;
     const url = new URL(current_http_url);
     const route_path = url.pathname + url.search;
     const get_route_param: string[] = route_path.split('?');
+    // console.log('current_http_url: ', current_http_url);
+    // console.log('route pth: ', route_path);
+
+    // suppress render if last_http_url_path and route_path is same
+    const last_http_url = RoutesStorage.last_http_url;
+    if (last_http_url != undefined && last_http_url != '') {
+      const last_http_url_breakdown = new URL(last_http_url);
+      const last_http_url_path =
+        last_http_url_breakdown.pathname + last_http_url_breakdown.search;
+      if (last_http_url_path == route_path) {
+        return;
+      }
+    }
 
     const RoutePages = RoutesStorage.RoutesPages;
     for (let i = 0; i < RoutePages.length; i++) {

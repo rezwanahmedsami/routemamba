@@ -154,6 +154,7 @@ export const RouteEngineInit = (Input: RouteEngineInput): void => {
         Input.http_url = Input.server_host;
       }
       window.history.pushState(Input.server_host, '', Input.http_url);
+      RoutesStorage.last_http_url = Input.http_url;
     }
   }
 
@@ -193,7 +194,6 @@ export const RouteEngineInit = (Input: RouteEngineInput): void => {
           DomRenderer.__render_DOM(Input.container, this.response);
           // check its on demand tab view or not
           if (Input.component_type == RouteComponentTypes.ON_DEMAND_TABVIEW) {
-            console.log(Input);
             if (OnDemandTabViewStorage.states.RequestedTabViewid != null) {
               OnDemandTabViewStorage.RegisterdTabViewsContents.push({
                 TabViewId: OnDemandTabViewStorage.states.RequestedTabViewid,
