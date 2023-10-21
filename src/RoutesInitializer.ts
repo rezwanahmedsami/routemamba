@@ -154,7 +154,16 @@ export const RouteEngineInit = (Input: RouteEngineInput): void => {
         Input.http_url = Input.server_host;
       }
       window.history.pushState(Input.server_host, '', Input.http_url);
-      RoutesStorage.last_http_url = Input.http_url;
+      let http_url = '';
+      if (
+        Input.http_url.includes(Input.server_host) &&
+        Input.server_host != ''
+      ) {
+        http_url = Input.http_url;
+      } else {
+        http_url = Input.server_host + Input.http_url;
+      }
+      RoutesStorage.last_http_url = http_url;
     }
   }
 
