@@ -89,9 +89,9 @@ export const historyRoutesLoader = (status: boolean): void => {
     // suppress render if last_http_url_path and route_path is same
     const last_http_url = RoutesStorage.last_http_url;
     if (last_http_url != undefined && last_http_url != '') {
-      console.log(last_http_url);
+      // console.log(last_http_url);
       const last_http_url_breakdown = new URL(last_http_url);
-      console.log(last_http_url_breakdown);
+      // console.log(last_http_url_breakdown);
       const last_http_url_path =
         last_http_url_breakdown.pathname + last_http_url_breakdown.search;
       if (last_http_url_path == route_path) {

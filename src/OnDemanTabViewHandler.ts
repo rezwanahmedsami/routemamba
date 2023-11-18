@@ -147,10 +147,28 @@ const render = (
       data: TabViewData,
       preloader: Preloader,
       error_content: Error_content,
-      http_url_change: HttpUrlChange,
+      http_url_change: false,
       http_url: http_url,
     };
     RoutesInitializer.route(Route);
+
+    // change browser url
+    if (HttpUrlChange) {
+      let TabViewIndex = findRegisteredTabViewIndex(TabView.TabViewId);
+      if (TabViewIndex == undefined) {
+        throw new Error(
+          `Can't replace browser url, TabView '${TabView.TabViewId}' is not found in register. Something went wrong. Check documentation for more info: ${Info.documentation}}`
+        );
+      }
+
+      if (TabViewIndex == 0) {
+        // console.log('replaceState', http_url);
+        window.history.replaceState({}, '', http_url);
+        return;
+      }
+      // console.log('pushState index', TabViewIndex);
+      window.history.pushState({}, '', http_url);
+    }
   } else {
     throw new Error(
       `Can't render OnDemand TabViews,No TabViews Found. You must need to register OnDemandTabViews as Array-Object in registerOnDemandTabView(). Check documentation for more info: ${Info.documentation}}`
@@ -176,6 +194,19 @@ const renderFromLoadedTabView = (
     return;
   }
   let http_url = buildHttpUrlWithTabViewId(TabViewContent.TabViewId);
+  let TabViewIndex = findRegisteredTabViewIndex(TabViewContent.TabViewId);
+  if (TabViewIndex == undefined) {
+    throw new Error(
+      `Can't replace browser url, TabView '${TabViewContent.TabViewId}' is not found in register. Something went wrong. Check documentation for more info: ${Info.documentation}}`
+    );
+  }
+
+  if (TabViewIndex == 0) {
+    // console.log('replaceState', http_url);
+    window.history.replaceState({}, '', http_url);
+    return;
+  }
+  // console.log('pushState index', TabViewIndex);
   window.history.pushState({}, '', http_url);
 };
 const loadTabView: OnDemandTabViewRegister['loadTabView'] = (
@@ -233,6 +264,27 @@ const findRegisteredTabView = (
     }
   }
   return TabView;
+};
+
+// find registered tabview by tabviewId and get the index number
+const findRegisteredTabViewIndex = (
+  TabViewId: TabViewId
+): number | undefined => {
+  let TabViewIndex: number | undefined = undefined;
+  for (
+    let i = 0;
+    i < OnDemandTabViewStorage.RegisteredOnDemandTabViews.length;
+    i++
+  ) {
+    if (
+      OnDemandTabViewStorage.RegisteredOnDemandTabViews[i].TabViewId ==
+      TabViewId
+    ) {
+      TabViewIndex = i;
+      break;
+    }
+  }
+  return TabViewIndex;
 };
 
 const findRegisteredTabViewContent = (
