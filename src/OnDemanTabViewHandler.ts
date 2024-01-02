@@ -97,10 +97,10 @@ const registerOnDemandTabView = (
     // register the TabView
     OnDemandTabViewStorage.RegisteredOnDemandTabViews.push(OnDemandTabViews[i]);
   }
-  let current_http_url: string = window.location.href;
+  const current_http_url: string = window.location.href;
   if (current_http_url.includes('#')) {
-    let split_http_url = current_http_url.split(`#`);
-    let TabViewId = split_http_url[split_http_url.length - 1];
+    const split_http_url = current_http_url.split('#');
+    const TabViewId = split_http_url[split_http_url.length - 1];
     render(TabViewId);
   } else {
     render();
@@ -112,10 +112,7 @@ const registerOnDemandTabView = (
   };
 };
 
-const render = (
-  TabViewId?: string,
-  HttpUrlChange: boolean = true
-): void | Error => {
+const render = (TabViewId?: string, HttpUrlChange = true): void | Error => {
   if (OnDemandTabViewStorage.RegisteredOnDemandTabViews.length > 0) {
     // render first tabview
     let TabView: OnDemandTabView | null =
@@ -134,11 +131,11 @@ const render = (
       HttpUrlChange = TabView.HttpUrlChange;
     }
 
-    let http_url = buildHttpUrlWithTabViewId(TabView.TabViewId);
+    const http_url = buildHttpUrlWithTabViewId(TabView.TabViewId);
 
-    let TabViewData = TabView.TabViewData || {};
-    let Preloader = TabView.Preloader || '';
-    let Error_content = TabView.Error_content || '';
+    const TabViewData = TabView.TabViewData || {};
+    const Preloader = TabView.Preloader || '';
+    const Error_content = TabView.Error_content || '';
     const Route: Route = {
       method: 'GET',
       meta_loader: false,
@@ -154,7 +151,7 @@ const render = (
 
     // change browser url
     if (HttpUrlChange) {
-      let TabViewIndex = findRegisteredTabViewIndex(TabView.TabViewId);
+      const TabViewIndex = findRegisteredTabViewIndex(TabView.TabViewId);
       if (TabViewIndex == undefined) {
         throw new Error(
           `Can't replace browser url, TabView '${TabView.TabViewId}' is not found in register. Something went wrong. Check documentation for more info: ${Info.documentation}}`
@@ -176,15 +173,15 @@ const render = (
   }
 };
 const buildHttpUrlWithTabViewId = (TabViewId: TabViewId): string => {
-  let hash_id = `#${TabViewId}`;
+  const hash_id = `#${TabViewId}`;
   let http_url = window.location.href;
-  let split_http_url = http_url.split(`#`);
+  const split_http_url = http_url.split('#');
   http_url = split_http_url[0] + hash_id;
   return http_url;
 };
 const renderFromLoadedTabView = (
   TabViewContent: RegisterdTabViewContent,
-  HttpUrlChange: boolean = true
+  HttpUrlChange = true
 ): void | Error => {
   DomRenderer.__render_DOM(
     `${HtmlSelector.OnDemandTabView}`,
@@ -193,8 +190,8 @@ const renderFromLoadedTabView = (
   if (!HttpUrlChange) {
     return;
   }
-  let http_url = buildHttpUrlWithTabViewId(TabViewContent.TabViewId);
-  let TabViewIndex = findRegisteredTabViewIndex(TabViewContent.TabViewId);
+  const http_url = buildHttpUrlWithTabViewId(TabViewContent.TabViewId);
+  const TabViewIndex = findRegisteredTabViewIndex(TabViewContent.TabViewId);
   if (TabViewIndex == undefined) {
     throw new Error(
       `Can't replace browser url, TabView '${TabViewContent.TabViewId}' is not found in register. Something went wrong. Check documentation for more info: ${Info.documentation}}`
@@ -211,17 +208,17 @@ const renderFromLoadedTabView = (
 };
 const loadTabView: OnDemandTabViewRegister['loadTabView'] = (
   TabViewId: TabViewId,
-  HttpUrlChange: boolean = true
+  HttpUrlChange = true
 ) => {
   OnDemandTabViewStorage.states.RequestedTabViewid = TabViewId;
-  let TabView: OnDemandTabView | null = findRegisteredTabView(TabViewId);
+  const TabView: OnDemandTabView | null = findRegisteredTabView(TabViewId);
   if (TabView == null) {
     throw new Error(
       `Can't load TabView, TabView '${TabViewId}' is not registered. You must need to register TabViewId in registerOnDemandTabView(). Check documentation for more info: ${Info.documentation}}`
     );
   }
 
-  let TabViewContent: RegisterdTabViewContent | null =
+  const TabViewContent: RegisterdTabViewContent | null =
     findRegisteredTabViewContent(TabViewId);
   // console.log('Registerd tabview id', OnDemandTabViewStorage.states.RequestedTabViewid);
   // console.log('TabViewContent', TabViewContent);
@@ -237,7 +234,7 @@ const reloadTabView: OnDemandTabViewRegister['reloadTabView'] = (
   TabViewId: TabViewId
 ) => {
   OnDemandTabViewStorage.states.RequestedTabViewid = TabViewId;
-  let TabView: OnDemandTabView | null = findRegisteredTabView(TabViewId);
+  const TabView: OnDemandTabView | null = findRegisteredTabView(TabViewId);
   if (TabView == null) {
     throw new Error(
       `Can't load TabView, TabView '${TabViewId}' is not registered. You must need to register TabViewId in registerOnDemandTabView(). Check documentation for more info: ${Info.documentation}}`
@@ -334,10 +331,10 @@ const setOnDemandTabViewContent = (
 
 const UrlStateChecker = (): void => {
   window.onpopstate = (e) => {
-    let current_http_url: string = window.location.href;
+    const current_http_url: string = window.location.href;
     if (current_http_url.includes('#')) {
-      let split_http_url = current_http_url.split(`#`);
-      let TabViewId = split_http_url[split_http_url.length - 1];
+      const split_http_url = current_http_url.split('#');
+      const TabViewId = split_http_url[split_http_url.length - 1];
       // console.log('TabViewId', TabViewId);
       loadTabView(TabViewId, false);
     }

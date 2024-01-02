@@ -38,14 +38,14 @@ export const renderHeader = (): void => {
   for (let Hindex = 0; Hindex < RoutesStorage.RoutesHeaders.length; Hindex++) {
     const Hroute = RoutesStorage.RoutesHeaders[Hindex];
     for (let i = 0; i < Hroute.http_url.length; i++) {
-      let http_url = Hroute.http_url[i];
+      const http_url = Hroute.http_url[i];
 
       if (
         http_url == get_route_param[0] ||
         RmValidator.checkPathParam(get_route_param[0], http_url) != null
       ) {
-        let registered_url_pattern = http_url;
-        let PathParamData = RmValidator.checkPathParam(
+        const registered_url_pattern = http_url;
+        const PathParamData = RmValidator.checkPathParam(
           get_route_param[0],
           http_url
         );
@@ -104,14 +104,14 @@ export const renderBody = (): void => {
   }
 
   for (let i = 0; i < RoutesStorage.RoutesPages.length; i++) {
-    let Broute = RoutesStorage.RoutesPages[i];
-    let http_url = Broute.http_url;
+    const Broute = RoutesStorage.RoutesPages[i];
+    const http_url = Broute.http_url;
     if (
       http_url == get_route_param[0] ||
       RmValidator.checkPathParam(get_route_param[0], http_url) != null
     ) {
-      let registered_url_pattern = http_url;
-      let PathParamData = RmValidator.checkPathParam(
+      const registered_url_pattern = http_url;
+      const PathParamData = RmValidator.checkPathParam(
         get_route_param[0],
         http_url
       );
@@ -176,13 +176,13 @@ export const renderFooter = (): void => {
   for (let Findex = 0; Findex < RoutesStorage.RoutesFooters.length; Findex++) {
     const Froute = RoutesStorage.RoutesFooters[Findex];
     for (let i = 0; i < Froute.http_url.length; i++) {
-      let http_url = Froute.http_url[i];
+      const http_url = Froute.http_url[i];
       if (
         http_url == get_route_param[0] ||
         RmValidator.checkPathParam(get_route_param[0], http_url) != null
       ) {
-        let registered_url_pattern = http_url;
-        let PathParamData = RmValidator.checkPathParam(
+        const registered_url_pattern = http_url;
+        const PathParamData = RmValidator.checkPathParam(
           get_route_param[0],
           http_url
         );
