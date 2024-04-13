@@ -335,7 +335,7 @@ const UrlStateChecker = (): void => {
     if (current_http_url.includes('#')) {
       const split_http_url = current_http_url.split('#');
       const TabViewId = split_http_url[split_http_url.length - 1];
-      // console.log('TabViewId', TabViewId);
+      console.log('TabViewId', TabViewId);
       loadTabView(TabViewId, false);
     }
   };
