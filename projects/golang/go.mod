@@ -3,7 +3,7 @@ module github.com/rezwanahmodsami/go-fiber-routemamba-application
 go 1.20
 
 require (
-	github.com/gofiber/fiber/v2 v2.52.1
+	github.com/gofiber/fiber/v2 v2.52.5
 	github.com/gofiber/template v1.8.1
 )
 
