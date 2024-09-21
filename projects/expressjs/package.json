@@ -14,9 +14,9 @@
   "author": "Routemamba js",
   "license": "ISC",
   "dependencies": {
-    "body-parser": "^1.20.2",
+    "body-parser": "^1.20.3",
     "ejs": "^3.1.10",
-    "express": "^4.19.2"
+    "express": "^4.21.0"
   },
   "devDependencies": {
     "nodemon": "^3.0.1"
